@@ -43,9 +43,9 @@ class SQLConnector {
 
         try {
             stmt = conn!!.createStatement()
-            resultset = stmt!!.executeQuery("SELECT post_content FROM wp_posts ;")
+            resultset = stmt!!.executeQuery("SELECT post_content FROM wp_posts where ID=85;")
 
-            if (stmt.execute("SELECT post_content FROM wp_posts ;")) {
+            if (stmt.execute("SELECT post_content FROM wp_posts where ID=85;")) {
                 resultset = stmt.resultSet
             }
 
@@ -53,8 +53,8 @@ class SQLConnector {
                 resultXML = resultXML + resultset.getString(1)
                 println(resultset.getString(1))
             }
-            //var rss = RSSUtil(resultXML)
-            //rss.test()
+            var rss = RSSUtil(resultXML)
+            rss.test()
         } catch (ex: SQLException) {
             // handle any errors
             ex.printStackTrace()

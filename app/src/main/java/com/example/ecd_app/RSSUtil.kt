@@ -21,20 +21,19 @@ class RSSUtil (XMLString: String) {
     val XMLString: String = XMLString
 
     fun test(){
-        println("Hello World!")
-        //val feedSource = URL("https://justsomerandomstuff.com/rss")
-        val inputStream: InputStream = XMLString.byteInputStream()
-        val input = SyndFeedInput()
-        val feed: com.rometools.rome.feed.synd.SyndFeed? = input.build( XmlReader(inputStream))
-        System.out.println(feed)
+        var document: Document? = loadXMLFromString(XMLString)
+        if (document != null) {
+            System.out.println(document.getElementsByTagName("p").item(1).textContent)
+        }
     }
 
 
     @Throws(Exception::class)
     fun loadXMLFromString(xml: String?): Document? {
+        var xmlWithRoot = "<root>" + xml + "</root>"
         val factory: DocumentBuilderFactory = DocumentBuilderFactory.newInstance()
         val builder: DocumentBuilder = factory.newDocumentBuilder()
-        val `is` = InputSource(StringReader(xml))
+        val `is` = InputSource(StringReader(xmlWithRoot))
         return builder.parse(`is`)
     }
 }
