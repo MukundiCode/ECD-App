@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -25,9 +27,12 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += '-Xjvm-default=all-compatibility'
     }
 }
 
@@ -44,4 +49,29 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0"
     implementation 'com.rometools:rome:1.8.0'
     implementation 'rome:rome:1.0'
+
+    implementation("androidx.room:room-runtime:2.4.2")
+    //annotationProcessor("androidx.room:room-compiler:2.4.2")
+    kapt("androidx.room:room-compiler:2.4.2")
+    implementation("androidx.room:room-ktx:2.4.2")
+    //implementation("androidx.room:room-rxjava2:2.4.2")
+    //implementation("androidx.room:room-rxjava3:2.4.2")
+    //implementation("androidx.room:room-guava:2.4.2")
+    testImplementation("androidx.room:room-testing:2.4.2")
+    implementation("androidx.room:room-paging:2.4.2")
+    implementation 'androidx.paging:paging-compose:1.0.0-alpha15'
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.5.0"
+
+    // Kotlin components
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+
+    implementation "androidx.activity:activity-ktx:1.5.0"
+    implementation "androidx.fragment:fragment-ktx:1.5.0"
+
 }

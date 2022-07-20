@@ -8,7 +8,8 @@ class SQLConnector {
     internal var conn: Connection? = null
     internal var username = "uctgroup2022" // provide the username
     internal var password = "ecd@BBP__!" // provide the corresponding password
-
+    var resultset: ResultSet? = null
+    var stmt: Statement? = null
 
     /**
      * This method makes a connection to MySQL Server
@@ -36,56 +37,47 @@ class SQLConnector {
         }
     }
 
-    fun executeMySQLQuery() {
-        var stmt: Statement? = null
-        var resultset: ResultSet? = null
-        var resultXML: String = ""
-
+    /** Should return the iteratore for the query and do nothing else */
+    fun executeMySQLQuery(query: String): ResultSet? {
         try {
             stmt = conn!!.createStatement()
-            resultset = stmt!!.executeQuery("SELECT post_content FROM wp_posts where ID=85;")
+            resultset = stmt!!.executeQuery(query)
 
-            if (stmt.execute("SELECT post_content FROM wp_posts where ID=85;")) {
-                resultset = stmt.resultSet
+            if (stmt!!.execute(query)) {
+                resultset = stmt!!.resultSet
+                return resultset
             }
-
-            while (resultset!!.next()) {
-                resultXML = resultXML + resultset.getString(1)
-                println(resultset.getString(1))
-            }
-            var rss = RSSUtil(resultXML)
-            rss.test()
         } catch (ex: SQLException) {
-            // handle any errors
             ex.printStackTrace()
         } finally {
-            // release resources
-            if (resultset != null) {
-                try {
-                    resultset.close()
-                } catch (sqlEx: SQLException) {
-                }
 
-                resultset = null
+        }
+        return resultset
+    }
+
+    fun closeConnection(){
+        // release resources
+        if (resultset != null) {
+            try {
+                resultset!!.close()
+            } catch (sqlEx: SQLException) {
             }
 
-            if (stmt != null) {
-                try {
-                    stmt.close()
-                } catch (sqlEx: SQLException) {
-                }
-
-                stmt = null
+            resultset = null
+        }
+        if (stmt != null) {
+            try {
+                stmt!!.close()
+            } catch (sqlEx: SQLException) {
             }
-
-            if (conn != null) {
-                try {
-                    conn!!.close()
-                } catch (sqlEx: SQLException) {
-                }
-
-                conn = null
+            stmt = null
+        }
+        if (conn != null) {
+            try {
+                conn!!.close()
+            } catch (sqlEx: SQLException) {
             }
+            conn = null
         }
     }
 }

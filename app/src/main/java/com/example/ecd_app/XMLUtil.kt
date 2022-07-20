@@ -17,7 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory
  * help with processing
  */
 
-class RSSUtil (XMLString: String) {
+class XMLUtil (XMLString: String) {
     val XMLString: String = XMLString
 
     fun test(){
