@@ -2,6 +2,7 @@ package com.example.ecd_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -31,9 +32,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = PostListAdapter()
+        val adapter = PostListAdapter(){
+
+            Toast.makeText(this@MainActivity,"hi from main", Toast.LENGTH_LONG).show()
+
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //connection
+        wordViewModel.allPosts.observe(this) { words ->
+            // Update the cached copy of the words in the adapter.
+            words.let { adapter.submitList(it) }
+        }
+
 
         lifecycleScope.launch {
             getSQL()

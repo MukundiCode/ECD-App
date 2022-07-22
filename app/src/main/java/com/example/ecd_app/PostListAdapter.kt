@@ -1,16 +1,19 @@
 package com.example.ecd_app
 
+import android.content.Context
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.room.Post
+import kotlin.coroutines.coroutineContext
 
-class PostListAdapter: ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_COMPARATOR)  {
+class PostListAdapter(private val itemClickFunc: () -> Unit): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_COMPARATOR)  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder.create(parent)
     }
@@ -24,6 +27,11 @@ class PostListAdapter: ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_C
         //djm
 
         //}
+
+        holder.itemView.setOnClickListener(){
+            Toast.makeText(it.context, "hello", Toast.LENGTH_LONG ).show()
+            itemClickFunc.invoke()
+        }
     }
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
