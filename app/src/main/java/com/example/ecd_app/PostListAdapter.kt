@@ -1,6 +1,7 @@
 package com.example.ecd_app
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.room.Post
 import kotlin.coroutines.coroutineContext
 
-class PostListAdapter(private val itemClickFunc: () -> Unit): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_COMPARATOR)  {
+class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_COMPARATOR)  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder.create(parent)
     }
@@ -28,9 +29,48 @@ class PostListAdapter(private val itemClickFunc: () -> Unit): ListAdapter<Post, 
 
         //}
 
+        /**
+         * data class Post(@PrimaryKey (autoGenerate = true) val id: Int,
+        val postTitle: String,
+        val dateCreated: String,
+        val postContent: String,
+        val metaData: String) {
+
+         side code stuff
+        //            Toast.makeText(it.context, "hello", Toast.LENGTH_LONG ).show()
+        //            itemClickFunc.invoke()
+
+         */
+
         holder.itemView.setOnClickListener(){
-            Toast.makeText(it.context, "hello", Toast.LENGTH_LONG ).show()
-            itemClickFunc.invoke()
+            //we will refer to current
+            var postID : Int = current.id
+            var postTitle : String = current.postTitle
+            var postDateCreated : String = current.dateCreated
+            var postContent : String = current.postContent
+            var postMetaData : String = current.metaData
+
+            //creating intent to transfer data
+
+            val intent = Intent(it.context, DetailedPostActivity::class.java)
+            //putting data into a intent
+            intent.putExtra("iPostID", postID )
+            intent.putExtra("iPostTitle", postTitle)
+            intent.putExtra("iPostDate", postDateCreated)
+            intent.putExtra("iPostContent", postContent)
+            intent.putExtra("iPostMetaData", postMetaData)
+            it.context.startActivity(intent) //starting a new activity
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 
