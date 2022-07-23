@@ -49,7 +49,7 @@ class PostListAdapter(private val itemClickFunc: () -> Unit): ListAdapter<Post, 
                 return PostViewHolder(view)
             }
         }
-    }
+}
     companion object {
         //from what ive read online this converts the old outdated list into the new list Transforms
         private val Posts_COMPARATOR = object : DiffUtil.ItemCallback<Post>() {
