@@ -29,7 +29,6 @@ class PostListAdapter: ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_C
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val postItemView: TextView = itemView.findViewById(R.id.textView)
 
-
         fun bind(text: String?) {
             postItemView.text = text
         }
