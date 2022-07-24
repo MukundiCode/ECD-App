@@ -42,7 +42,6 @@ class SQLConnector {
         try {
             stmt = conn!!.createStatement()
             resultset = stmt!!.executeQuery(query)
-
             if (stmt!!.execute(query)) {
                 resultset = stmt!!.resultSet
                 return resultset
@@ -50,19 +49,16 @@ class SQLConnector {
         } catch (ex: SQLException) {
             ex.printStackTrace()
         } finally {
-
         }
         return resultset
     }
 
     fun closeConnection(){
-        // release resources
         if (resultset != null) {
             try {
                 resultset!!.close()
             } catch (sqlEx: SQLException) {
             }
-
             resultset = null
         }
         if (stmt != null) {
@@ -76,8 +72,28 @@ class SQLConnector {
             try {
                 conn!!.close()
             } catch (sqlEx: SQLException) {
-            }
+                }
             conn = null
         }
     }
+
+    fun getAssignedUser(name: String): String{
+        var queryResultSet = this.executeMySQLQuery("SELECT ID FROM wp_users HAVING user_login = $name")
+        queryResultSet!!.next()
+        return queryResultSet.getString(1)
+    }
+
+    fun getAssignedPosts(ID: String): ArrayList<String>? {
+        var results : ArrayList<String> ? = null
+        var queryResultSet = this.executeMySQLQuery("SELECT meta_value FROM wp_usermeta WHERE meta_key = 'assigned_posts' AND user_id = $ID")
+        while(queryResultSet!!.next()){
+            results!!.add(queryResultSet.getString(1))
+        }
+        return results
+    }
+
+//    fun getAssignedPostContent(IDs: Array<String>): Array<String>{
+//
+//    }
+
 }

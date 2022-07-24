@@ -58,9 +58,7 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             var SQLConnector = SQLConnector()
             SQLConnector.getConnection()
-            var queryResultSet = SQLConnector.executeMySQLQuery("SELECT post_content FROM wp_posts where ID=85;")
-
-            //saving to database
+            var queryResultSet = SQLConnector.executeMySQLQuery("SELECT * FROM wp_posts where ID=85;")
             System.out.println("Saving to db")
             val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
             val currentDate = sdf.format(Date())
