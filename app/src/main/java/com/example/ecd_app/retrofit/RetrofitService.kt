@@ -29,7 +29,6 @@ class RetrofitService
             .build()
             .create(WordPressEcdAPI::class.java)
 
-
         fun buildService(): WordPressEcdAPI {
             return retrofit
         }
