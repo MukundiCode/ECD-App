@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.retrofit.PostJS
 import com.example.ecd_app.retrofit.PostsJS
 import com.example.ecd_app.retrofit.RetrofitService
+import com.example.ecd_app.retrofit.User
 import com.example.ecd_app.room.Post
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
@@ -54,14 +55,14 @@ class MainActivity : AppCompatActivity() {
     fun retrofitCall(){
         val compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
-            RetrofitService.ServiceBuilder.buildService().getPosts()
+            RetrofitService.ServiceBuilder.buildService().getUsers()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
 
     }
 
-    fun onResponse(response: List<PostJS>){
+    fun onResponse(response: List<User>){
         System.out.println(response)
     }
 
