@@ -26,7 +26,7 @@ class XMLUtil (XMLString: String) {
             System.out.println(document.getElementsByTagName("p").item(1).textContent)
         }
     }
-    
+
     @Throws(Exception::class)
     fun loadXMLFromString(xml: String?): Document? {
         var xmlWithRoot = "<root>" + xml + "</root>"

@@ -13,8 +13,15 @@ class DashBoard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)
         val cardContent : CardView = findViewById(R.id.cardContent)
+        val cardMapActivity : CardView = findViewById(R.id.cardMap)
+
         cardContent.setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        cardMapActivity.setOnClickListener(){
+            val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
 

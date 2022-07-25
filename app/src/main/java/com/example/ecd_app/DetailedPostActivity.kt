@@ -7,6 +7,7 @@ import android.widget.TextView
 class DetailedPostActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         setContentView(R.layout.activity_detailed_post)
         var intent = intent //getting the intent
         val postID = intent.getIntExtra("iPostID",0)

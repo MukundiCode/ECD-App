@@ -17,16 +17,16 @@
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/tvCategory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
+        app:layout_constraintVertical_bias="0.821" />
 
     <TextView
         android:id="@+id/tvCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="624dp"
+        android:layout_marginBottom="576dp"
         android:fontFamily="@font/psregular"
         android:text="category placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,14 +41,14 @@
         app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.644"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCategory"
-        app:layout_constraintVertical_bias="0.253">
+        app:layout_constraintVertical_bias="0.388">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="507dp">
 
             <ImageView
                 android:id="@+id/imageView3"

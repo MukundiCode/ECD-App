@@ -2,6 +2,7 @@ package com.example.ecd_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,8 +27,11 @@ class MainActivity : AppCompatActivity() {
         PostsViewModelFactory((application as ECDApplication).repository)
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
