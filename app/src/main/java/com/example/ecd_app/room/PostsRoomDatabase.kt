@@ -24,7 +24,7 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
                 scope.launch {
                     //nothing yet
                     var postDao = database.postDao()
-                    var post = Post(0,"TitleBanana","Content","date","meta")
+                    var post = Post(0,"BreastFeeding at work","July","date","meta")
                     postDao.insert(post)
                     System.out.println("Database created")
                 }

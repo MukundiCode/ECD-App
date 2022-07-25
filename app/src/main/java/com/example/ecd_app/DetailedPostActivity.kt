@@ -21,17 +21,17 @@ class DetailedPostActivity : AppCompatActivity() {
 //        intent.putExtra("iPostContent", postContent)
 //        intent.putExtra("iPostMetaData", postMetaData)
 
-        val tvPostId:TextView = findViewById(R.id.tvPostId)
-        val tvPostTitle:TextView = findViewById(R.id.tvPostTitle)
-        val tvPostDate:TextView = findViewById(R.id.tvPostDate)
-        val tvPostContent:TextView = findViewById(R.id.tvPostContent)
-        val tvPostMetaData:TextView = findViewById(R.id.tvPostMetaData)
+//        val tvPostId:TextView = findViewById(R.id.tvPostId)
+        val tvPostTitle:TextView = findViewById(R.id.tvTitle)
+//        val tvPostDate:TextView = findViewById(R.id.tvPostDate)
+        val tvPostContent:TextView = findViewById(R.id.tvContent)
+//        val tvPostMetaData:TextView = findViewById(R.id.tvPostMetaData)
 
-        tvPostId.text = postID.toString()
+        //tvPostId.text = postID.toString()
         tvPostTitle.text = postTitle
-        tvPostDate.text = postDateCreated
+        //tvPostDate.text = postDateCreated
         tvPostContent.text = postContent
-        tvPostMetaData.text = postMetaData
+        //tvPostMetaData.text = postMetaData
 
 
 

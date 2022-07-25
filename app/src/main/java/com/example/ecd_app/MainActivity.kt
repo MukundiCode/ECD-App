@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = PostListAdapter()
+
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         wordViewModel.allPosts.observe(this) { words ->
