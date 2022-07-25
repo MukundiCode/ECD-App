@@ -34,14 +34,10 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
     }
 
     companion object {
-        // Singleton prevents multiple instances of database opening at the
-        // same time.
         @Volatile
         private var INSTANCE: PostsRoomDatabase? = null
 
         fun getDatabase(context: Context, scope: CoroutineScope): PostsRoomDatabase {
-            // if the INSTANCE is not null, then return it,
-            // if it is, then create the database
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

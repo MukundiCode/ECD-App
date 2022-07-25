@@ -9,7 +9,6 @@ import androidx.cardview.widget.CardView
 
 class DashBoard : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)

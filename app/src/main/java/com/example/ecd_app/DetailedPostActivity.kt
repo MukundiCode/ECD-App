@@ -33,10 +33,5 @@ class DetailedPostActivity : AppCompatActivity() {
         tvPostContent.text = postContent
         //tvPostMetaData.text = postMetaData
 
-
-
-
-
-
     }
 }

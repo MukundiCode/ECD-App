@@ -10,6 +10,4 @@ data class Post(@PrimaryKey (autoGenerate = true) val id: Int,
                 val dateCreated: String,
                 val postContent: String,
                 val metaData: String) {
-
-
 }

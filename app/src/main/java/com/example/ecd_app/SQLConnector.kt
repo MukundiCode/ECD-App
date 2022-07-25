@@ -91,9 +91,4 @@ class SQLConnector {
         }
         return results
     }
-
-//    fun getAssignedPostContent(IDs: Array<String>): Array<String>{
-//
-//    }
-
 }

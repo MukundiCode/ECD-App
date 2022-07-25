@@ -64,29 +64,14 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
             intent.putExtra("iPostMetaData", postMetaData)
             it.context.startActivity(intent) //starting a new activity
 
-
-
-
-
-
-
-
-
-
-
         }
     }
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         //private val postItemView: TextView = itemView.findViewById(R.id.textView)
-
         private val postTitleEdit: TextView = itemView.findViewById(R.id.tvTitle)
         private val postTitleDescriptionEdit: TextView = itemView.findViewById(R.id.tvDescription)
         private val postDateEdit: TextView = itemView.findViewById(R.id.tvDate)
-
-
-
-
 
         fun bind(postTitle: String?, postDescription: String?, postDate: String?) {
 //            postItemView.text = text
