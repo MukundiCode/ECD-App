@@ -3,10 +3,6 @@ package com.example.ecd_app
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.retrofit.*
@@ -39,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             // Update the cached copy of the words in the adapter.
             words.let { adapter.submitList(it) }
         }
+        wordViewModel.deleteAll()
         retrofitCall()
     }
 

@@ -18,6 +18,12 @@ class DashBoard : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val webview : CardView = findViewById(R.id.cardSearch)
+        webview.setOnClickListener(){
+            val intent = Intent(this, postContentWebView::class.java)
+            startActivity(intent)
+        }
+
 //        val btnContent : Button = findViewById(R.id.btnContent)
 //
 //        btnContent.setOnClickListener(){

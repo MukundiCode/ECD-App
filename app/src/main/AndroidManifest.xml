@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ecd_app">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -15,22 +16,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ECD_App"
-        tools:targetApi="31" >
-<!--        <activity-->
-<!--            android:name=".DetailedPostActivity"-->
-<!--            android:parentActivityName=".MainActivity"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            android:exported="true">-->
+        tools:targetApi="31">
+        <activity
+            android:name=".postContentWebView"
+            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".DetailedPostActivity" -->
+        <!-- android:parentActivityName=".MainActivity" -->
+        <!-- android:exported="false" /> -->
+        <!-- <activity -->
+        <!-- android:name=".MainActivity" -->
+        <!-- android:exported="true"> -->
         <activity
             android:name=".MapsActivity"
             android:exported="false" />
         <activity
             android:name=".DashBoard"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -40,8 +45,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" >
-        </activity>
+            android:exported="false"></activity>
     </application>
 
 </manifest>
