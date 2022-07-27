@@ -11,4 +11,8 @@ class PostsRepository(private val postDAO: PostDAO) {
     suspend fun insert(post: Post) {
         postDAO.insert(post)
     }
+    @WorkerThread
+    suspend fun deleteAll() {
+        postDAO.deleteAll()
+    }
 }

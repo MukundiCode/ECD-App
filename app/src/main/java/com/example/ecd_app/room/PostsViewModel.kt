@@ -15,6 +15,9 @@ class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
     fun insert(post: Post) = viewModelScope.launch {
         repository.insert(post)
     }
+    fun deleteAll() = viewModelScope.launch {
+        repository.deleteAll()
+    }
 }
 class PostsViewModelFactory(private val repository: PostsRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
