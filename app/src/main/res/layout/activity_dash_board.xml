@@ -34,7 +34,6 @@
             android:padding="10dp"
             android:background="#FAFAFA">
 
-            <!-->ITEM CARD 1<-->
             <com.google.android.flexbox.FlexboxLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -49,7 +48,7 @@
             android:padding="10dp"
             android:background="#FAFAFA"
                 app:layout_flexBasisPercent="100%">
-
+                <!-->ITEM CARD 1<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardContent"
                     android:layout_width="match_parent"
@@ -79,7 +78,7 @@
                             android:layout_marginTop="20dp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
+                <!-->ITEM CARD 2<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardSearch"
                     android:layout_width="match_parent"
@@ -111,8 +110,7 @@
                             android:layout_marginTop="20dp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
-                <!--card 3-->
+                <!-->ITEM CARD 3<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardMap"
                     android:layout_width="match_parent"
@@ -142,7 +140,7 @@
                             android:layout_marginTop="20dp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
+                <!-->ITEM CARD 4<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardSettings"
                     android:layout_width="match_parent"
@@ -172,7 +170,7 @@
                             android:layout_marginTop="20dp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
+                <!-->ITEM CARD 5<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardLogout"
                     android:layout_width="match_parent"
@@ -188,7 +186,6 @@
                         android:orientation="vertical"
                         android:gravity="center"
                         >
-
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
@@ -203,8 +200,6 @@
                             android:textColor="@color/white"
                             android:layout_marginTop="20dp"/>
                     </LinearLayout>
-
-
                 </androidx.cardview.widget.CardView>
 
             </com.google.android.flexbox.FlexboxLayout>
