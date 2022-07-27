@@ -11,11 +11,11 @@ android {
 
     defaultConfig {
         applicationId "com.example.ecd_app"
-        minSdk 21
+        minSdk 18
+        multiDexEnabled true
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -72,7 +72,6 @@ dependencies {
     testImplementation("androidx.room:room-testing:2.4.2")
     implementation("androidx.room:room-paging:2.4.2")
     implementation 'androidx.paging:paging-compose:1.0.0-alpha15'
-
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0"

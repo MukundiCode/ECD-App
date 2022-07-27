@@ -35,7 +35,7 @@ class DetailedPostActivity : AppCompatActivity() {
 
 
         postContent= "<!-- wp:video {\\\"id\\\":74} -->\\n\" +\n" +
-                "                    \"<figure class=\\\"wp-block-video\\\"><video controls src=\\\"https://ecdportal.azurewebsites.net/wp-content/uploads/2022/06/feedingtime_vid.mp4\\\" width=\"10\" height=\"10\"></video></figure>\\n\" +\n" +
+                "                    \"<figure class=\\\"wp-block-video\\\"><video controls src=\\\"https://ecdportal.azurewebsites.net/wp-content/uploads/2022/06/feedingtime_vid.mp4\\\" width=\"100\" height=\"100\"></video></figure>\\n\" +\n" +
                 "                    \"<!-- /wp:video -->"
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Loading Data...")
@@ -44,9 +44,10 @@ class DetailedPostActivity : AppCompatActivity() {
         web_view.requestFocus()
         web_view.settings.lightTouchEnabled = true
         web_view.settings.javaScriptEnabled = true
-//        web_view.getSettings().setLoadWithOverviewMode(true);
-//        web_view.getSettings().setUseWideViewPort(true);
-        web_view.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        web_view.setInitialScale(1);
+        web_view.getSettings().setLoadWithOverviewMode(true);
+        web_view.getSettings().setUseWideViewPort(true);
+        web_view.getSettings().setJavaScriptEnabled(true);
 
         web_view.settings.setGeolocationEnabled(true)
         web_view.isSoundEffectsEnabled = true

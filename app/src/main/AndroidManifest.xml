@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
+    <uses-sdk tools:overrideLibrary="androidx.paging.compose, androidx.compose.foundation, androidx.compose.animation, androidx.compose.foundation.layout, androidx.compose.animation.core, androidx.compose.ui, androidx.compose.ui.text, androidx.compose.ui.graphics, androidx.compose.ui.unit, androidx.compose.ui.geometry, androidx.compose.runtime.saveable, com.google.android.gms.maps, androidx.compose.ui.util"/>
 
     <application
         android:name=".ECDApplication"
