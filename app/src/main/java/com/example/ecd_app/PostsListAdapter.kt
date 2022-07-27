@@ -39,7 +39,7 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
         val postContent: String,
         val metaData: String) {
 
-         side code stuff
+        side code stuff
         //            Toast.makeText(it.context, "hello", Toast.LENGTH_LONG ).show()
         //            itemClickFunc.invoke()
 
@@ -87,7 +87,7 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
                 return PostViewHolder(view)
             }
         }
-}
+    }
     companion object {
         //from what ive read online this converts the old outdated list into the new list Transforms
         private val Posts_COMPARATOR = object : DiffUtil.ItemCallback<Post>() {
