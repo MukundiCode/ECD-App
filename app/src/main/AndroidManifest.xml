@@ -5,8 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".ECDApplication"
@@ -19,7 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECD_App"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ArticleListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArticleActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
