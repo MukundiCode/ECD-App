@@ -13,22 +13,24 @@ class DashBoard : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dash_board)
         val cardContent : CardView = findViewById(R.id.cardContent)
+        val cardMapActivity : CardView = findViewById(R.id.cardMap)
+        val cardArticlesActivity : CardView = findViewById(R.id.cardArticle)
+
+
         cardContent.setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
-        val webview : CardView = findViewById(R.id.cardSearch)
-        webview.setOnClickListener(){
-            val intent = Intent(this, postContentWebView::class.java)
+        cardMapActivity.setOnClickListener(){
+            val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
 
-//        val btnContent : Button = findViewById(R.id.btnContent)
-//
-//        btnContent.setOnClickListener(){
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//        }
+        cardArticlesActivity.setOnClickListener(){
+            val intent = Intent(this, ArticleListActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

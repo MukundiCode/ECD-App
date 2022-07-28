@@ -2,6 +2,8 @@ package com.example.ecd_app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +11,7 @@ import com.example.ecd_app.retrofit.*
 import com.example.ecd_app.room.Post
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -22,12 +25,16 @@ class MainActivity : AppCompatActivity() {
         PostsViewModelFactory((application as ECDApplication).repository)
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = PostListAdapter()
+        val fetchPosts = findViewById<FloatingActionButton>(R.id.fab)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -35,8 +42,15 @@ class MainActivity : AppCompatActivity() {
             // Update the cached copy of the words in the adapter.
             words.let { adapter.submitList(it) }
         }
-        wordViewModel.deleteAll()
-        retrofitCall()
+
+        fetchPosts.setOnClickListener(){
+            Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
+            wordViewModel.deleteAll()
+            retrofitCall()
+
+        }
+//        wordViewModel.deleteAll()
+//        retrofitCall()
     }
 
     fun retrofitCall(){
