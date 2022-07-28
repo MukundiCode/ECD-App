@@ -72,8 +72,7 @@ android:background="#FAFAFA"
                 android:textColor="#000000"
                 app:layout_flexBasisPercent="100%"
                 android:textSize="16sp"
-                android:fontFamily="@font/psregular"
-                android:textStyle="bold"
+                android:fontFamily="@font/psbold"
                 app:layout_constraintLeft_toRightOf="@id/ivArticleCard"
                 app:layout_constraintTop_toTopOf="@id/ivArticleCard"/>
             <TextView
