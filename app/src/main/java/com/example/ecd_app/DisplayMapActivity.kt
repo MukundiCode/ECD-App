@@ -48,7 +48,7 @@ class DisplayMapActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        Toast.makeText(applicationContext, "yo ${userMap._title}", Toast.LENGTH_LONG).show()
+//        Toast.makeText(applicationContext, "yo ${userMap._title}", Toast.LENGTH_LONG).show()
         val boundsBuilder = LatLngBounds.builder()
         for(place in userMap.places){
             val latLngMarker = LatLng(place.latitude, place.longitude)
