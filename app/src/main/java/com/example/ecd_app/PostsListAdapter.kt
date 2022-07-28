@@ -71,13 +71,13 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
         //private val postItemView: TextView = itemView.findViewById(R.id.textView)
         private val postTitleEdit: TextView = itemView.findViewById(R.id.tvTitle)
         private val postTitleDescriptionEdit: TextView = itemView.findViewById(R.id.tvDescription)
-        private val postDateEdit: TextView = itemView.findViewById(R.id.tvDate)
+//        private val postDateEdit: TextView = itemView.findViewById(R.id.tvDate)
 
         fun bind(postTitle: String?, postDescription: String?, postDate: String?) {
 //            postItemView.text = text
             postTitleEdit.text = postTitle
             //postTitleDescriptionEdit.text = Resources.getSystem().getString(R.string.loremipsum)
-            postDateEdit.text = postDate
+//            postDateEdit.text = postDate
         }
 
         companion object {

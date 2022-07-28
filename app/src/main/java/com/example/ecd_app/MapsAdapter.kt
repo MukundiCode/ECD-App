@@ -23,16 +23,16 @@ class MapsAdapter(val context: Context, val userMaps: List<UserMap>, val onClick
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.simple_list_item_1, parent, false)
-        return ViewHolder(view)
+        val layoutView = LayoutInflater.from((parent.context)).inflate(com.example.ecd_app.R.layout.map_item_layout, parent, false)
+        return ViewHolder(layoutView)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val tvMapTitle= holder.itemView.findViewById<TextView>(com.example.ecd_app.R.id.tvMapTitle)
         val userMap = userMaps[position]
-        val tvTitle = holder.itemView.findViewById<TextView>(R.id.text1)
-        tvTitle.text = userMap._title
+        tvMapTitle.text = userMap._title
         holder.itemView.setOnClickListener(){
-            Toast.makeText(context,"You clicked ${tvTitle.text}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context,"You clicked ${tvMapTitle.text}", Toast.LENGTH_SHORT).show()
             onClickListener.onItemClick(position)
         }
     }

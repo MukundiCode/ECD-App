@@ -41,11 +41,7 @@ class MapActivity : AppCompatActivity() {
         setContentView(R.layout.activity_map)
 
 
-        val debugTv = findViewById<TextView>(R.id.tvDebug)
-        debugTv.append("LIST\n")
-        for (item in userMapsList){
-            debugTv.append(item._title+"\n")
-        }
+
 
         //set layout manager on the recycler view
         //set adapter on recycler view
@@ -54,7 +50,7 @@ class MapActivity : AppCompatActivity() {
         rvMaps.layoutManager = LinearLayoutManager(this)
         mapAdapter = MapsAdapter(this, userMapsList, object: MapsAdapter.OnClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@MapActivity,"hi from main", Toast.LENGTH_LONG).show()
+//                Toast.makeText(this@MapActivity,"hi from main", Toast.LENGTH_LONG).show()
                 val intent = Intent(this@MapActivity, DisplayMapActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, userMapsList[position])
                 startActivity(intent)
@@ -65,7 +61,7 @@ class MapActivity : AppCompatActivity() {
 
         val fab : FloatingActionButton = findViewById(R.id.fabCreateMap)
         fab.setOnClickListener(){
-            Toast.makeText(this,"hi from fab", Toast.LENGTH_LONG).show()
+//            Toast.makeText(this,"hi from fab", Toast.LENGTH_LONG).show()
             showAlertDialog()
 
 
@@ -78,7 +74,7 @@ class MapActivity : AppCompatActivity() {
         if(requestCode== REQUEST_CODE && resultCode== Activity.RESULT_OK){
             //come here
             val userMap = data?.getSerializableExtra(EXTRA_USER_MAP) as UserMap
-            Toast.makeText(this, "we here", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "we here", Toast.LENGTH_SHORT).show()
             userMapsList.add(userMap)
             mapAdapter.notifyItemInserted(userMapsList.size-1)
             serializeUserMaps(this, userMapsList)
