@@ -36,6 +36,7 @@ class DetailedPostActivity : AppCompatActivity() {
 //        val testString : String = "Coding can be difficult but don't give up"
 //        val posOfBe : Int = testString.indexOf("be")
 //        Toast.makeText(this@MainActivity, "the index of be in the test string is $posOfBe the expected position was 11" , Toast.LENGTH_LONG).show()
+        Toast.makeText(this@DetailedPostActivity, postContent, Toast.LENGTH_LONG ).show()
 
         if (postContent != null) {
             url = if (postContent.contains("<video")){
@@ -74,29 +75,31 @@ class DetailedPostActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
-//        intent.putExtra("iPostID", postID )
-//        intent.putExtra("iPostTitle", postTitle)
-//        intent.putExtra("iPostDate", postDateCreated)
-//        intent.putExtra("iPostContent", postContent)
-//        intent.putExtra("iPostMetaData", postMetaData)
-
-//        val tvPostId:TextView = findViewById(R.id.tvPostId)
         val tvPostTitle:TextView = findViewById(R.id.tvTitle)
-//        val tvPostDate:TextView = findViewById(R.id.tvPostDate)
         val tvPostContent:TextView = findViewById(R.id.tvContent)
-//        val tvPostMetaData:TextView = findViewById(R.id.tvPostMetaData)
 
-        //tvPostId.text = postID.toString()
+        var str = postContent
+
+
+//        var str= "<!-- wp:paragraph -->\n" +"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vehicula in lectus non accumsan. Praesent at dui ante. Vestibulum eget leo vitae mi venenatis tristique ut non quam. Donec dictum risus purus, et porttitor ex vestibulum sit amet. Sed sed nibh eros. Donec blandit sodales libero id fringilla. Suspendisse aliquam efficitur volutpat. Praesent blandit metus id ipsum condimentum egestas. Integer quis sagittis eros. Duis posuere, purus suscipit molestie venenatis, nibh nunc aliquet dolor, id consequat nulla tortor vitae sem.</p>\n"
+        if (str != null) {
+            str  = str.replace("<[^>]*>".toRegex(), "")
+        }
+//        println(str)
+
+//        val tvConsole : TextView = findViewById(R.id.tvConsole)
+//        tvConsole.text= str
+
+
         tvPostTitle.text = postTitle
-        //tvPostDate.text = postDateCreated
-        tvPostContent.text = postContent
-        //tvPostMetaData.text = postMetaData
-
-
+        if (str != null) {
+            if (str.trim().isEmpty()){
+                tvPostContent.text="This post does not have a text description"
+                //need help hiding component
+            }else{
+                tvPostContent.text = str
+            }
+        }
 
     }
 
