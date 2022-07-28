@@ -19,10 +19,11 @@
         app:alignItems="flex_start"
         app:justifyContent="flex_start"
         app:alignContent="flex_start"
-        app:flexDirection="row">
+        app:flexDirection="row"
+        >
         <androidx.cardview.widget.CardView
             android:background="#066D2E"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_flexBasisPercent="30%"
             app:cardCornerRadius="12dp"
@@ -30,13 +31,11 @@
             android:id="@+id/ivArticleCard"
             app:cardBackgroundColor="#066D2E"
             >
-            <TextView
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#fff"
-                android:text="Breastfeeding"
-                android:textSize="16sp"
-                android:fontFamily="@font/psbold"
+                android:layout_height="104"
+                android:src="@drawable/ic_feed"
+                android:layout_marginTop="18dp"
                 android:gravity="center"
                 />
         </androidx.cardview.widget.CardView>
