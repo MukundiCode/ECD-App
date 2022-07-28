@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/12 THE GREAT/AndroidStudioProjects/ECD_App/app/src/main/res/layout/activity_dash_board.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/12 THE GREAT/AndroidStudioProjects/ECD_App/app/src/main/res/layout/activity_detailed_post.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/12 THE GREAT/AndroidStudioProjects/ECD_App/app/src/main/res/layout/activity_post_content_web_view.xml" value="0.25" />
+        <entry key="..\:/Users/12 THE GREAT/AndroidStudioProjects/ECD_App/app/src/main/res/layout/activity_video_view_test.xml" value="0.19020323084940072" />
         <entry key="app/src/main/res/layout/activity_detailed_post.xml" value="0.2740628166160081" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.4519927536231884" />
         <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.4519927536231884" />
