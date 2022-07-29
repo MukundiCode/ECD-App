@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="140dp"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_marginTop="20dp"
+android:layout_marginLeft="20dp"
+android:layout_marginRight="20dp"
+app:cardElevation="8dp"
+    >
+<com.google.android.flexbox.FlexboxLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:flexWrap="wrap"
+    app:alignItems="flex_start"
+    app:justifyContent="flex_start"
+    app:alignContent="flex_start"
+    app:flexDirection="row"
+    >
+    <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="#EA4139"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_flexBasisPercent="30%"
+        app:cardElevation="8dp"
+        android:id="@+id/ivArticleCard"
+        >
+        <ImageView
+            android:id="@+id/ivMapCard"
+            android:layout_width="match_parent"
+            android:layout_height="104dp"
+            android:src="@drawable/ic_building"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            />
+    </androidx.cardview.widget.CardView>
+    <com.google.android.flexbox.FlexboxLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        app:layout_flexBasisPercent="70%"
+        android:layout_height="match_parent"
+        app:flexWrap="wrap"
+        app:alignItems="center"
+        app:justifyContent="center"
+        app:alignContent="flex_start"
+        android:padding="4dp"
+        >
+        <TextView
+            android:id="@+id/tvMapTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textColor="#000000"
+            app:layout_flexBasisPercent="100%"
+            android:textSize="16sp"
+            android:fontFamily="@font/psbold"
+            app:layout_constraintLeft_toRightOf="@id/ivArticleCard"
+            app:layout_constraintTop_toTopOf="@id/ivArticleCard"/>
+    </com.google.android.flexbox.FlexboxLayout>
+</com.google.android.flexbox.FlexboxLayout>
+</androidx.cardview.widget.CardView>
+
+<!--><androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,7 +77,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <ImageView
             android:id="@+id/ivMapCard"
             android:layout_width="74dp"
@@ -21,7 +85,6 @@
             android:src="@drawable/ic_building"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tvMapTitle"
             android:layout_width="wrap_content"
@@ -33,14 +96,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/ivMapCard"
             app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
-
+<-->
 
 
 

@@ -30,7 +30,6 @@ class ArticleAdapter(val articleList: List<Article>, val onClickListener: OnClic
         val article = articleList[position]
         articleTitle= holder.view.findViewById(R.id.tvArticleTitle)
         articleDescription= holder.view.findViewById(R.id.tvArticleDescription)
-        articleImage= holder.view.findViewById(R.id.ivArticleCard)
         articleTitle.text = article.articleTitle
         articleDescription.text= article.articleDescriptor
         holder.itemView.setOnClickListener(){
