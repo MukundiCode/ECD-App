@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onResponse(response: User){
+        //create list of video links
+        var videoLinks : List<String> = listOf("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4",
+            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health-Introduction-Afrikaans.mp4",
+            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/Services-Needed_vid.mp4")
         for (assignedPost : AssignedPosts in response.assignedPosts){
             val post = Post(
                 0,
@@ -71,10 +75,15 @@ class MainActivity : AppCompatActivity() {
                 assignedPost.postContent!!,
                 "meta"
             )
+            //add link to list
             System.out.println("Post created ")
             if (post != null) {
                 wordViewModel.insert(post)
                 System.out.println("Post inserted in database ")
+            }
+            //for all links, download video
+            for (link in videoLinks){
+
             }
         }
     }
