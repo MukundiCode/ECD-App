@@ -100,6 +100,10 @@ dependencies {
     //pdf reader
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
+    //jsoup
+    implementation("org.jsoup:jsoup:1.13.1")
+
+
 
 
 }
