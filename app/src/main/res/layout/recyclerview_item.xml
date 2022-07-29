@@ -7,7 +7,6 @@
     android:layout_marginTop="20dp"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
-    app:cardCornerRadius="12dp"
     app:cardElevation="8dp"
     >
     <com.google.android.flexbox.FlexboxLayout
@@ -26,7 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_flexBasisPercent="30%"
-            app:cardCornerRadius="12dp"
             app:cardElevation="8dp"
             android:id="@+id/ivArticleCard"
             app:cardBackgroundColor="#066D2E"
@@ -70,10 +68,8 @@
                 android:layout_margin="8dp"
                 app:layout_flexBasisPercent="100%"
                 android:text="This video goes over how breastfeeding should be conducted in a professional setting"
-                app:layout_constraintLeft_toLeftOf="@id/tvArticleTitle"
                 app:layout_constraintRight_toRightOf="parent"
-                android:fontFamily="@font/psmediumitalic"
-                app:layout_constraintTop_toBottomOf="@id/tvArticleTitle"/>
+                android:fontFamily="@font/psmediumitalic"></TextView>
         </com.google.android.flexbox.FlexboxLayout>
     </com.google.android.flexbox.FlexboxLayout>
 </androidx.cardview.widget.CardView>
