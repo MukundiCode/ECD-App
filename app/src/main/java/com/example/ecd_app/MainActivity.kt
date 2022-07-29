@@ -1,10 +1,16 @@
 package com.example.ecd_app
 
+import android.Manifest
+import android.content.DialogInterface
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.retrofit.*
@@ -50,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         }
         wordViewModel.deleteAll()
+        checkStoragePermission()
         retrofitCall()
     }
 
@@ -64,10 +71,6 @@ class MainActivity : AppCompatActivity() {
 
     fun onResponse(response: User){
         //create list of video links
-        var downloader = VideoDownloader()
-        var videoLinks : List<String> = listOf("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4",
-            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health-Introduction-Afrikaans.mp4",
-            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/Services-Needed_vid.mp4")
         for (assignedPost : AssignedPosts in response.assignedPosts){
             val post = Post(
                 0,
@@ -82,15 +85,66 @@ class MainActivity : AppCompatActivity() {
                 wordViewModel.insert(post)
                 System.out.println("Post inserted in database ")
             }
-            //for all links, download video
-            for (link in videoLinks){
-                downloader.downloadVideo(link, this)
-            }
+
         }
     }
 
     fun onFailure(t: Throwable){
         System.out.println("Retrofit Failed: "+ t.stackTraceToString())
+    }
+
+    fun downloadVideos(){
+        var downloader = VideoDownloader()
+        var videoLinks : List<String> = listOf("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4",
+            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health-Introduction-Afrikaans.mp4",
+            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/Services-Needed_vid.mp4")
+        //for all links, download video
+        for (link in videoLinks){
+            downloader.downloadVideo(link, this)
+        }
+    }
+
+    /**
+     * Returns true if this app has permission to access location, else, prompts the
+     * user to accept or deny request for location permission.
+     * @return boolean
+     */
+    fun checkStoragePermission(): Boolean {
+        return if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                AlertDialog.Builder(this) //.setTitle(R.string.title_location_permission)
+                    .setTitle("Title") //.setMessage(R.string.text_location_permission)
+                    .setMessage("R.string.permission_request_message")
+                    .setPositiveButton("R.string.permission_request_explaination",
+                        DialogInterface.OnClickListener { dialogInterface, i -> //Prompt the user once explanation has been shown
+                            ActivityCompat.requestPermissions(
+                                this@MainActivity,
+                                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                                101
+                            )
+                        })
+                    .create()
+                    .show()
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    101
+                )
+            }
+            false
+        } else {
+            true
+        }
     }
 
 }
