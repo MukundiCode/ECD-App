@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onResponse(response: User){
         //create list of video links
+        var downloader = VideoDownloader()
         var videoLinks : List<String> = listOf("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4",
             "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health-Introduction-Afrikaans.mp4",
             "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/Services-Needed_vid.mp4")
@@ -83,7 +84,7 @@ class MainActivity : AppCompatActivity() {
             }
             //for all links, download video
             for (link in videoLinks){
-
+                downloader.downloadVideo(link, this)
             }
         }
     }
