@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
             retrofitCall()
 
         }
-//        wordViewModel.deleteAll()
-//        retrofitCall()
+        wordViewModel.deleteAll()
+        retrofitCall()
     }
 
     fun retrofitCall(){

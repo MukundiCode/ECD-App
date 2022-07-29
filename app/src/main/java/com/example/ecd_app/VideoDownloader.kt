@@ -6,7 +6,6 @@ import android.content.Context.DOWNLOAD_SERVICE
 import android.net.Uri
 import android.os.Environment
 import androidx.core.content.ContextCompat.getSystemService
-import com.downloader.*
 import com.mysql.jdbc.Util.getPackageName
 
 
