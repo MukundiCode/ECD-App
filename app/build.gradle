@@ -42,6 +42,9 @@ android {
 
 kapt {
     correctErrorTypes true
+    arguments {
+        arg("room.schemaLocation", "$projectDir/schemas".toString())
+    }
 }
 
 dependencies {
@@ -102,8 +105,6 @@ dependencies {
 
     //jsoup
     implementation("org.jsoup:jsoup:1.13.1")
-
-
 
 
 }
