@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
                 var videoName = s.get(s.size-1)
                 System.out.println("Downloading video with name: "+ videoName)
                 downloader.downloadVideo(link,videoName, this)
+                System.out.println("DONE test")
             }
         }
     }
