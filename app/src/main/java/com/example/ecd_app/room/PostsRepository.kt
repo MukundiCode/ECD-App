@@ -11,6 +11,12 @@ class PostsRepository(private val postDAO: PostDAO) {
     suspend fun insert(post: Post) {
         postDAO.insert(post)
     }
+
+    @WorkerThread
+    fun exists(post_title: String): Flow<Int> {
+        return postDAO.exists(post_title)
+    }
+
     @WorkerThread
     suspend fun deleteAll() {
         postDAO.deleteAll()

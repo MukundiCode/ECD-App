@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.retrofit.*
@@ -20,6 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 
 
@@ -79,7 +81,9 @@ class MainActivity : AppCompatActivity() {
                 videoName!!,
                 "meta"
             )
-            System.out.println("Post created ")
+            //lifecycleScope.launch(){
+                System.out.println(wordViewModel.exists(assignedPost.postTitle!!).value)
+            //}
             if (post != null) {
                 wordViewModel.insert(post)
                 System.out.println("Post inserted in database ")

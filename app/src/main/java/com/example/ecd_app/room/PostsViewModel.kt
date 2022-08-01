@@ -9,11 +9,15 @@ class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
     val allPosts: LiveData<List<Post>> = repository.allPosts.asLiveData()
+    //val exists: LiveData<Int> = repository.exists.as
     /**
      * Launching a new coroutine to insert the data in a non-blocking way
      */
     fun insert(post: Post) = viewModelScope.launch {
         repository.insert(post)
+    }
+    fun exists(post_title: String): LiveData<Int> {
+        return repository.exists(post_title).asLiveData()
     }
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
