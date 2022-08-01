@@ -1,6 +1,7 @@
 package com.example.ecd_app.room
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -8,8 +9,14 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-// Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = arrayOf(Post::class), version = 1, exportSchema = false)
+@Database(
+    entities = arrayOf(Post::class),
+    version = 3,
+    exportSchema = true,
+    autoMigrations = [
+        AutoMigration (from = 2, to = 3)
+]
+)
 public abstract class PostsRoomDatabase : RoomDatabase() {
 
     abstract fun postDao(): PostDAO
@@ -24,7 +31,12 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
                 scope.launch {
                     //nothing yet
                     var postDao = database.postDao()
-                    var post = Post(0,"BreastFeeding at work","July","date","meta")
+                    var post = Post(0,
+                        "BreastFeeding at work",
+                        "July",
+                        "date",
+                        "None",
+                        "meta")
                     postDao.insert(post)
                     System.out.println("Database created")
                 }
@@ -43,9 +55,10 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
                     context.applicationContext,
                     PostsRoomDatabase::class.java,
                     "posts_database"
-                ).addCallback(PostDatabaseCallback(scope)).build()
+                ).addCallback(PostDatabaseCallback(scope))
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
-                // return instance
                 instance
             }
         }

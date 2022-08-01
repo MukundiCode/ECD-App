@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -18,11 +17,10 @@ import com.example.ecd_app.room.Post
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.text.SimpleDateFormat
-import java.util.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import org.jsoup.Jsoup
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,8 +28,7 @@ class MainActivity : AppCompatActivity() {
     private val wordViewModel: PostsViewModel by viewModels {
         PostsViewModelFactory((application as ECDApplication).repository)
     }
-
-
+    val postVideoLinks : ArrayList<String?> = ArrayList<String?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +37,11 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = PostListAdapter()
-        val fetchPosts = findViewById<FloatingActionButton>(R.id.fab)
+        val fetchPosts = findViewById<FloatingActionButton>(R.id.sync_content)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         wordViewModel.allPosts.observe(this) { words ->
-            // Update the cached copy of the words in the adapter.
             words.let { adapter.submitList(it) }
         }
 
@@ -53,11 +49,8 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
             wordViewModel.deleteAll()
             retrofitCall()
-
         }
-        wordViewModel.deleteAll()
         checkStoragePermission()
-        retrofitCall()
     }
 
     fun retrofitCall(){
@@ -70,38 +63,66 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onResponse(response: User){
-        //create list of video links
         for (assignedPost : AssignedPosts in response.assignedPosts){
+            var videoLink: String? = if (getVideoLink(assignedPost.postContent!!) != null){
+                                            getVideoLink(assignedPost.postContent!!)
+                                        }else{
+                                             null
+                                        }
+            val s = videoLink?.split("/")
+            var videoName = s?.get(s.size-1)
             val post = Post(
                 0,
                 assignedPost.postTitle!!,
                 assignedPost.postDate!!,
                 assignedPost.postContent!!,
+                videoName!!,
                 "meta"
             )
-            //add link to list
             System.out.println("Post created ")
             if (post != null) {
                 wordViewModel.insert(post)
                 System.out.println("Post inserted in database ")
             }
-
+            if (videoLink != null){
+                System.out.println("URL is :"+ videoLink)
+                postVideoLinks.add(videoLink)
+            }
         }
+        downloadVideos(postVideoLinks)
     }
 
     fun onFailure(t: Throwable){
         System.out.println("Retrofit Failed: "+ t.stackTraceToString())
     }
 
-    fun downloadVideos(){
+    fun downloadVideos(videoLinks : ArrayList<String?>){
         var downloader = VideoDownloader()
-        var videoLinks : List<String> = listOf("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4",
-            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health-Introduction-Afrikaans.mp4",
-            "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/Services-Needed_vid.mp4")
-        //for all links, download video
+        System.out.println("Downloading videos, number of videos: "+ videoLinks.size)
+
         for (link in videoLinks){
-            downloader.downloadVideo(link, this)
+            if (link != null){
+                val s = link?.split("/")
+                var videoName = s.get(s.size-1)
+                System.out.println("Downloading video with name: "+ videoName)
+                downloader.downloadVideo(link,videoName, this)
+            }
         }
+    }
+
+    fun getVideoLink(post_content : String): String? {
+        var url: String? = null
+        val doc: org.jsoup.nodes.Document? = Jsoup.parse(post_content)
+        val element = doc?.select("video")
+        val srcUrl = element?.attr("src")
+        if (srcUrl != null) {
+            url = if (srcUrl.trim().isEmpty()){
+                null
+            }else{
+                srcUrl
+            }
+        }
+        return url
     }
 
     /**
