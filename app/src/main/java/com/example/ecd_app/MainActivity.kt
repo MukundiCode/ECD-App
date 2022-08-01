@@ -18,7 +18,7 @@ import com.example.ecd_app.room.Post
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.text.SimpleDateFormat
+import org.jsoup.Jsoup
 import java.util.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 wordViewModel.insert(post)
                 System.out.println("Post inserted in database ")
             }
-
+            //getLinkFromPost(assignedPost.postContent!!)
         }
     }
 
@@ -145,6 +145,25 @@ class MainActivity : AppCompatActivity() {
         } else {
             true
         }
+    }
+
+    fun getLinkFromPost(xml : String) : String? {
+        //clean up the wp postContent html jsoup
+        var url : String? = null
+        val doc: org.jsoup.nodes.Document? = Jsoup.parse(xml)
+        val text: String? = doc?.text()
+        val element = doc?.select("video")
+        val srcUrl = element?.attr("src")
+        if (srcUrl != null) {
+            url = if (srcUrl.trim().isEmpty()){
+                null
+            }else{
+                srcUrl
+            }
+            System.out.println("The url is "+ url)
+
+        }
+        return url
     }
 
 }

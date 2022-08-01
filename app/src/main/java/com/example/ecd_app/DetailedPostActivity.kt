@@ -53,6 +53,7 @@ class DetailedPostActivity : AppCompatActivity() {
             }else{
                 srcUrl
             }
+            System.out.println("The url is "+ url)
         }
 
         //category
