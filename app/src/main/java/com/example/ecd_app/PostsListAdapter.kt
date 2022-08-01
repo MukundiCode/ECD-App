@@ -51,6 +51,7 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
             var postTitle : String = current.postTitle
             var postDateCreated : String = current.dateCreated
             var postContent : String = current.postContent
+            var postVideoName : String = current.videoName!!
             var postMetaData : String = current.metaData
 
             //creating intent to transfer data
@@ -61,6 +62,7 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
             intent.putExtra("iPostTitle", postTitle)
             intent.putExtra("iPostDate", postDateCreated)
             intent.putExtra("iPostContent", postContent)
+            intent.putExtra("iPostVideoName", postVideoName)
             intent.putExtra("iPostMetaData", postMetaData)
             it.context.startActivity(intent) //starting a new activity
 
