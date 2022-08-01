@@ -40,7 +40,6 @@ class DetailedPostActivity : AppCompatActivity() {
         val tvCategory : TextView = findViewById(R.id.tvCategory)
         context = this.applicationContext
 
-        }
         if (postContent != null) {
             url = if (postContent.contains("<video")){
                 val initialPositionHttps : Int = postContent.indexOf("https:")
@@ -80,9 +79,8 @@ class DetailedPostActivity : AppCompatActivity() {
         if (str != null) {
             if (str.trim().isEmpty()){
                 tvPostContent.text="This post does not have a text description"
-                //need help hiding component
             }else{
-                srcUrl
+                //srcUrl
             }
             System.out.println("The url is "+ url)
         }
