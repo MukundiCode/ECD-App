@@ -2,6 +2,7 @@ package com.example.ecd_app
 
 import android.Manifest
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,7 +11,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.retrofit.*
@@ -21,7 +21,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 
 
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     private val wordViewModel: PostsViewModel by viewModels {
         PostsViewModelFactory((application as ECDApplication).repository)
     }
-    val postVideoLinks : ArrayList<String?> = ArrayList<String?>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +47,11 @@ class MainActivity : AppCompatActivity() {
 
         fetchPosts.setOnClickListener(){
             Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
-            wordViewModel.deleteAll()
+           // wordViewModel.deleteAll()
             retrofitCall()
+//            lifecycleScope.launch {
+//                testExists()
+//            }
         }
         checkStoragePermission()
     }
@@ -65,12 +66,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onResponse(response: User){
+        var posts: ArrayList<Post> = ArrayList<Post>()
+        var videoLinks: ArrayList<String> = ArrayList<String>()
         for (assignedPost : AssignedPosts in response.assignedPosts){
             var videoLink: String? = if (getVideoLink(assignedPost.postContent!!) != null){
-                                            getVideoLink(assignedPost.postContent!!)
-                                        }else{
-                                             null
-                                        }
+                getVideoLink(assignedPost.postContent!!)
+            }else{
+                null
+            }
             val s = videoLink?.split("/")
             var videoName = s?.get(s.size-1)
             val post = Post(
@@ -81,20 +84,54 @@ class MainActivity : AppCompatActivity() {
                 videoName!!,
                 "meta"
             )
-            //lifecycleScope.launch(){
-                System.out.println(wordViewModel.exists(assignedPost.postTitle!!).value)
-            //}
             if (post != null) {
-                wordViewModel.insert(post)
-                System.out.println("Post inserted in database ")
+                posts.add(post)
             }
             if (videoLink != null){
-                System.out.println("URL is :"+ videoLink)
-                postVideoLinks.add(videoLink)
+                videoLinks.add(videoLink)
             }
         }
-        downloadVideos(postVideoLinks)
+        //launch background service
+        val intent = Intent(this, OnRetrofitResponseAsyncTask::class.java)
+        intent.putExtra("PostList",posts)
+        intent.putExtra("VideoLinks",videoLinks)
+        startService(intent)
     }
+
+
+//    fun onResponse(response: User){
+//        //this function should just collect results into an array
+//        //when done it spawns the background service
+//        for (assignedPost : AssignedPosts in response.assignedPosts){
+//            var videoLink: String? = if (getVideoLink(assignedPost.postContent!!) != null){
+//                                            getVideoLink(assignedPost.postContent!!)
+//                                        }else{
+//                                             null
+//                                        }
+//            val s = videoLink?.split("/")
+//            var videoName = s?.get(s.size-1)
+//            val post = Post(
+//                0,
+//                assignedPost.postTitle!!,
+//                assignedPost.postDate!!,
+//                assignedPost.postContent!!,
+//                videoName!!,
+//                "meta"
+//            )
+////            lifecycleScope.launch(){
+//                System.out.println("Number is :"+wordViewModel.exists(assignedPost.postTitle!!))
+////            }
+//            if (post != null) {
+//                wordViewModel.insert(post)
+//                System.out.println("Post inserted in database ")
+//            }
+//            if (videoLink != null){
+//                System.out.println("URL is :"+ videoLink)
+//                postVideoLinks.add(videoLink)
+//            }
+//        }
+//        downloadVideos(postVideoLinks)
+//    }
 
     fun onFailure(t: Throwable){
         System.out.println("Retrofit Failed: "+ t.stackTraceToString())

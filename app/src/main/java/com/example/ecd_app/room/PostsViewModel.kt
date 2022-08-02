@@ -16,8 +16,8 @@ class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
     fun insert(post: Post) = viewModelScope.launch {
         repository.insert(post)
     }
-    fun exists(post_title: String): LiveData<Int> {
-        return repository.exists(post_title).asLiveData()
+    fun exists(post_title: String): Boolean {
+        return repository.exists(post_title)
     }
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()

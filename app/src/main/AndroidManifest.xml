@@ -25,6 +25,7 @@
         <activity
             android:name=".ArticleActivity"
             android:exported="false" />
+        <service android:name=".OnRetrofitResponseAsyncTask" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
