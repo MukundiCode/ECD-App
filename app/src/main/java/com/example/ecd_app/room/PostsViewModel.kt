@@ -1,6 +1,7 @@
 package com.example.ecd_app.room
 
 import androidx.lifecycle.*
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
@@ -17,6 +18,11 @@ class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
     }
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
+    }
+
+    //suvanth
+    fun searchDatabase(searchQuery: String): LiveData<List<Post>>{
+        return repository.searchDatabase(searchQuery).asLiveData()
     }
 }
 class PostsViewModelFactory(private val repository: PostsRepository) : ViewModelProvider.Factory {

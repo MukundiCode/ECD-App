@@ -15,6 +15,10 @@ interface PostDAO {
     @Query("SELECT * FROM posts_table ORDER BY postTitle ASC")
     fun getAlphabetizedPosts(): Flow<List<Post>>
 
+    //suvanth
+    @Query("SELECT * FROM posts_table WHERE postTitle LIKE :searchQuery OR postContent LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): Flow<List<Post>>
+
     @Query("DELETE FROM posts_table")
     suspend fun deleteAll()
 }
