@@ -49,9 +49,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
            // wordViewModel.deleteAll()
             retrofitCall()
-//            lifecycleScope.launch {
-//                testExists()
-//            }
         }
         checkStoragePermission()
     }
@@ -98,58 +95,10 @@ class MainActivity : AppCompatActivity() {
         startService(intent)
     }
 
-
-//    fun onResponse(response: User){
-//        //this function should just collect results into an array
-//        //when done it spawns the background service
-//        for (assignedPost : AssignedPosts in response.assignedPosts){
-//            var videoLink: String? = if (getVideoLink(assignedPost.postContent!!) != null){
-//                                            getVideoLink(assignedPost.postContent!!)
-//                                        }else{
-//                                             null
-//                                        }
-//            val s = videoLink?.split("/")
-//            var videoName = s?.get(s.size-1)
-//            val post = Post(
-//                0,
-//                assignedPost.postTitle!!,
-//                assignedPost.postDate!!,
-//                assignedPost.postContent!!,
-//                videoName!!,
-//                "meta"
-//            )
-////            lifecycleScope.launch(){
-//                System.out.println("Number is :"+wordViewModel.exists(assignedPost.postTitle!!))
-////            }
-//            if (post != null) {
-//                wordViewModel.insert(post)
-//                System.out.println("Post inserted in database ")
-//            }
-//            if (videoLink != null){
-//                System.out.println("URL is :"+ videoLink)
-//                postVideoLinks.add(videoLink)
-//            }
-//        }
-//        downloadVideos(postVideoLinks)
-//    }
-
     fun onFailure(t: Throwable){
         System.out.println("Retrofit Failed: "+ t.stackTraceToString())
     }
 
-    fun downloadVideos(videoLinks : ArrayList<String?>){
-        var downloader = VideoDownloader()
-        System.out.println("Downloading videos, number of videos: "+ videoLinks.size)
-
-        for (link in videoLinks){
-            if (link != null){
-                val s = link?.split("/")
-                var videoName = s.get(s.size-1)
-                System.out.println("Downloading video with name: "+ videoName)
-                downloader.downloadVideo(link,videoName, this)
-            }
-        }
-    }
 
     fun getVideoLink(post_content : String): String? {
         var url: String? = null
@@ -207,25 +156,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             true
         }
-    }
-
-    fun getLinkFromPost(xml : String) : String? {
-        //clean up the wp postContent html jsoup
-        var url : String? = null
-        val doc: org.jsoup.nodes.Document? = Jsoup.parse(xml)
-        val text: String? = doc?.text()
-        val element = doc?.select("video")
-        val srcUrl = element?.attr("src")
-        if (srcUrl != null) {
-            url = if (srcUrl.trim().isEmpty()){
-                null
-            }else{
-                srcUrl
-            }
-            System.out.println("The url is "+ url)
-
-        }
-        return url
     }
 
 }
