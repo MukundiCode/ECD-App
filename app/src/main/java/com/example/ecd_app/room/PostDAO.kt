@@ -15,8 +15,8 @@ interface PostDAO {
     @Query("SELECT * FROM posts_table ORDER BY postTitle ASC")
     fun getAlphabetizedPosts(): Flow<List<Post>>
 
-    @Query("SELECT COUNT(1) FROM posts_table WHERE postTitle = :post_title")
-    fun exists(post_title: String): Flow<Int>
+    @Query("SELECT EXISTS (SELECT * FROM posts_table WHERE postTitle = :post_title)")
+    fun exists(post_title: String): Boolean
 
     @Query("DELETE FROM posts_table")
     suspend fun deleteAll()
