@@ -2,6 +2,7 @@ package com.example.ecd_app.room
 
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
+import java.util.concurrent.Executors
 
 class PostsRepository(private val postDAO: PostDAO) {
 
@@ -11,6 +12,19 @@ class PostsRepository(private val postDAO: PostDAO) {
     suspend fun insert(post: Post) {
         postDAO.insert(post)
     }
+
+    @WorkerThread
+    fun exists(post_title: String): Boolean {
+        return postDAO.exists(post_title)
+    }
+
+    fun existsAsync(post_title: String) {
+        Executors.newSingleThreadExecutor().execute {
+            val num  = exists(post_title)
+            //liveWords.postValue(words)
+        }
+    }
+
     @WorkerThread
     suspend fun deleteAll() {
         postDAO.deleteAll()

@@ -1,13 +1,15 @@
 package com.example.ecd_app
 
+import android.content.Context
+import android.database.Cursor
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import org.jsoup.Jsoup
-
 
 class DetailedPostActivity : AppCompatActivity() {
     private val defaulturl = "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4"
@@ -84,9 +86,17 @@ class DetailedPostActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-
-        val uri = Uri.parse(url)
-        iPostVideoView.setVideoURI(uri)
+        System.out.println(postVideoName)
+        var videos = context?.let { fetchVideos(it.contentResolver) }
+        if (videos != null) {
+            var vids = videos.blockingGet()
+            for (v in vids){
+                if (v.VIDEO_NAME == postVideoName){
+                    iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
+                    break
+                }
+            }
+        }
         pgBar.visibility= View.VISIBLE
 
 
