@@ -88,11 +88,16 @@ class DetailedPostActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         System.out.println(postVideoName)
-        val uri = Uri.parse(Environment.DIRECTORY_MOVIES + "/ECD" + "/" + postVideoName)
-
-
-        System.out.println("Path is "+ this.filesDir.absolutePath)
-        iPostVideoView.setVideoURI(uri)
+        var videos = context?.let { fetchVideos(it.contentResolver) }
+        if (videos != null) {
+            var vids = videos.blockingGet()
+            for (v in vids){
+                if (v.VIDEO_NAME == postVideoName){
+                    iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
+                    break
+                }
+            }
+        }
         pgBar.visibility= View.VISIBLE
     }
 
@@ -105,17 +110,6 @@ class DetailedPostActivity : AppCompatActivity() {
     override fun onStop() {
         iPostVideoView.stopPlayback()
         super.onStop()
-    }
-
-    fun getPath(uri: Uri?): String? {
-        val projection = arrayOf(MediaStore.Video.Media._ID)
-        val cursor: Cursor? = context!!.contentResolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI !!, projection, null, null, null)
-        System.out.println("context is "+context)
-        return if (cursor != null) {
-            val column_index: Int = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA)
-            cursor.moveToFirst()
-            cursor.getString(column_index)
-        } else null
     }
 
 }
