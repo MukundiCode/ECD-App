@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -24,8 +26,9 @@ import io.reactivex.schedulers.Schedulers
 import org.jsoup.Jsoup
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
+    private lateinit var adapter : PostListAdapter
     private val wordViewModel: PostsViewModel by viewModels {
         PostsViewModelFactory((application as ECDApplication).repository)
     }
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = PostListAdapter()
+        adapter = PostListAdapter()
         val fetchPosts = findViewById<FloatingActionButton>(R.id.sync_content)
 
         recyclerView.adapter = adapter
@@ -99,7 +102,6 @@ class MainActivity : AppCompatActivity() {
     fun onFailure(t: Throwable){
         System.out.println("Retrofit Failed: "+ t.stackTraceToString())
     }
-
 
     fun getVideoLink(post_content : String): String? {
         var url: String? = null
@@ -197,6 +199,41 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.search_menu, menu)
+
+        val search = menu?.findItem(R.id.menu_search)
+        val searchView = search?.actionView as? androidx.appcompat.widget.SearchView
+        searchView?.isSubmitButtonEnabled= true
+        searchView?.setOnQueryTextListener(this@MainActivity)
+        return true
 
 
+
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if (query!=null){
+            searchDatabase(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query: String?): Boolean {
+        if (query!=null){
+            searchDatabase(query)
+        }
+        return true
+    }
+
+    private fun searchDatabase(query: String){
+        val searchQuery = "%$query%"
+        wordViewModel.searchDatabase(searchQuery).observe(this) { list ->
+            list.let {
+                adapter.submitList(it)
+            }
+
+        }
+
+    }
 }

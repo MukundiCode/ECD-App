@@ -29,4 +29,9 @@ class PostsRepository(private val postDAO: PostDAO) {
     suspend fun deleteAll() {
         postDAO.deleteAll()
     }
+
+    //suvanth
+    fun searchDatabase(searchQuery: String): Flow<List<Post>> {
+        return postDAO.searchDatabase(searchQuery)
+    }
 }

@@ -11,6 +11,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
+        gradlePluginPortal()
+
     }
 }
 rootProject.name = "ECD_App"

@@ -15,6 +15,9 @@ interface PostDAO {
     @Query("SELECT * FROM posts_table ORDER BY postTitle ASC")
     fun getAlphabetizedPosts(): Flow<List<Post>>
 
+    @Query("SELECT * FROM posts_table WHERE postTitle LIKE :searchQuery OR postContent LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): Flow<List<Post>>
+
     @Query("SELECT EXISTS (SELECT * FROM posts_table WHERE postTitle = :post_title)")
     fun exists(post_title: String): Boolean
 
