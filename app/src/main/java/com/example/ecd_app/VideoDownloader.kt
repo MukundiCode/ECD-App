@@ -32,7 +32,6 @@ class VideoDownloader {
             Environment.DIRECTORY_MOVIES + "/ECD" ,
             vidoeName
         ) // for public destination
-        System.out.println(("Downloading File "  + vidoeName +"to folder " + Environment.getExternalStorageDirectory().absolutePath ))
         val downloadManager = context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager?
         val downloadID = downloadManager!!.enqueue(request) // enqueue puts the download request in the queue.
     }
