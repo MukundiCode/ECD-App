@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             retrofitCall()
         }
         checkStoragePermission()
+        checkReadStoragePermission()
     }
 
     fun retrofitCall(){
@@ -157,5 +158,45 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+
+    fun checkReadStoragePermission(): Boolean {
+        return if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            ) {
+                AlertDialog.Builder(this) //.setTitle(R.string.title_location_permission)
+                    .setTitle("Title") //.setMessage(R.string.text_location_permission)
+                    .setMessage("R.string.permission_request_message")
+                    .setPositiveButton("R.string.permission_request_explaination",
+                        DialogInterface.OnClickListener { dialogInterface, i -> //Prompt the user once explanation has been shown
+                            ActivityCompat.requestPermissions(
+                                this@MainActivity,
+                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                101
+                            )
+                        })
+                    .create()
+                    .show()
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(
+                    this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    41
+                )
+            }
+            false
+        } else {
+            true
+        }
+    }
+
+
 
 }

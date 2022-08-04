@@ -1,15 +1,15 @@
 package com.example.ecd_app
 
 import android.content.Context
+import android.database.Cursor
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import org.jsoup.Jsoup
-
 
 
 class DetailedPostActivity : AppCompatActivity() {
@@ -82,15 +82,16 @@ class DetailedPostActivity : AppCompatActivity() {
             }else{
                 //srcUrl
             }
-            System.out.println("The url is "+ url)
         }
     }
 
     override fun onStart() {
         super.onStart()
-        //val uri = Uri.parse(url)
-        val uri = Uri.parse("android.resource://" + context!!.packageName + "/" +postVideoName)
-        System.out.println(uri)
+        System.out.println(postVideoName)
+        val uri = Uri.parse(Environment.DIRECTORY_MOVIES + "/ECD" + "/" + postVideoName)
+
+
+        System.out.println("Path is "+ this.filesDir.absolutePath)
         iPostVideoView.setVideoURI(uri)
         pgBar.visibility= View.VISIBLE
     }
@@ -104,6 +105,17 @@ class DetailedPostActivity : AppCompatActivity() {
     override fun onStop() {
         iPostVideoView.stopPlayback()
         super.onStop()
+    }
+
+    fun getPath(uri: Uri?): String? {
+        val projection = arrayOf(MediaStore.Video.Media._ID)
+        val cursor: Cursor? = context!!.contentResolver.query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI !!, projection, null, null, null)
+        System.out.println("context is "+context)
+        return if (cursor != null) {
+            val column_index: Int = cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DATA)
+            cursor.moveToFirst()
+            cursor.getString(column_index)
+        } else null
     }
 
 }
