@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import org.jsoup.Jsoup
 
 class DetailedPostActivity : AppCompatActivity() {
     private val defaulturl = "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4"
@@ -18,6 +19,7 @@ class DetailedPostActivity : AppCompatActivity() {
     private lateinit var iPostVideoView: VideoView
     private lateinit var mediaController: MediaController
     private lateinit var url: String
+    private var postVideoName: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +34,7 @@ class DetailedPostActivity : AppCompatActivity() {
         val postDateCreated = intent.getStringExtra("iPostDate")
         val postContent = intent.getStringExtra("iPostContent")
         val postMetaData = intent.getStringExtra("iPostMetaData")
+        postVideoName = intent.getStringExtra("iPostVideoName")
         //getting elements
         val tvCategory: TextView = findViewById(R.id.tvCategory)
         val tvPostTitle: TextView = findViewById(R.id.tvTitle)
@@ -87,7 +90,7 @@ class DetailedPostActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         System.out.println(postVideoName)
-        var videos = context?.let { fetchVideos(it.contentResolver) }
+        var videos = this?.let { fetchVideos(it.contentResolver) }
         if (videos != null) {
             var vids = videos.blockingGet()
             for (v in vids){
