@@ -11,15 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvGreeting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Your Dashboard"
-            android:fontFamily="@font/psbold"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            android:layout_margin="20dp"/>
 
         <com.google.android.flexbox.FlexboxLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,8 +23,38 @@
             app:justifyContent="flex_start"
             app:alignContent="flex_start"
             app:flexDirection="column"
-            android:padding="10dp"
             android:background="#FAFAFA">
+
+            <com.google.android.flexbox.FlexboxLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            app:flexWrap="wrap"
+            app:alignItems="center"
+            app:justifyContent="center"
+            app:alignContent="center"
+            app:flexDirection="row"
+            android:background="#066D2E"
+            android:bottomLeftRadius="70dp"
+            android:bottomRightRadius="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="20dp"
+            >
+
+            <TextView
+                android:id="@+id/tvGreeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home: You and Your Baby "
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:fontFamily="@font/psbold"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                />
+
+            </com.google.android.flexbox.FlexboxLayout>
 
             <com.google.android.flexbox.FlexboxLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,17 +63,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:flexWrap="wrap"
-            app:alignItems="flex_start"
-            app:justifyContent="flex_start"
-            app:alignContent="flex_start"
-            app:flexDirection="column"
+            app:alignItems="center"
+            app:justifyContent="center"
+            app:alignContent="center"
+            app:flexDirection="row"
             android:padding="10dp"
             android:background="#FAFAFA"
                 app:layout_flexBasisPercent="100%">
                 <!-->ITEM CARD 1<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardContent"
-                    android:layout_width="match_parent"
+                    android:layout_width="170dp"
                     android:layout_height="170dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="8dp"
@@ -65,15 +86,15 @@
                         android:gravity="center"
                         >
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_content"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/baby"
                             android:layout_marginTop="18dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Content"
-                            android:fontFamily="@font/pslight"
+                            android:text="ECD Content"
+                            android:fontFamily="@font/psbold"
                             android:textSize="18sp"
                             android:textColor="@color/white"
                             android:layout_marginTop="20dp"/>
@@ -82,7 +103,7 @@
                 <!-->ITEM CARD 2<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardArticle"
-                    android:layout_width="match_parent"
+                    android:layout_width="170dp"
                     android:layout_height="170dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="8dp"
@@ -97,15 +118,15 @@
                         >
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_article"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/parenthealth"
                             android:layout_marginTop="18dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Articles"
-                            android:fontFamily="@font/pslight"
+                            android:text="Public Articles"
+                            android:fontFamily="@font/psbold"
                             android:textSize="18sp"
                             android:textColor="@color/white"
                             android:layout_marginTop="20dp"/>
@@ -114,7 +135,7 @@
                 <!-->ITEM CARD 3<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardMap"
-                    android:layout_width="match_parent"
+                    android:layout_width="170dp"
                     android:layout_height="170dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="8dp"
@@ -127,15 +148,15 @@
                         android:gravity="center"
                         >
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_location"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/map"
                             android:layout_marginTop="18dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Facilities"
-                            android:fontFamily="@font/pslight"
+                            android:fontFamily="@font/psbold"
                             android:textSize="18sp"
                             android:textColor="@color/white"
                             android:layout_marginTop="20dp"/>
@@ -144,11 +165,11 @@
                 <!-->ITEM CARD 4<-->
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardSettings"
-                    android:layout_width="match_parent"
+                    android:layout_width="170dp"
                     android:layout_height="170dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="8dp"
-                    app:cardBackgroundColor="#F0EA54"
+                    app:cardBackgroundColor="@color/grey"
                     android:layout_margin="10dp">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -157,24 +178,24 @@
                         android:gravity="center"
                         >
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:src="@drawable/ic_settings"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/settings"
                             android:layout_marginTop="18dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Settings"
-                            android:fontFamily="@font/pslight"
+                            android:fontFamily="@font/psbold"
                             android:textSize="18sp"
                             android:textColor="@color/white"
                             android:layout_marginTop="20dp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-                <!-->ITEM CARD 5<-->
+                <!-->ITEM CARD 5
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardLogout"
-                    android:layout_width="match_parent"
+                    android:layout_width="170dp"
                     android:layout_height="170dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="8dp"
@@ -202,7 +223,7 @@
                             android:layout_marginTop="20dp"/>
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-
+<-->
             </com.google.android.flexbox.FlexboxLayout>
         </com.google.android.flexbox.FlexboxLayout>
     </LinearLayout>

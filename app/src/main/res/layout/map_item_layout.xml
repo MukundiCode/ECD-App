@@ -32,7 +32,7 @@ app:cardElevation="8dp"
             android:id="@+id/ivMapCard"
             android:layout_width="match_parent"
             android:layout_height="104dp"
-            android:src="@drawable/ic_building"
+            android:src="@drawable/map"
             android:layout_marginTop="18dp"
             android:gravity="center"
             />
