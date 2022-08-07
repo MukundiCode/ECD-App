@@ -25,6 +25,7 @@ class DashBoard : AppCompatActivity() {
         val cardMapActivity : CardView = findViewById(R.id.cardMap)
         val cardArticlesActivity : CardView = findViewById(R.id.cardArticle)
         val cardLogout : CardView = findViewById(R.id.cardLogout)
+        val cardSettings : CardView = findViewById(R.id.cardSettings)
 
 
         val tvGreetingUsername : TextView = findViewById(R.id.tvGreeting)
@@ -43,6 +44,11 @@ class DashBoard : AppCompatActivity() {
 
         cardArticlesActivity.setOnClickListener(){
             val intent = Intent(this, ArticleListActivity::class.java)
+            startActivity(intent)
+        }
+
+        cardSettings.setOnClickListener(){
+            val intent = Intent(this, ContactActivity::class.java)
             startActivity(intent)
         }
 

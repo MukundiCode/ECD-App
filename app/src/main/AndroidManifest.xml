@@ -21,15 +21,19 @@
         android:theme="@style/Theme.ECD_App"
         tools:targetApi="31">
         <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ContactActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ArticleListActivity"
@@ -37,6 +41,7 @@
         <activity
             android:name=".ArticleActivity"
             android:exported="false" />
+
         <service android:name=".OnRetrofitResponseAsyncTask" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -54,10 +59,6 @@
             android:value="AIzaSyBTkACIPQn4up85c8ET2SeKUsau-TZtQeE" />
 
         <activity
-            android:name=".CreateMapActivity"
-            android:exported="false"
-            android:label="@string/title_activity_create_map" />
-        <activity
             android:name=".DisplayMapActivity"
             android:exported="false"
             android:label="@string/title_activity_display_map" />
@@ -66,9 +67,7 @@
             android:exported="false" />
         <activity
             android:name=".DashBoard"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".DetailedPostActivity"
             android:exported="false"

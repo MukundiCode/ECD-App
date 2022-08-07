@@ -28,6 +28,11 @@ class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
     fun searchDatabase(searchQuery: String): LiveData<List<Post>>{
         return repository.searchDatabase(searchQuery).asLiveData()
     }
+
+    //suvanth
+    fun filterDatabase(filterQuery: String): LiveData<List<Post>>{
+        return repository.filterDatabase(filterQuery).asLiveData()
+    }
 }
 class PostsViewModelFactory(private val repository: PostsRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

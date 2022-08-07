@@ -45,9 +45,11 @@ class OnRetrofitResponseAsyncTask : Service()  {
         for (link in videoLinks){
             if (link != null){
                 val s = link?.split("/")
-                var videoName = s.get(s.size-1)
+                var videoName = s?.get(s.size-1)
                 System.out.println("Downloading video with name: "+ videoName)
-                downloader.downloadVideo(link,videoName, this)
+                if (videoName != null) {
+                    downloader.downloadVideo(link,videoName, this)
+                }
             }
         }
     }

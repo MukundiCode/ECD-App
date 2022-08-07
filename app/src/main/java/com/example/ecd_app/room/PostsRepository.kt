@@ -34,4 +34,8 @@ class PostsRepository(private val postDAO: PostDAO) {
     fun searchDatabase(searchQuery: String): Flow<List<Post>> {
         return postDAO.searchDatabase(searchQuery)
     }
+
+    fun filterDatabase(filterQuery: String): Flow<List<Post>> {
+        return postDAO.filterDatabase(filterQuery)
+    }
 }
