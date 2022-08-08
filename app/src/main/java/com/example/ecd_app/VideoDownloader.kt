@@ -29,7 +29,9 @@ class VideoDownloader {
         /*request.setDestinationInExternalFilesDir(MainActivity.this, Environment.DIRECTORY_MOVIES, "Shivam196.mp4");*/ //For private destination
         //Set the local destination for the downloaded file to a path within the application's external files directory
         request.setDestinationInExternalPublicDir(
-            Environment.DIRECTORY_MOVIES + "/ECD" ,
+            //Environment.DIRECTORY_MOVIES + "/ECD" ,
+            Environment.DIRECTORY_MOVIES  ,
+            //context.filesDir.absolutePath,
             vidoeName
         ) // for public destination
         val downloadManager = context.getSystemService(DOWNLOAD_SERVICE) as DownloadManager?
