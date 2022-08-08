@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         val filterBtnPlay : AppCompatButton = findViewById(R.id.filterBtnPlay)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
 
+        
+
         filterBtnAll.setOnClickListener(){
             filterBtnAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             filterBtnFeeding.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))

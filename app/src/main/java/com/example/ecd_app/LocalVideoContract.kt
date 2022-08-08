@@ -33,7 +33,9 @@ class LocalVideoContract {
         // The Uri path
         fun queryUri(): Uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
 
-        fun projection() = arrayOf(VIDEO_NAME, VIDEO_PATH, VIDEO_TYPE, VIDEO_DURATION, VIDEO_SIZE, VIDEO_DATE_ADDED, VIDEO_ALBUM, VIDEO_RESOLUTION)
+        //fun projection() = arrayOf(VIDEO_NAME, VIDEO_PATH, VIDEO_TYPE, VIDEO_DURATION, VIDEO_SIZE, VIDEO_DATE_ADDED, VIDEO_ALBUM, VIDEO_RESOLUTION)
+        fun projection() = arrayOf(VIDEO_NAME,VIDEO_PATH, VIDEO_TYPE, VIDEO_DURATION, VIDEO_SIZE, VIDEO_DATE_ADDED)
+
 
         fun selection(): String {
             val argsSize = selectionArgs().size
@@ -69,8 +71,10 @@ fun fetchVideos(contentResolver: ContentResolver): Single<List<LocalVideoData>> 
                             cursor.getString(cursor.getColumnIndex(VIDEO_TYPE)),
                             cursor.getLong(cursor.getColumnIndex(VIDEO_DURATION)),
                             cursor.getLong(cursor.getColumnIndex(VIDEO_SIZE)),
-                            cursor.getLong(cursor.getColumnIndex(VIDEO_DATE_ADDED)),
-                            cursor.getString(cursor.getColumnIndex(VIDEO_RESOLUTION))))
+                            cursor.getLong(cursor.getColumnIndex(VIDEO_DATE_ADDED))
+                            //cursor.getString(cursor.getColumnIndex(VIDEO_RESOLUTION))
+                        )
+                        )
                         idx++
                     } while (cursor.moveToNext())
                 }
