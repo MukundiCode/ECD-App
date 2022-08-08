@@ -11,6 +11,7 @@ import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,7 +39,68 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_main)
 
+        val filterBtnAll : AppCompatButton = findViewById(R.id.filterBtnAll)
+        val filterBtnFeeding : AppCompatButton = findViewById(R.id.filterBtnFeeding)
+        val filterBtnRthb : AppCompatButton = findViewById(R.id.filterBtnRthb)
+        val filterBtnMassage : AppCompatButton = findViewById(R.id.filterBtnMassage)
+        val filterBtnPlay : AppCompatButton = findViewById(R.id.filterBtnPlay)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+
+        filterBtnAll.setOnClickListener(){
+            filterBtnAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
+            filterBtnFeeding.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnRthb.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnMassage.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnPlay.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //need a method to change the list in the recycler view will be similar to the search methods
+            allPostsDatabase()
+        }
+
+        filterBtnFeeding.setOnClickListener(){
+            filterBtnAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnFeeding.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
+            filterBtnRthb.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnMassage.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnPlay.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //need a method to change the list in the recycler view will be similar to the search methods
+            filterDatabase("Benefits of Breastfeeding")
+            filterDatabase("Breast Milk Expression")
+            filterDatabase("BreastFeeding at work")
+
+
+
+        }
+
+        filterBtnRthb.setOnClickListener(){
+            filterBtnAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnFeeding.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnRthb.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
+            filterBtnMassage.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnPlay.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //need a method to change the list in the recycler view will be similar to the search methods
+            filterDatabase("The Road to Health Introduction")
+
+        }
+
+        filterBtnMassage.setOnClickListener(){
+            filterBtnAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnFeeding.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnRthb.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnMassage.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
+            filterBtnPlay.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //need a method to change the list in the recycler view will be similar to the search methods
+        }
+
+        filterBtnPlay.setOnClickListener(){
+            filterBtnAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnFeeding.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnRthb.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnMassage.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            filterBtnPlay.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
+            //need a method to change the list in the recycler view will be similar to the search methods
+        }
+
+
         adapter = PostListAdapter()
         val fetchPosts = findViewById<FloatingActionButton>(R.id.sync_content)
 
@@ -236,4 +298,26 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         }
 
     }
+
+    private fun filterDatabase(filterQuery: String){
+        val filterQueryArg = "%$filterQuery%"
+        wordViewModel.searchDatabase(filterQueryArg).observe(this) { list ->
+            list.let {
+                adapter.submitList(it)
+            }
+
+        }
+
+    }
+
+    private fun allPostsDatabase(){
+        wordViewModel.allPosts.observe(this) { words ->
+            words.let { adapter.submitList(it) }
+        }
+
+
+    }
+
+
+
 }

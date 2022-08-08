@@ -14,7 +14,7 @@ class ArticleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_article)
         articleFile = intent.getSerializableExtra(EXTRA_ARTICLE_FNAME) as Article
         Toast.makeText(this@ArticleActivity, "${articleFile.articleFileName}", Toast.LENGTH_LONG).show()
-//        supportActionBar?.title = articleFile.articleTitle
+        supportActionBar?.title = articleFile.articleTitle
         val pdf: PDFView = findViewById(R.id.pdfView)
         pdf.fromAsset(articleFile.articleFileName).enableSwipe(true).swipeHorizontal(true).load()
     }
