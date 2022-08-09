@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 
 
         adapter = PostListAdapter()
-        val fetchPosts = findViewById<FloatingActionButton>(R.id.sync_content)
 
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -109,11 +108,11 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             words.let { adapter.submitList(it) }
         }
         
-        fetchPosts.setOnClickListener(){
-            Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
-           //wordViewModel.deleteAll()
-            retrofitCall()
-        }
+//        fetchPosts.setOnClickListener(){
+//            Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
+//           //wordViewModel.deleteAll()
+//            retrofitCall()
+//        }
         checkStoragePermission()
         checkReadStoragePermission()
     }
