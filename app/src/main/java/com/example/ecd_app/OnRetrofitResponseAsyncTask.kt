@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.io.File
 
 class OnRetrofitResponseAsyncTask : Service()  {
 
@@ -47,7 +48,7 @@ class OnRetrofitResponseAsyncTask : Service()  {
                 val s = link?.split("/")
                 var videoName = s?.get(s.size-1)
                 System.out.println("Downloading video with name: "+ videoName)
-                if (videoName != null) {
+                if (videoName != null && videoName != "None") {
                     downloader.downloadVideo(link,videoName, this)
                 }
             }
