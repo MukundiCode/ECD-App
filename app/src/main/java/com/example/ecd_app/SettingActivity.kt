@@ -9,6 +9,10 @@ class SettingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Settings"
+
+
 
         val cardSync : CardView = findViewById(R.id.cardSync)
         val cardDelete : CardView = findViewById(R.id.cardDelete)
