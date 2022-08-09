@@ -10,6 +10,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.flexbox.FlexboxLayout
 import org.jsoup.Jsoup
 
 class DetailedPostActivity : AppCompatActivity() {
@@ -75,7 +76,7 @@ class DetailedPostActivity : AppCompatActivity() {
         pgBar = findViewById(R.id.progressBar)
         iPostVideoView = findViewById(R.id.videoViewWPpost)
         mediaController = MediaController(this@DetailedPostActivity)
-        val videocontainer: FrameLayout = findViewById(R.id.videoContainer)
+        val videocontainer: FlexboxLayout = findViewById(R.id.videoContainer)
 
         iPostVideoView.setOnPreparedListener() {
             mediaController.setAnchorView(videocontainer)
