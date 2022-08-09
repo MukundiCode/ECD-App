@@ -264,8 +264,24 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         menuInflater.inflate(R.menu.search_menu, menu)
 
         val search = menu?.findItem(R.id.menu_search)
+        val sync = menu?.findItem(R.id.menu_sync)
+
+
         val searchView = search?.actionView as? androidx.appcompat.widget.SearchView
+        val syncView = sync?.actionView as? androidx.appcompat.widget.AppCompatImageView
+
+//        syncView?.text = "Sync"
+        syncView?.setBackgroundDrawable(getDrawable(R.drawable.ic_postfetch ))
+
         searchView?.isSubmitButtonEnabled= true
+
+        syncView?.setOnClickListener(){
+            Toast.makeText(this@MainActivity,"buggy fetch", Toast.LENGTH_LONG).show()
+            retrofitCall()
+
+        }
+
+
         searchView?.setOnQueryTextListener(this@MainActivity)
         return true
 

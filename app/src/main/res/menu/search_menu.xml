@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
+
+
     <item android:id="@+id/menu_search"
         android:title="Search"
         android:icon="@drawable/ic_search"
@@ -11,5 +13,19 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView">
 
     </item>
+
+
+    <item android:id="@+id/menu_sync"
+        android:title="Sync"
+        android:icon="@drawable/ic_sync"
+        android:iconTint="@color/white"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.AppCompatImageView">
+    </item>
+    
+
+
+
+
 
 </menu>
