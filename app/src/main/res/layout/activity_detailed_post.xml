@@ -52,7 +52,7 @@
 
     <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/videoContainer"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_flexBasisPercent="100%"
             app:flexWrap="wrap"
@@ -60,14 +60,13 @@
             app:justifyContent="center"
             app:alignContent="center"
             app:flexDirection="row"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="20dp"
             android:background="#FAFAFA"
             >
             <VideoView
                 android:id="@+id/videoViewWPpost"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 />
 
         <ProgressBar
