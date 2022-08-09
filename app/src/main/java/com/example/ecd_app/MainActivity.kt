@@ -107,7 +107,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         wordViewModel.allPosts.observe(this) { words ->
             words.let { adapter.submitList(it) }
         }
-        
 //        fetchPosts.setOnClickListener(){
 //            Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
 //           //wordViewModel.deleteAll()

@@ -94,10 +94,11 @@ class DetailedPostActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         System.out.println(postVideoName)
-        var videos = this?.let { fetchVideos(it.contentResolver) }
+        //var videos = this?.let { fetchVideos(it.contentResolver) }
+        var videos = (this.application as ECDApplication).videos
         if (videos != null) {
-            var vids = videos.blockingGet()
-            for (v in vids){
+            //var vids = videos.blockingGet()
+            for (v in videos){
                 if (v.VIDEO_NAME == postVideoName){
                     iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
                     break
