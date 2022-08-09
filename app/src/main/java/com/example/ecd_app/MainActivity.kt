@@ -111,10 +111,10 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         wordViewModel.allPosts.observe(this) { words ->
             words.let { adapter.submitList(it) }
         }
-
+        
         fetchPosts.setOnClickListener(){
             Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
-           // wordViewModel.deleteAll()
+           //wordViewModel.deleteAll()
             retrofitCall()
         }
         checkStoragePermission()
@@ -133,14 +133,18 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     fun onResponse(response: User){
         var posts: ArrayList<Post> = ArrayList<Post>()
         var videoLinks: ArrayList<String> = ArrayList<String>()
+        var videoName: String? = "None"
         for (assignedPost : AssignedPosts in response.assignedPosts){
             var videoLink: String? = if (getVideoLink(assignedPost.postContent!!) != null){
                 getVideoLink(assignedPost.postContent!!)
             }else{
                 null
             }
-            val s = videoLink?.split("/")
-            var videoName = s?.get(s.size-1)
+            if (videoLink != null){
+                val s = videoLink?.split("/")
+                videoName = s?.get(s.size-1)
+            }
+            System.out.println(assignedPost.category.get(0).name)
             val post = Post(
                 0,
                 assignedPost.postTitle!!,
