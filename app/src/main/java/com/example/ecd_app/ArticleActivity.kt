@@ -12,6 +12,7 @@ class ArticleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         articleFile = intent.getSerializableExtra(EXTRA_ARTICLE_FNAME) as Article
         Toast.makeText(this@ArticleActivity, "${articleFile.articleFileName}", Toast.LENGTH_LONG).show()
         supportActionBar?.title = articleFile.articleTitle

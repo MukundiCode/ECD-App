@@ -13,6 +13,8 @@ class ArticleListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_list)
+        supportActionBar?.title = "Articles"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         //layout
         //adapter
         val articleList : List<Article> = listOf(

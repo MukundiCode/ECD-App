@@ -36,6 +36,10 @@ class MapActivity : AppCompatActivity() {
 
         userMapsList = generateSampleData().toMutableList()
         setContentView(R.layout.activity_map)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Facilities"
+
+
 
 
         //set layout manager on the recycler view

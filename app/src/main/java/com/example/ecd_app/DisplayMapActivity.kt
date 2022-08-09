@@ -28,6 +28,8 @@ class DisplayMapActivity : AppCompatActivity(), OnMapReadyCallback {
         userMap = intent.getSerializableExtra(EXTRA_USER_MAP) as UserMap
 
         supportActionBar?.title = userMap._title
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
 
 
