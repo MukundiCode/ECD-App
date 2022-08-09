@@ -33,6 +33,10 @@ class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
     fun filterDatabase(filterQuery: String): LiveData<List<Post>>{
         return repository.filterDatabase(filterQuery).asLiveData()
     }
+
+    fun getPostByCategory(meta: String): LiveData<List<Post>>{
+        return repository.getByCategory(meta).asLiveData()
+    }
 }
 class PostsViewModelFactory(private val repository: PostsRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

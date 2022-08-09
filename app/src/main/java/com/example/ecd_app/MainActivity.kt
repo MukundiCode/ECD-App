@@ -147,7 +147,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 assignedPost.postDate!!,
                 assignedPost.postContent!!,
                 videoName!!,
-                "meta"
+                assignedPost.category.get(0).name!!
             )
             if (post != null) {
                 posts.add(post)

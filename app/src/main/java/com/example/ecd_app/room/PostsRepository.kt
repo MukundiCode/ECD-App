@@ -38,4 +38,8 @@ class PostsRepository(private val postDAO: PostDAO) {
     fun filterDatabase(filterQuery: String): Flow<List<Post>> {
         return postDAO.filterDatabase(filterQuery)
     }
+    fun getByCategory(meta: String): Flow<List<Post>> {
+        return postDAO.getPostsByCategory(meta)
+    }
+
 }
