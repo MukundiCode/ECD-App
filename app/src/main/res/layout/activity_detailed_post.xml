@@ -64,19 +64,21 @@
             android:layout_marginTop="20dp"
             android:background="#FAFAFA"
             >
-
+            <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <VideoView
                 android:id="@+id/videoViewWPpost"
-                android:layout_width="wrap_content"
-                android:layout_height="170dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 />
-
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
+            </ScrollView>
     </com.google.android.flexbox.FlexboxLayout>
 
     <androidx.cardview.widget.CardView
