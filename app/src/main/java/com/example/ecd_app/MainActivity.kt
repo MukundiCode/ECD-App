@@ -36,6 +36,8 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "ECD Content List"
+
         setContentView(R.layout.activity_main)
 
         val categoryAll : AppCompatButton = findViewById(R.id.categoryAll)
@@ -65,6 +67,8 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             //need a method to change the list in the recycler view will be similar to the search methods
             getPostsByCategory("Baby Health")
+            getPostsByCategory("meta")
+
 
 
 

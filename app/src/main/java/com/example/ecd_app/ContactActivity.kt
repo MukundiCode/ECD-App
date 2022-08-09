@@ -15,6 +15,8 @@ class ContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contact)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Information"
         val facebookImage : ImageView = findViewById(R.id.imageFacebook)
         val instagramImage : ImageView = findViewById(R.id.imageInstagram)
         val whatsappImage : ImageView = findViewById(R.id.imageWhatsapp)

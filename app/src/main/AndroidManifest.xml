@@ -23,9 +23,11 @@
         android:requestLegacyExternalStorage="true">
         <activity
             android:name=".SettingActivity"
+            android:parentActivityName=".DashBoard"
             android:exported="false" />
         <activity
             android:name=".ContactActivity"
+            android:parentActivityName=".DashBoard"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -38,9 +40,11 @@
         </activity>
         <activity
             android:name=".ArticleListActivity"
+            android:parentActivityName=".DashBoard"
             android:exported="false" />
         <activity
             android:name=".ArticleActivity"
+            android:parentActivityName=".ArticleListActivity"
             android:exported="false" />
 
         <service android:name=".OnRetrofitResponseAsyncTask" />
@@ -62,9 +66,11 @@
         <activity
             android:name=".DisplayMapActivity"
             android:exported="false"
+            android:parentActivityName=".MapActivity"
             android:label="@string/title_activity_display_map" />
         <activity
             android:name=".MapActivity"
+            android:parentActivityName=".DashBoard"
             android:exported="false" />
         <activity
             android:name=".DashBoard"
@@ -75,6 +81,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
+            android:parentActivityName=".DashBoard"
             android:exported="false" />
     </application>
 
