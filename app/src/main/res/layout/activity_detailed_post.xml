@@ -51,7 +51,7 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/videoContainer"
+            android:id="@+id/videoContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_flexBasisPercent="100%"
