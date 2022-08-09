@@ -34,7 +34,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/filterBtnAll"
+                android:id="@+id/categoryAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
@@ -45,54 +45,53 @@
                 android:textAllCaps="false" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/filterBtnFeeding"
+                android:id="@+id/categoryBabyHealth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/custom_button_initial"
-                android:text="Feeding"
+                android:text="Baby Health"
                 android:textAllCaps="false">
 
             </androidx.appcompat.widget.AppCompatButton>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/filterBtnRthb"
+                android:id="@+id/categoryBabyDevelopment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/custom_button_initial"
-                android:text="Road to health"
+                android:text="Baby Development"
                 android:textAllCaps="false">
 
             </androidx.appcompat.widget.AppCompatButton>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/filterBtnMassage"
+                android:id="@+id/categoryParentHealth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/custom_button_initial"
-                android:text="Massage"
+                android:text="Parent Health"
                 android:textAllCaps="false">
 
             </androidx.appcompat.widget.AppCompatButton>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/filterBtnPlay"
+                android:id="@+id/categoryAssignedContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10dp"
-
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="@drawable/custom_button_initial"
-                android:text="Play"
+                android:text="Assigned Content"
                 android:textAllCaps="false">
 
             </androidx.appcompat.widget.AppCompatButton>

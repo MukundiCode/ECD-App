@@ -34,6 +34,7 @@ class DetailedPostActivity : AppCompatActivity() {
         val postDateCreated = intent.getStringExtra("iPostDate")
         val postContent = intent.getStringExtra("iPostContent")
         val postMetaData = intent.getStringExtra("iPostMetaData")
+        Toast.makeText(this@DetailedPostActivity, postMetaData, Toast.LENGTH_LONG).show()
         postVideoName = intent.getStringExtra("iPostVideoName")
         //getting elements
         val tvCategory: TextView = findViewById(R.id.tvCategory)
