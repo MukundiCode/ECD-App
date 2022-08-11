@@ -28,8 +28,6 @@ class DashBoard : AppCompatActivity() {
         val cardInformation : CardView = findViewById(R.id.cardInfo)
         val cardLogout : CardView = findViewById(R.id.cardLogout)
 
-
-
         val tvGreetingUsername : TextView = findViewById(R.id.tvGreeting)
         tvGreetingUsername.text="${username}'s Dashboard"
 

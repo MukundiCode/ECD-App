@@ -47,8 +47,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         val categoryBtnAssignedContent : AppCompatButton = findViewById(R.id.categoryAssignedContent)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
 
-        
-
         categoryAll.setOnClickListener(){
             categoryAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             categoryBtnBabyHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
@@ -99,21 +97,16 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             getPostsByCategory("Assigned Content")
         }
 
-
         adapter = PostListAdapter()
-
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         wordViewModel.allPosts.observe(this) { words ->
             words.let { adapter.submitList(it) }
         }
-//        fetchPosts.setOnClickListener(){
-//            Toast.makeText(this@MainActivity, "Fetching new posts :)", Toast.LENGTH_LONG).show()
-//           //wordViewModel.deleteAll()
-//            retrofitCall()
-//        }
-        checkStoragePermission()
-        checkReadStoragePermission()
+        Permissions().checkStoragePermission(this)
+        Permissions().checkReadStoragePermission(this)
+//        checkStoragePermission()
+//        checkReadStoragePermission()
     }
 
     fun retrofitCall(){
@@ -199,9 +192,9 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 )
             ) {
                 AlertDialog.Builder(this) //.setTitle(R.string.title_location_permission)
-                    .setTitle("Title") //.setMessage(R.string.text_location_permission)
-                    .setMessage("R.string.permission_request_message")
-                    .setPositiveButton("R.string.permission_request_explaination",
+                    .setTitle("Allow write storage permission") //.setMessage(R.string.text_location_permission)
+                    .setMessage(R.string.permission_request_message)
+                    .setPositiveButton(R.string.permission_request_explaination,
                         DialogInterface.OnClickListener { dialogInterface, i -> //Prompt the user once explanation has been shown
                             ActivityCompat.requestPermissions(
                                 this@MainActivity,
@@ -237,9 +230,9 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 )
             ) {
                 AlertDialog.Builder(this) //.setTitle(R.string.title_location_permission)
-                    .setTitle("Title") //.setMessage(R.string.text_location_permission)
-                    .setMessage("R.string.permission_request_message")
-                    .setPositiveButton("R.string.permission_request_explaination",
+                    .setTitle("Allow Read storage permission") //.setMessage(R.string.text_location_permission)
+                    .setMessage(R.string.permission_request_message)
+                    .setPositiveButton(R.string.permission_request_explaination,
                         DialogInterface.OnClickListener { dialogInterface, i -> //Prompt the user once explanation has been shown
                             ActivityCompat.requestPermissions(
                                 this@MainActivity,
@@ -264,31 +257,21 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
-
         val search = menu?.findItem(R.id.menu_search)
         val sync = menu?.findItem(R.id.menu_sync)
-
-
         val searchView = search?.actionView as? androidx.appcompat.widget.SearchView
         val syncView = sync?.actionView as? androidx.appcompat.widget.AppCompatImageView
-
-//        syncView?.text = "Sync"
         syncView?.setBackgroundDrawable(getDrawable(R.drawable.ic_postfetch ))
-
         searchView?.isSubmitButtonEnabled= true
 
         syncView?.setOnClickListener(){
-            Toast.makeText(this@MainActivity,"buggy fetch", Toast.LENGTH_LONG).show()
-            retrofitCall()
-
+            if (Permissions().checkStoragePermission(this) && Permissions().checkReadStoragePermission(this)){
+                Toast.makeText(this@MainActivity,"Fetching", Toast.LENGTH_LONG).show()
+                retrofitCall()
+            }
         }
-
-
         searchView?.setOnQueryTextListener(this@MainActivity)
         return true
-
-
-
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -311,9 +294,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             list.let {
                 adapter.submitList(it)
             }
-
         }
-
     }
 
     private fun getPostsByCategory(categoryQuery: String){
@@ -321,19 +302,12 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             list.let {
                 adapter.submitList(it)
             }
-
         }
-
     }
 
     private fun allPostsDatabase(){
         wordViewModel.allPosts.observe(this) { words ->
             words.let { adapter.submitList(it) }
         }
-
-
     }
-
-
-
 }

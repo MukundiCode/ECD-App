@@ -72,7 +72,6 @@ class DetailedPostActivity : AppCompatActivity() {
             else -> tvCategory.text = "General"
         }
 
-        //media controller
         pgBar = findViewById(R.id.progressBar)
         iPostVideoView = findViewById(R.id.videoViewWPpost)
         mediaController = MediaController(this@DetailedPostActivity)
@@ -93,21 +92,19 @@ class DetailedPostActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        System.out.println(postVideoName)
-        //var videos = this?.let { fetchVideos(it.contentResolver) }
-        var videos = (this.application as ECDApplication).videos
-        if (videos != null) {
-            //var vids = videos.blockingGet()
-            for (v in videos){
-                if (v.VIDEO_NAME == postVideoName){
-                    iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
-                    break
+        if (Permissions().checkStoragePermission(this) && Permissions().checkReadStoragePermission(this)){
+            System.out.println(postVideoName)
+            var videos = (this.application as ECDApplication).videos
+            if (videos != null) {
+                for (v in videos){
+                    if (v.VIDEO_NAME == postVideoName){
+                        iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
+                        break
+                    }
                 }
             }
         }
         pgBar.visibility= View.VISIBLE
-
-
     }
 
     override fun onPause() {
