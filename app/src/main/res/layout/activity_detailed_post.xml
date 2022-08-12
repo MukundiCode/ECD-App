@@ -53,8 +53,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="#877575"
-
         app:alignContent="center"
         app:alignItems="center"
         app:flexDirection="row"
@@ -66,9 +64,7 @@
             android:id="@+id/videoImageButtont"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/thumbnailvid" />
-
-
+            android:src="@drawable/videoButtonnn" />
     </com.google.android.flexbox.FlexboxLayout>
 
     <androidx.cardview.widget.CardView
