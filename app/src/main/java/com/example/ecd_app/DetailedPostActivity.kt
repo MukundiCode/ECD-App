@@ -34,9 +34,9 @@ class DetailedPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_detailed_post)
-        val triggerFullScreen: FlexboxLayout = findViewById(R.id.videoContainer)
+        val videoButtonImageView: ImageView = findViewById(R.id.videoImageButton)
 
-        triggerFullScreen.setOnClickListener() {
+        videoButtonImageView.setOnClickListener() {
             val intentVid = Intent(this@DetailedPostActivity, fullScreenVideoPlayer::class.java)
             var videos = this?.let { fetchVideos(it.contentResolver) }
             if (videos != null) {
@@ -68,6 +68,8 @@ class DetailedPostActivity : AppCompatActivity() {
         val tvPostTitle: TextView = findViewById(R.id.tvTitle)
         val tvPostContent: TextView = findViewById(R.id.tvContent)
 
+        tvCategory.text = postMetaData
+
 
         //clean up the wp postContent html jsoup
         val doc: org.jsoup.nodes.Document? = Jsoup.parse(postContent)
@@ -89,12 +91,12 @@ class DetailedPostActivity : AppCompatActivity() {
         }
 
         //category
-        when {
-            postTitle?.lowercase()?.contains("food") == true && postTitle.lowercase()
-                .contains("breast") -> tvCategory.text = "Nutrition"
-            postTitle?.lowercase()?.contains("breast") == true -> tvCategory.text = "Breastfeeding"
-            else -> tvCategory.text = "General"
-        }
+//        when {
+//            postTitle?.lowercase()?.contains("food") == true && postTitle.lowercase()
+//                .contains("breast") -> tvCategory.text = "Nutrition"
+//            postTitle?.lowercase()?.contains("breast") == true -> tvCategory.text = "Breastfeeding"
+//            else -> tvCategory.text = "General"
+//        }
     }
 }
 

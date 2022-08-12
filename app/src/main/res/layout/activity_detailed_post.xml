@@ -61,10 +61,10 @@
         app:layout_flexBasisPercent="100%">
 
         <ImageView
-            android:id="@+id/videoImageButtont"
+            android:id="@+id/videoImageButton"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/videoButtonnn" />
+            android:src="@drawable/videobutton" />
     </com.google.android.flexbox.FlexboxLayout>
 
     <androidx.cardview.widget.CardView

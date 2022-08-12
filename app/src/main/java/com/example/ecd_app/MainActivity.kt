@@ -7,12 +7,15 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.retrofit.*
@@ -20,6 +23,7 @@ import com.example.ecd_app.room.Post
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -29,6 +33,7 @@ import org.jsoup.Jsoup
 class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
     private lateinit var adapter : PostListAdapter
+    private lateinit var postStatusCommunicationTV : TextView
     private val wordViewModel: PostsViewModel by viewModels {
         PostsViewModelFactory((application as ECDApplication).repository)
     }
@@ -46,8 +51,9 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         val categoryBtnParentHealth : AppCompatButton = findViewById(R.id.categoryParentHealth)
         val categoryBtnAssignedContent : AppCompatButton = findViewById(R.id.categoryAssignedContent)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
+        postStatusCommunicationTV = findViewById(R.id.textViewPostStatus)
 
-        
+
 
         categoryAll.setOnClickListener(){
             categoryAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
@@ -57,6 +63,8 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             //need a method to change the list in the recycler view will be similar to the search methods
             allPostsDatabase()
+//            Snackbar.make(it,"This is a simple Snackbar",Snackbar.LENGTH_LONG).show()
+
         }
 
         categoryBtnBabyHealth.setOnClickListener(){
@@ -105,6 +113,9 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         wordViewModel.allPosts.observe(this) { words ->
+            val rootView = window.decorView.rootView
+            Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+
             words.let { adapter.submitList(it) }
         }
         
@@ -296,6 +307,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         if (query!=null){
             searchDatabase(query)
         }
+
         return true
     }
 
@@ -303,6 +315,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         if (query!=null){
             searchDatabase(query)
         }
+        Toast.makeText(this@MainActivity, "Showing search results", Toast.LENGTH_LONG).show()
         return true
     }
 
@@ -310,7 +323,13 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         val searchQuery = "%$query%"
         wordViewModel.searchDatabase(searchQuery).observe(this) { list ->
             list.let {
+                if (it.isEmpty()){
+                    postStatusCommunicationTV.visibility = View.VISIBLE
+                }else{
+                    postStatusCommunicationTV.visibility = View.INVISIBLE
+                }
                 adapter.submitList(it)
+
             }
 
         }
@@ -318,9 +337,38 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     }
 
     private fun getPostsByCategory(categoryQuery: String){
+        val rootView = window.decorView.rootView
+//        Snackbar.make(rootView,"This is a simple Snackbar",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+
         wordViewModel.getPostByCategory(categoryQuery).observe(this) { list ->
             list.let {
+                if (it.isEmpty()){
+                    postStatusCommunicationTV.visibility = View.VISIBLE
+                }else{
+                    postStatusCommunicationTV.visibility = View.INVISIBLE
+                }
+                if (it.size==1){
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        "Showing ${it.size} post in $categoryQuery",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+                    Snackbar.make(rootView,"Showing ${it.size} post in $categoryQuery",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+
+
+                }
+                if(it.size>1) {
+//                    Toast.makeText(
+//                        this@MainActivity,
+//                        "Showing ${it.size} posts in $categoryQuery",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+                    Snackbar.make(rootView,"Showing ${it.size} posts in $categoryQuery",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+
+                }
+
                 adapter.submitList(it)
+
             }
 
         }
@@ -329,6 +377,15 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 
     private fun allPostsDatabase(){
         wordViewModel.allPosts.observe(this) { words ->
+            if (words.isEmpty()){
+                postStatusCommunicationTV.visibility = View.VISIBLE
+            }else{
+                postStatusCommunicationTV.visibility = View.INVISIBLE
+                val rootView = window.decorView.rootView
+
+                Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+
+            }
             words.let { adapter.submitList(it) }
         }
 

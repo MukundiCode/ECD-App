@@ -19,13 +19,13 @@
         app:flexDirection="row"
         >
         <androidx.cardview.widget.CardView
-            android:background="#066D2E"
+            android:background="#009688"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_flexBasisPercent="30%"
             app:cardElevation="8dp"
             android:id="@+id/ivArticleCard"
-            app:cardBackgroundColor="#066D2E"
+            app:cardBackgroundColor="#009688"
             >
             <ImageView
                 android:id="@+id/ivPostImage"

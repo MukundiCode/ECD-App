@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,7 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val current = getItem(position)
-        holder.bind(current.postTitle, current.postContent, current.dateCreated)
+        holder.bind(current.postTitle, current.postContent, current.metaData)
         //holder.itemView.setOnClickListener(){
         //    d("clickFunction", "clicked")
         //click listener shouldnt be too bad
@@ -77,10 +78,16 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
         private val postImageView : ImageView = itemView.findViewById(R.id.ivPostImage)
 //        private val postDateEdit: TextView = itemView.findViewById(R.id.tvDate)
 
-        fun bind(postTitle: String?, postDescription: String?, postDate: String?) {
+        fun bind(postTitle: String?, postDescription: String?, postMetaData: String?) {
 //            postItemView.text = text
             postTitleEdit.text = postTitle
-            //postTitleDescriptionEdit.text = Resources.getSystem().getString(R.string.loremipsum)
+            when{
+                postMetaData.equals("Baby Health") -> postImageView.setImageResource(R.drawable.health)
+                postMetaData.equals("Baby Development") -> postImageView.setImageResource(R.drawable.baby)
+                postMetaData.equals("Parent Health") -> postImageView.setImageResource(R.drawable.parent)
+                postMetaData.equals("Assigned Content") -> postImageView.setImageResource(R.drawable.assigned)
+            }
+//            postTitleDescriptionEdit.text = postDescription
 //            postDateEdit.text = postDate
         }
 
