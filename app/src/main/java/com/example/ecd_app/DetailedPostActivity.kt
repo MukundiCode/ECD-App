@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +17,8 @@ import com.google.android.flexbox.FlexboxLayout
 import org.jsoup.Jsoup
 
 class DetailedPostActivity : AppCompatActivity() {
-    private val defaulturl = "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4"
+    private val defaulturl =
+        "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4"
     private var playbackPosition = 0
     private lateinit var pgBar: ProgressBar
     private lateinit var iPostVideoView: VideoView
@@ -26,14 +28,28 @@ class DetailedPostActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Toast.makeText(this@DetailedPostActivity, "creating", Toast.LENGTH_LONG).show()
+
+
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_detailed_post)
-         val triggerFullScreen : CardView = findViewById(R.id.triggerFullscreen)
+        val triggerFullScreen: FlexboxLayout = findViewById(R.id.videoContainer)
 
-        triggerFullScreen.setOnClickListener(){
-            val intent = Intent(this@DetailedPostActivity, fullScreenVideoPlayer::class.java)
-            startActivity(intent)
+        triggerFullScreen.setOnClickListener() {
+            val intentVid = Intent(this@DetailedPostActivity, fullScreenVideoPlayer::class.java)
+            var videos = this?.let { fetchVideos(it.contentResolver) }
+            if (videos != null) {
+                var vids = videos.blockingGet()
+                for (v in vids) {
+                    if (v.VIDEO_NAME == postVideoName) {
+//                        iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
+                        intentVid.putExtra("VIDEOLINK", v.VIDEO_PATH)
+                        break
+                    }
+                }
+            }
+            startActivity(intentVid)
         }
 
 
@@ -56,7 +72,7 @@ class DetailedPostActivity : AppCompatActivity() {
         //clean up the wp postContent html jsoup
         val doc: org.jsoup.nodes.Document? = Jsoup.parse(postContent)
         val text: String? = doc?.text()
-        tvPostTitle.text=postTitle
+        tvPostTitle.text = postTitle
         tvPostContent.text = text
         if (tvPostContent.text.trim().isEmpty()) {
             tvPostContent.text = "No text decription in this post"
@@ -65,9 +81,9 @@ class DetailedPostActivity : AppCompatActivity() {
         val element = doc?.select("video")
         val srcUrl = element?.attr("src")
         if (srcUrl != null) {
-            url = if (srcUrl.trim().isEmpty()){
+            url = if (srcUrl.trim().isEmpty()) {
                 defaulturl
-            }else{
+            } else {
                 srcUrl
             }
         }
@@ -79,53 +95,60 @@ class DetailedPostActivity : AppCompatActivity() {
             postTitle?.lowercase()?.contains("breast") == true -> tvCategory.text = "Breastfeeding"
             else -> tvCategory.text = "General"
         }
-
-        //media controller
-        pgBar = findViewById(R.id.progressBar)
-        iPostVideoView = findViewById(R.id.videoViewWPpost)
-        mediaController = MediaController(this@DetailedPostActivity)
-        val videocontainer: FlexboxLayout = findViewById(R.id.videoContainer)
-
-        iPostVideoView.setOnPreparedListener() {
-            mediaController.setAnchorView(videocontainer)
-            iPostVideoView.setMediaController(mediaController)
-            iPostVideoView.seekTo(playbackPosition)
-            iPostVideoView.start()
-        }
-
-        iPostVideoView.setOnInfoListener{ player, what, extras ->
-            if(what== MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START){
-                pgBar.visibility = View.INVISIBLE
-            };true
-        }
     }
-    override fun onStart() {
-        super.onStart()
-        System.out.println(postVideoName)
-        var videos = this?.let { fetchVideos(it.contentResolver) }
-        if (videos != null) {
-            var vids = videos.blockingGet()
-            for (v in vids){
-                if (v.VIDEO_NAME == postVideoName){
-                    iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
-                    break
-                }
-            }
-        }
-        pgBar.visibility= View.VISIBLE
-
-
-    }
-
-    override fun onPause() {
-        iPostVideoView.pause()
-        playbackPosition = iPostVideoView.currentPosition
-        super.onPause()
-    }
-
-    override fun onStop() {
-        iPostVideoView.stopPlayback()
-        super.onStop()
-    }
-
 }
+
+//        //media controller
+//        pgBar = findViewById(R.id.progressBar)
+//        iPostVideoView = findViewById(R.id.videoViewWPpost)
+//        mediaController = MediaController(this@DetailedPostActivity)
+//        val videocontainer: FlexboxLayout = findViewById(R.id.videoContainer)
+
+//        iPostVideoView.setOnPreparedListener() {
+//            mediaController.setAnchorView(videocontainer)
+//            iPostVideoView.setMediaController(mediaController)
+//            iPostVideoView.seekTo(playbackPosition)
+//            iPostVideoView.start()
+//        }
+//
+//        iPostVideoView.setOnInfoListener{ player, what, extras ->
+//            if(what== MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START){
+//                pgBar.visibility = View.INVISIBLE
+//            };true
+//        }
+//}
+//    override fun onStart() {
+//        super.onStart()
+//        System.out.println(postVideoName)
+//        var videos = this?.let { fetchVideos(it.contentResolver) }
+//        if (videos != null) {
+//            var vids = videos.blockingGet()
+//            for (v in vids){
+//                if (v.VIDEO_NAME == postVideoName){
+//                    iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
+//                    break
+//                }
+//            }
+//        }
+//        pgBar.visibility= View.VISIBLE
+//
+//
+//    }
+//
+//    override fun onPause() {
+//        iPostVideoView.pause()
+//        playbackPosition = iPostVideoView.currentPosition
+//        super.onPause()
+//    }
+//
+//    override fun onStop() {
+//        iPostVideoView.stopPlayback()
+//        super.onStop()
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        Toast.makeText(this@DetailedPostActivity, "destroying", Toast.LENGTH_LONG).show()
+//    }
+//
+//}

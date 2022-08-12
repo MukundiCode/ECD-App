@@ -27,21 +27,23 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
         val playerView = findViewById<PlayerView>(R.id.player)
         val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
-        val bt_fullscreen = findViewById<ImageView>(R.id.bt_fullscreen)
+//        val bt_fullscreen = findViewById<ImageView>(R.id.bt_fullscreen)
 //        val bt_lockscreen = findViewById<ImageView>(R.id.exo_lock)
+        var intent = intent //getting the intent
+        val postVideoPath = intent.getStringExtra("VIDEOLINK")
 
-        bt_fullscreen.setOnClickListener(){
-            if(!isFullScreen){
-                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen_exit))
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-            }else{
-                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen))
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
-            }
-            isFullScreen =!isFullScreen
-
-        }
+//        bt_fullscreen.setOnClickListener(){
+//            if(!isFullScreen){
+//                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen_exit))
+//                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+//            }else{
+//                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen))
+//                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+//
+//            }
+//            isFullScreen =!isFullScreen
+//
+//        }
 
 
 
@@ -65,7 +67,8 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
         })
 
-        val videoSource = Uri.parse("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4")
+//        val videoSource = Uri.parse("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4")
+        val videoSource = Uri.parse(postVideoPath)
         val mediaItem = MediaItem.fromUri(videoSource)
         simpleExoPlayer.setMediaItem(mediaItem)
         simpleExoPlayer.prepare()
@@ -84,9 +87,9 @@ class fullScreenVideoPlayer : AppCompatActivity() {
         simpleExoPlayer.release()
     }
 
-    override fun onPause() {
-        super.onPause()
-        simpleExoPlayer.release()
-    }
+//    override fun onPause() {
+//        super.onPause()
+//        simpleExoPlayer.release()
+//    }
 
 }
