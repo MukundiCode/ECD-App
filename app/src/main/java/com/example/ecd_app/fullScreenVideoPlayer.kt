@@ -16,15 +16,19 @@ import com.google.android.exoplayer2.ui.PlayerView
 class fullScreenVideoPlayer : AppCompatActivity() {
 
     var isFullScreen = false
+    lateinit var simpleExoPlayer: SimpleExoPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_screen_video_player)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "exo"
+
 
         val playerView = findViewById<PlayerView>(R.id.player)
         val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
         val bt_fullscreen = findViewById<ImageView>(R.id.bt_fullscreen)
-        val bt_lockscreen = findViewById<ImageView>(R.id.exo_lock)
+//        val bt_lockscreen = findViewById<ImageView>(R.id.exo_lock)
 
         bt_fullscreen.setOnClickListener(){
             if(!isFullScreen){
@@ -41,7 +45,7 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
 
 
-        val simpleExoPlayer= SimpleExoPlayer.Builder(this)
+         simpleExoPlayer= SimpleExoPlayer.Builder(this)
             .setSeekBackIncrementMs(5000)
             .setSeekForwardIncrementMs(5000)
             .build()
@@ -68,9 +72,21 @@ class fullScreenVideoPlayer : AppCompatActivity() {
         simpleExoPlayer.play()
 
 
-
-
-
-
     }
+
+    override fun onStop() {
+        super.onStop()
+        simpleExoPlayer.stop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        simpleExoPlayer.release()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        simpleExoPlayer.release()
+    }
+
 }

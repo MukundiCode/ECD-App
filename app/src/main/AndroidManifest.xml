@@ -25,6 +25,7 @@
             android:name=".fullScreenVideoPlayer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
             android:configChanges="orientation|screenSize|screenLayout"
+            android:parentActivityName=".DetailedPostActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"

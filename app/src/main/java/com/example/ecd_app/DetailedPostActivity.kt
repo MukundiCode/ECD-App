@@ -1,6 +1,7 @@
 package com.example.ecd_app
 
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.media.MediaPlayer
 import android.net.Uri
@@ -10,6 +11,7 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import com.google.android.flexbox.FlexboxLayout
 import org.jsoup.Jsoup
 
@@ -27,6 +29,12 @@ class DetailedPostActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_detailed_post)
+         val triggerFullScreen : CardView = findViewById(R.id.triggerFullscreen)
+
+        triggerFullScreen.setOnClickListener(){
+            val intent = Intent(this@DetailedPostActivity, fullScreenVideoPlayer::class.java)
+            startActivity(intent)
+        }
 
 
         //fetching intents
