@@ -23,7 +23,8 @@ class RetrofitService
             .build()
 
         private val retrofit = Retrofit.Builder()
-            .baseUrl("https://ecdportal.azurewebsites.net/")
+            //.baseUrl("https://ecdportal.azurewebsites.net/")
+            .baseUrl("https://wordpress-729091-2804560.cloudwaysapps.com/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .callbackExecutor(Executors.newSingleThreadExecutor())

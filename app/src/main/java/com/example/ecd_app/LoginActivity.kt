@@ -8,6 +8,11 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.ecd_app.retrofit.AuthResponse
+import com.example.ecd_app.retrofit.RetrofitService
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 class LoginActivity : AppCompatActivity() {
 
@@ -38,23 +43,31 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("NAME", name)
             editor.putBoolean("CHECKBOX", true)
             editor.apply()
+            retrofitCall(name.trim())
+        }
+    }
 
+    fun retrofitCall(username : String){
+        val compositeDisposable = CompositeDisposable()
+        compositeDisposable.add(
+            RetrofitService.ServiceBuilder.buildService().authenticate(username)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
+    }
+
+    fun onResponse(response: AuthResponse){
+        if(response.response == true){
             Toast.makeText(this, "info saved", Toast.LENGTH_LONG).show()
             val intent = Intent(this, DashBoard::class.java)
             startActivity(intent)
             finish()
-
         }
-
-
-
-
-
-
-
-
-
-
-
+        else{
+            Toast.makeText(this, "Login error, please try again", Toast.LENGTH_LONG).show()
+        }
+    }
+    fun onFailure(t: Throwable){
+        System.out.println("Retrofit Failed: "+ t.stackTraceToString())
     }
 }
