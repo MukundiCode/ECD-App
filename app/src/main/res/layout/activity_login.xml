@@ -133,6 +133,7 @@
                     />
 
                 <Button
+                    android:id="@+id/btnGuest"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:backgroundTint="#EA4139"

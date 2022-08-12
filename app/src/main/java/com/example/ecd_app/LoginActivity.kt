@@ -30,6 +30,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val loginBtn : Button = findViewById(R.id.btnLogin)
+        val guestLoginBtn : Button = findViewById(R.id.btnGuest)
+
         val etUsername : EditText = findViewById(R.id.etUsername)
 
         loginBtn.setOnClickListener(){
@@ -44,6 +46,19 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
 
+        }
+
+        guestLoginBtn.setOnClickListener(){
+            val name: String = "Guests"
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString("NAME", name)
+            editor.putBoolean("CHECKBOX", true)
+            editor.apply()
+
+            Toast.makeText(this, "info saved", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, DashBoard::class.java)
+            startActivity(intent)
+            finish()
         }
 
 
