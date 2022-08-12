@@ -16,19 +16,24 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ECD_App"
-        tools:targetApi="31"
-        android:requestLegacyExternalStorage="true">
+        tools:targetApi="31">
+        <activity
+            android:name=".fullScreenVideoPlayer"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:exported="false" />
         <activity
             android:name=".SettingActivity"
-            android:parentActivityName=".DashBoard"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DashBoard" />
         <activity
             android:name=".ContactActivity"
-            android:parentActivityName=".DashBoard"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DashBoard" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -40,12 +45,12 @@
         </activity>
         <activity
             android:name=".ArticleListActivity"
-            android:parentActivityName=".DashBoard"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DashBoard" />
         <activity
             android:name=".ArticleActivity"
-            android:parentActivityName=".ArticleListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ArticleListActivity" />
 
         <service android:name=".OnRetrofitResponseAsyncTask" />
         <!--
@@ -66,12 +71,12 @@
         <activity
             android:name=".DisplayMapActivity"
             android:exported="false"
-            android:parentActivityName=".MapActivity"
-            android:label="@string/title_activity_display_map" />
+            android:label="@string/title_activity_display_map"
+            android:parentActivityName=".MapActivity" />
         <activity
             android:name=".MapActivity"
-            android:parentActivityName=".DashBoard"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DashBoard" />
         <activity
             android:name=".DashBoard"
             android:exported="false" />
@@ -81,8 +86,8 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
-            android:parentActivityName=".DashBoard"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DashBoard" />
     </application>
 
 </manifest>

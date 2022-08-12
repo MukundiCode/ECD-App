@@ -113,6 +113,10 @@ dependencies {
     //snow
     implementation 'com.github.jetradarmobile:android-snowfall:1.2.1'
 
+    //exoplayer video view
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
+
+
 
 
 }
