@@ -8,6 +8,7 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
@@ -73,6 +74,7 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
         //private val postItemView: TextView = itemView.findViewById(R.id.textView)
         private val postTitleEdit: TextView = itemView.findViewById(R.id.tvTitle)
         private val postTitleDescriptionEdit: TextView = itemView.findViewById(R.id.tvDescription)
+        private val postImageView : ImageView = itemView.findViewById(R.id.ivPostImage)
 //        private val postDateEdit: TextView = itemView.findViewById(R.id.tvDate)
 
         fun bind(postTitle: String?, postDescription: String?, postDate: String?) {

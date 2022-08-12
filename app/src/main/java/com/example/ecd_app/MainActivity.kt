@@ -279,7 +279,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         searchView?.isSubmitButtonEnabled= true
 
         syncView?.setOnClickListener(){
-            Toast.makeText(this@MainActivity,"buggy fetch", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@MainActivity,"Content Syncing", Toast.LENGTH_LONG).show()
             retrofitCall()
 
         }

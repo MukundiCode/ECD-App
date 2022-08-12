@@ -28,6 +28,7 @@
             app:cardBackgroundColor="#066D2E"
             >
             <ImageView
+                android:id="@+id/ivPostImage"
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
                 android:src="@drawable/baby"
