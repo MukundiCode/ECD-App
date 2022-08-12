@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.io.File
 
 class OnRetrofitResponseAsyncTask : Service()  {
 
@@ -41,14 +42,25 @@ class OnRetrofitResponseAsyncTask : Service()  {
     fun downloadVideos(videoLinks: ArrayList<String>){
         var downloader = VideoDownloader()
         System.out.println("Downloading videos, number of videos: "+ videoLinks.size)
+        var videos = (this.application as ECDApplication).videos
+        var videoNames = ArrayList<String>()
+        if (videos != null) {
+            for (v in videos) {
+                v.VIDEO_NAME?.let { videoNames.add(it) }
+            }
+        }
 
         for (link in videoLinks){
             if (link != null){
                 val s = link?.split("/")
                 var videoName = s?.get(s.size-1)
-                System.out.println("Downloading video with name: "+ videoName)
-                if (videoName != null) {
-                    downloader.downloadVideo(link,videoName, this)
+                if (!videoNames.contains(videoName)){
+                    if (videoName != null && videoName != "None") {
+                        downloader.downloadVideo(link,videoName, this)
+                        System.out.println("Downloading video with name: "+ videoName)
+                    }
+                }else{
+                    System.out.println("Video already exists")
                 }
             }
         }

@@ -10,4 +10,5 @@ class ECDApplication : Application() {
     val applicationScope = CoroutineScope(SupervisorJob())
     val database by lazy { PostsRoomDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { PostsRepository(database.postDao()) }
+    val videos  by lazy { fetchVideos(contentResolver)?.blockingGet() }
 }
