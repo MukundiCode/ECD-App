@@ -18,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var sharedPreferences: SharedPreferences
     var isRemembered = false
+    var guestLoginBtn : Button ? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val loginBtn : Button = findViewById(R.id.btnLogin)
-        val guestLoginBtn : Button = findViewById(R.id.btnGuest)
+        guestLoginBtn = findViewById(R.id.btnGuest)
 
         val etUsername : EditText = findViewById(R.id.etUsername)
 
@@ -71,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
     }
     fun onFailure(t: Throwable){
         System.out.println("Retrofit Failed: "+ t.stackTraceToString())
-        guestLoginBtn.setOnClickListener(){
+        guestLoginBtn?.setOnClickListener(){
             val name: String = "Guests"
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putString("NAME", name)

@@ -39,17 +39,23 @@ class DetailedPostActivity : AppCompatActivity() {
         videoButtonImageView.setOnClickListener() {
             val intentVid = Intent(this@DetailedPostActivity, fullScreenVideoPlayer::class.java)
             var videos = this?.let { fetchVideos(it.contentResolver) }
+            var found = false
             if (videos != null) {
                 var vids = videos.blockingGet()
                 for (v in vids) {
                     if (v.VIDEO_NAME == postVideoName) {
-//                        iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
+//                      iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
                         intentVid.putExtra("VIDEOLINK", v.VIDEO_PATH)
+                        startActivity(intentVid)
+                        found = true
                         break
                     }
                 }
+                if (!found){
+                    Toast.makeText(this, "Video does not exist", Toast.LENGTH_SHORT).show()
+                }
             }
-            startActivity(intentVid)
+           // startActivity(intentVid)
         }
 
 
@@ -61,7 +67,7 @@ class DetailedPostActivity : AppCompatActivity() {
         val postDateCreated = intent.getStringExtra("iPostDate")
         val postContent = intent.getStringExtra("iPostContent")
         val postMetaData = intent.getStringExtra("iPostMetaData")
-        Toast.makeText(this@DetailedPostActivity, postMetaData, Toast.LENGTH_LONG).show()
+       // Toast.makeText(this@DetailedPostActivity, postMetaData, Toast.LENGTH_LONG).show()
         postVideoName = intent.getStringExtra("iPostVideoName")
         //getting elements
         val tvCategory: TextView = findViewById(R.id.tvCategory)
