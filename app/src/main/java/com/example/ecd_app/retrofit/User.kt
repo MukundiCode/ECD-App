@@ -74,18 +74,6 @@ data class AssignedPosts (
 
 )
 
-//data class Self (
-//
-//    @SerializedName("href" ) var href : String? = null
-//
-//)
-//
-//data class Collection (
-//
-//    @SerializedName("href" ) var href : String? = null
-//
-//)
-
 data class LinksUser (
 
     @SerializedName("self"       ) var self       : ArrayList<Self>       = arrayListOf(),

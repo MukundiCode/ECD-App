@@ -117,26 +117,26 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         }
         Permissions().checkStoragePermission(this)
         Permissions().checkReadStoragePermission(this)
-//        checkStoragePermission()
-//        checkReadStoragePermission()
     }
 
     fun retrofitCall(){
         val compositeDisposable = CompositeDisposable()
+        val username = (this.application as ECDApplication).getUsernameFromPreferences()
+        System.out.println("Username is "+username)
         compositeDisposable.add(
-            RetrofitService.ServiceBuilder.buildService().getUsers()
+            RetrofitService.ServiceBuilder.buildService().getPosts(username)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
     }
 
-    fun onResponse(response: User){
+    fun onResponse(response: List<PostJS>){
         var posts: ArrayList<Post> = ArrayList<Post>()
         var videoLinks: ArrayList<String> = ArrayList<String>()
         var videoName: String? = "None"
-        for (assignedPost : AssignedPosts in response.assignedPosts){
-            var videoLink: String? = if (getVideoLink(assignedPost.postContent!!) != null){
-                getVideoLink(assignedPost.postContent!!)
+        for (assignedPost : PostJS in response){
+            var videoLink: String? = if (getVideoLink(assignedPost.post?.postContent!!) != null){
+                getVideoLink(assignedPost.post!!.postContent!!)
             }else{
                 null
             }
@@ -144,14 +144,14 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 val s = videoLink?.split("/")
                 videoName = s?.get(s.size-1)
             }
-            System.out.println(assignedPost.category.get(0).name)
+            System.out.println(assignedPost.category)
             val post = Post(
                 0,
-                assignedPost.postTitle!!,
-                assignedPost.postDate!!,
-                assignedPost.postContent!!,
+                assignedPost.post!!.postTitle!!,
+                assignedPost.post!!.postDate!!,
+                assignedPost.post!!.postContent!!,
                 videoName!!,
-                assignedPost.category.get(0).name!!
+                assignedPost.category!!
             )
             if (post != null) {
                 posts.add(post)

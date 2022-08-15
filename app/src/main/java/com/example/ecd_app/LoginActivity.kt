@@ -48,6 +48,18 @@ class LoginActivity : AppCompatActivity() {
             editor.apply()
             retrofitCall(name.trim())
         }
+
+        guestLoginBtn?.setOnClickListener {
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            val name = "Public"
+            editor.putString("NAME", name)
+            editor.putBoolean("CHECKBOX", true)
+            editor.apply()
+            Toast.makeText(this, "Logged in as guest", Toast.LENGTH_LONG).show()
+            val intent = Intent(this, DashBoard::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun retrofitCall(username : String){

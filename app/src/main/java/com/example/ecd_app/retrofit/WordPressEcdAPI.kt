@@ -10,8 +10,8 @@ interface WordPressEcdAPI {
 
     //@GET("/top.json")
     //fun getTop(@Query("after") after: String, @Query("limit") limit: String): Call<PostJS>;
-    @GET("/wp-json/wp/v2/ecd_content/")
-    fun getPosts(): Observable<List<PostJS>>
+    @GET("/wp-json/ecd/v1/usersPosts/{Username}")
+    fun getPosts(@Path("Username") Username: String): Observable<List<PostJS>>
 
     @GET("/wp-json/wp/v2/users/1")
     fun getUsers(): Observable<User>

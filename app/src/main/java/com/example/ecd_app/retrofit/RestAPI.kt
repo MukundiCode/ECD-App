@@ -16,8 +16,4 @@ class RestAPI {
         wpEcdAPI = retrofit.create(WordPressEcdAPI::class.java)
     }
 
-//    fun getPost(after: String, limit: String): Call<PostJS> {
-//        return wpEcdAPI.getTop(after, limit)
-//    }
-
 }

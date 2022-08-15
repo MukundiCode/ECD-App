@@ -1,6 +1,8 @@
 package com.example.ecd_app
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import com.example.ecd_app.room.PostsRepository
 import com.example.ecd_app.room.PostsRoomDatabase
 import kotlinx.coroutines.CoroutineScope
@@ -11,4 +13,16 @@ class ECDApplication : Application() {
     val database by lazy { PostsRoomDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { PostsRepository(database.postDao()) }
     val videos  by lazy { fetchVideos(contentResolver)?.blockingGet() }
+    //val username by lazy {getUsernameFromPreferences()}
+
+    fun getUsernameFromPreferences(): String {
+        var preferences: SharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
+        val username = preferences.getString("NAME","")
+
+        if (username != null){
+            return username
+        }else{
+            return "Public"
+        }
+    }
 }
