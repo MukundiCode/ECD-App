@@ -14,4 +14,13 @@ class ExampleUnitTest {
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
     }
+
+    /**
+     * TODO : Test Database write and access
+     * TODO : Test Retrofit call
+     * TODO : Test duplicate videos
+     * TODO : Test duplicate posts
+     * TODO : Test authentication
+     * TODO : Test video download
+     */
 }

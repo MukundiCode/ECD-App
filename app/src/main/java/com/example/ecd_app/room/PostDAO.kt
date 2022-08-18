@@ -18,6 +18,9 @@ interface PostDAO {
     @Query("SELECT * FROM posts_table WHERE metaData = :metaData")
     fun getPostsByCategory(metaData: String): Flow<List<Post>>
 
+    @Query("SELECT * FROM posts_table WHERE postTitle = :post_title")
+    fun getPostsByTitle(post_title: String): List<Post>
+
     @Query("SELECT * FROM posts_table WHERE postTitle LIKE :searchQuery OR postContent LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): Flow<List<Post>>
 

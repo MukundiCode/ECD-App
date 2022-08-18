@@ -41,5 +41,8 @@ class PostsRepository(private val postDAO: PostDAO) {
     fun getByCategory(meta: String): Flow<List<Post>> {
         return postDAO.getPostsByCategory(meta)
     }
+    fun getByTitle(title: String): List<Post> {
+        return postDAO.getPostsByTitle(title)
+    }
 
 }

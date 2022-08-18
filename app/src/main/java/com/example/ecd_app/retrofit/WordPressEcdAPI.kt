@@ -7,9 +7,7 @@ import io.reactivex.Observable
 import retrofit2.http.Path
 
 interface WordPressEcdAPI {
-
-    //@GET("/top.json")
-    //fun getTop(@Query("after") after: String, @Query("limit") limit: String): Call<PostJS>;
+    
     @GET("/wp-json/ecd/v1/usersPosts/{Username}")
     fun getPosts(@Path("Username") Username: String): Observable<List<PostJS>>
 
