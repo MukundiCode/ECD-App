@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         recyclerView.layoutManager = LinearLayoutManager(this)
         wordViewModel.allPosts.observe(this) { words ->
             val rootView = window.decorView.rootView
-            Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+            Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
 
             words.let { adapter.submitList(it) }
         }
@@ -218,7 +218,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         if (query!=null){
             searchDatabase(query)
         }
-        Toast.makeText(this@MainActivity, "Showing search results", Toast.LENGTH_LONG).show()
         return true
     }
 
@@ -254,7 +253,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 //                        "Showing ${it.size} post in $categoryQuery",
 //                        Toast.LENGTH_LONG
 //                    ).show()
-                    Snackbar.make(rootView,"Showing ${it.size} post in $categoryQuery",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+                    Snackbar.make(rootView,"Showing ${it.size} post in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
 
 
                 }
@@ -264,7 +263,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 //                        "Showing ${it.size} posts in $categoryQuery",
 //                        Toast.LENGTH_LONG
 //                    ).show()
-                    Snackbar.make(rootView,"Showing ${it.size} posts in $categoryQuery",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+                    Snackbar.make(rootView,"Showing ${it.size} posts in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
 
                 }
 
@@ -282,7 +281,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 postStatusCommunicationTV.visibility = View.INVISIBLE
                 val rootView = window.decorView.rootView
 
-                Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
+                Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
 
             }
             words.let { adapter.submitList(it) }

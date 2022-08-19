@@ -1,9 +1,12 @@
 package com.example.ecd_app
 
 import android.content.pm.ActivityInfo
+import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.OrientationEventListener
+import android.view.OrientationListener
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -27,27 +30,30 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
         val playerView = findViewById<PlayerView>(R.id.player)
         val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
-//        val bt_fullscreen = findViewById<ImageView>(R.id.bt_fullscreen)
+        val bt_fullscreen = findViewById<ImageView>(R.id.bt_fullscreen)
 //        val bt_lockscreen = findViewById<ImageView>(R.id.exo_lock)
         var intent = intent //getting the intent
         val postVideoPath = intent.getStringExtra("VIDEOLINK")
 
-//        bt_fullscreen.setOnClickListener(){
-//            if(!isFullScreen){
-//                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen_exit))
-//                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-//            }else{
-//                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen))
-//                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-//
-//            }
-//            isFullScreen =!isFullScreen
-//
-//        }
+
+
+        bt_fullscreen.setOnClickListener(){
+            if(!isFullScreen){
+                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen_exit))
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+            }else{
+                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen))
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+            }
+            isFullScreen =!isFullScreen
+
+        }
 
 
 
-         simpleExoPlayer= SimpleExoPlayer.Builder(this)
+        
+        simpleExoPlayer= SimpleExoPlayer.Builder(this)
             .setSeekBackIncrementMs(5000)
             .setSeekForwardIncrementMs(5000)
             .build()
