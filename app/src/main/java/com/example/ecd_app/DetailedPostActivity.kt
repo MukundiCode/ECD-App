@@ -28,9 +28,6 @@ class DetailedPostActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Toast.makeText(this@DetailedPostActivity, "creating", Toast.LENGTH_LONG).show()
-
-
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_detailed_post)

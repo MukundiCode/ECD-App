@@ -17,6 +17,6 @@ class ArticleActivity : AppCompatActivity() {
         Toast.makeText(this@ArticleActivity, "${articleFile.articleFileName}", Toast.LENGTH_LONG).show()
         supportActionBar?.title = articleFile.articleTitle
         val pdf: PDFView = findViewById(R.id.pdfView)
-        pdf.fromAsset(articleFile.articleFileName).enableSwipe(true).swipeHorizontal(true).load()
+        pdf.fromAsset(articleFile.articleFileName).enableSwipe(true).load()
     }
 }
