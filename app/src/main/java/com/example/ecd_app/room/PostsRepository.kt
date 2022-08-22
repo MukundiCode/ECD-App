@@ -30,6 +30,11 @@ class PostsRepository(private val postDAO: PostDAO) {
         postDAO.deleteAll()
     }
 
+    @WorkerThread
+    suspend fun deletebyName(post_title: String) {
+        postDAO.deleteByName(post_title)
+    }
+
     //suvanth
     fun searchDatabase(searchQuery: String): Flow<List<Post>> {
         return postDAO.searchDatabase(searchQuery)
@@ -44,5 +49,6 @@ class PostsRepository(private val postDAO: PostDAO) {
     fun getByTitle(title: String): List<Post> {
         return postDAO.getPostsByTitle(title)
     }
+
 
 }

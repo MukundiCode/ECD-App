@@ -23,6 +23,9 @@ class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
     }
+    fun deleteByName(post_title: String) = viewModelScope.launch {
+        repository.deletebyName(post_title)
+    }
 
     //suvanth
     fun searchDatabase(searchQuery: String): LiveData<List<Post>>{

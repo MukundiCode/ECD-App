@@ -30,6 +30,9 @@ interface PostDAO {
     @Query("SELECT EXISTS (SELECT * FROM posts_table WHERE postTitle = :post_title)")
     fun exists(post_title: String): Boolean
 
+    @Query("DELETE FROM posts_table WHERE postTitle = :post_title")
+    suspend fun deleteByName(post_title: String)
+
     @Query("DELETE FROM posts_table")
     suspend fun deleteAll()
 }

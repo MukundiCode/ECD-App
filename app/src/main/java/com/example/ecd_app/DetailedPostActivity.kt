@@ -14,6 +14,10 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.google.android.flexbox.FlexboxLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import org.jsoup.Jsoup
 
 class DetailedPostActivity : AppCompatActivity() {
@@ -29,8 +33,6 @@ class DetailedPostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Toast.makeText(this@DetailedPostActivity, "creating", Toast.LENGTH_LONG).show()
-
-
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_detailed_post)
@@ -58,7 +60,6 @@ class DetailedPostActivity : AppCompatActivity() {
            // startActivity(intentVid)
         }
 
-
         //fetching intents
         var intent = intent //getting the intent
         val postID = intent.getIntExtra("iPostID", 0)
@@ -73,10 +74,7 @@ class DetailedPostActivity : AppCompatActivity() {
         val tvCategory: TextView = findViewById(R.id.tvCategory)
         val tvPostTitle: TextView = findViewById(R.id.tvTitle)
         val tvPostContent: TextView = findViewById(R.id.tvContent)
-
         tvCategory.text = postMetaData
-
-
         //clean up the wp postContent html jsoup
         val doc: org.jsoup.nodes.Document? = Jsoup.parse(postContent)
         val text: String? = doc?.text()
