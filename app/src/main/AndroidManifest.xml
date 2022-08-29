@@ -8,8 +8,11 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <queries> <package android:name="com.whatsapp" /> </queries>
+
 
     <application
+
         android:name=".ECDApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -19,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ECD_App"
         tools:targetApi="31">
+
         <activity
             android:name=".fullScreenVideoPlayer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
@@ -52,6 +56,7 @@
             android:parentActivityName=".ArticleListActivity" />
 
         <service android:name=".OnRetrofitResponseAsyncTask" />
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -87,6 +92,9 @@
             android:name=".MainActivity"
             android:exported="false"
             android:parentActivityName=".DashBoard" />
+
+
+
     </application>
 
 </manifest>
