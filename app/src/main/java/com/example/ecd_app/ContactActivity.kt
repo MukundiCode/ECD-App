@@ -1,9 +1,11 @@
 package com.example.ecd_app
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.synnapps.carouselview.CarouselView
 import com.synnapps.carouselview.ImageListener
@@ -22,6 +24,16 @@ class ContactActivity : AppCompatActivity() {
         val whatsappImage : ImageView = findViewById(R.id.imageWhatsapp)
         val ecdImage : ImageView = findViewById(R.id.imageBbpPortal)
 
+        fun isAppInstalled(packageName: String): Boolean {
+            val pm: PackageManager = getPackageManager()
+            return try {
+                pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+                true
+            } catch (e: PackageManager.NameNotFoundException) {
+                false
+            }
+        }
+
         facebookImage.setOnClickListener(){
             val url: String = "https://www.facebook.com/bhabhisanababyproject/"
             val fb = Intent(Intent.ACTION_VIEW)
@@ -38,10 +50,17 @@ class ContactActivity : AppCompatActivity() {
         }
 
         whatsappImage.setOnClickListener(){
-            val url: String = "https://chat.whatsapp.com/HrqX8TOScucI2LDIUpEXvI"
-            val whatsapp = Intent(Intent.ACTION_VIEW)
-            whatsapp.data = Uri.parse(url)
-            startActivity(whatsapp)
+            val result = isAppInstalled("com.whatsapp")
+            if(result){
+                val url: String = "https://chat.whatsapp.com/HrqX8TOScucI2LDIUpEXvI"
+                val whatsapp = Intent(Intent.ACTION_VIEW)
+                whatsapp.data = Uri.parse(url)
+                startActivity(whatsapp)
+            }else{
+                Toast.makeText(this@ContactActivity, "Install WhatsApp first", Toast.LENGTH_LONG).show()
+            }
+
+
 
         }
 

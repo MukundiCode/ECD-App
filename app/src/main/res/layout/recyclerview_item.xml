@@ -69,8 +69,12 @@
                 android:text="This video goes over how breastfeeding should be conducted in a professional setting"
                 app:layout_constraintRight_toRightOf="parent"
                 android:fontFamily="@font/psregular"></TextView>
+
         </com.google.android.flexbox.FlexboxLayout>
+
     </com.google.android.flexbox.FlexboxLayout>
+
+
 </androidx.cardview.widget.CardView>
 
 
