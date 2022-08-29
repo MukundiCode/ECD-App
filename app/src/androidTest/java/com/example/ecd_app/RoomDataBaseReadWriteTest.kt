@@ -44,7 +44,7 @@ class RoomDataBaseReadWriteTest {
 
     @Test
     @Throws(Exception::class)
-    fun writeUserAndReadInList() {
+    fun testReadAndWrite() {
         val post = Post(
             0,
             "Test Title",
@@ -57,6 +57,66 @@ class RoomDataBaseReadWriteTest {
             postsRepository.insert(post)
         }
         val byTitle = postsRepository.getByTitle("Test Title")
-        assertThat(byTitle.get(0).postTitle, equalTo(post.postTitle))
+        assertEquals(byTitle.get(0).postTitle, post.postTitle)
     }
+//    @Test
+//    @Throws(Exception::class)
+//    fun testDeleteByTitle(){
+//        val post = Post(
+//            0,
+//            "Test Title",
+//            "Test Date",
+//            "Test content",
+//            "Test Video Name",
+//            "Test Category"
+//        )
+//        scope.launch {
+//            postsRepository.insert(post)
+//        }
+//        val byTitle = postsRepository.getByTitle("Test Title")
+//        assertEquals(byTitle.get(0).postTitle, post.postTitle)
+//        scope.launch {
+//            postsRepository.deleteByTitle("Test Title")
+//        }
+//        assertEquals(byTitle.size, 0)
+//    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testExists(){
+        val post = Post(
+            0,
+            "Test Title",
+            "Test Date",
+            "Test content",
+            "Test Video Name",
+            "Test Category"
+        )
+        scope.launch {
+            postsRepository.insert(post)
+        }
+        val exists = postsRepository.exists("Test Title")
+        assertEquals(true,exists)
+    }
+
+    @Test
+    @Throws(Exception::class)
+    fun testGetByTitle(){
+        val post = Post(
+            0,
+            "Test Title",
+            "Test Date",
+            "Test content",
+            "Test Video Name",
+            "Test Category"
+        )
+        scope.launch {
+            postsRepository.insert(post)
+        }
+        val byTitle = postsRepository.getByTitle("Test Title")
+        assertEquals(byTitle.get(0).postTitle, post.postTitle)
+    }
+
+
+
 }
