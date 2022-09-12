@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * This is the room database object
+ * It initializes the sqlite database
+ */
+
 package com.example.ecd_app.room
 
 import android.content.Context
@@ -38,7 +44,6 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
                         "None",
                         "meta")
                     postDao.insert(post)
-                    System.out.println("Database created")
                 }
             }
         }

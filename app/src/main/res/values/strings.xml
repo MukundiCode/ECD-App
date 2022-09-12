@@ -5,7 +5,7 @@
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Word not saved because it is empty.</string>
     <string name="add_word">Add word</string>
-    <string name="ECD_PORTAL_BASE_URL">https://ecdportal.azurewebsites.net/</string>
+    <string name="ECD_PORTAL_BASE_URL">https://youandyourbaby.bhabhisana.org.za/</string>
     <string name="loremipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <string name="title_activity_display_map">DisplayMapActivity</string>
     <string name="title_activity_create_map">CreateMapActivity</string>

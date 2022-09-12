@@ -24,8 +24,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         supportActionBar?.hide()
-
-
         sharedPreferences = getSharedPreferences("SHARED_PREF", Context.MODE_PRIVATE)
         isRemembered = sharedPreferences.getBoolean("CHECKBOX", false)
 
@@ -37,7 +35,6 @@ class LoginActivity : AppCompatActivity() {
 
         val loginBtn : Button = findViewById(R.id.btnLogin)
         guestLoginBtn = findViewById(R.id.btnGuest)
-
         val etUsername : EditText = findViewById(R.id.etUsername)
 
         loginBtn.setOnClickListener(){
@@ -90,7 +87,6 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("NAME", name)
             editor.putBoolean("CHECKBOX", true)
             editor.apply()
-
             Toast.makeText(this, "info saved", Toast.LENGTH_LONG).show()
             val intent = Intent(this, DashBoard::class.java)
             startActivity(intent)

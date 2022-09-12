@@ -43,20 +43,11 @@ class ArticleListActivity : AppCompatActivity() {
                 override fun onItemClick(position: Int) {
                     val intent = Intent(this@ArticleListActivity, ArticleActivity::class.java)
                     val articleName = articleList[position]
-//                    Toast.makeText(this@ArticleListActivity, "${articleName.articleTitle} and ${articleName.articleDescriptor} and ${articleName.articleFileName}", Toast.LENGTH_LONG).show()
                     intent.putExtra(EXTRA_ARTICLE_FNAME, articleName)
                     startActivity(intent)
 
                 }
-
-
             })
-
-
         }
-
-
-
-
     }
 }

@@ -1,19 +1,16 @@
+/**
+ * @author Tinashe Mukundi Chitamba and Suvanth Ramruthen
+ * Class observes database changes and notifies UI, ie livedata
+ */
+
 package com.example.ecd_app.room
 
 import androidx.lifecycle.*
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class PostsViewModel(private val repository: PostsRepository) : ViewModel() {
-    // Using LiveData and caching what allWords returns has several benefits:
-    // - We can put an observer on the data (instead of polling for changes) and only update the
-    //   the UI when the data actually changes.
-    // - Repository is completely separated from the UI through the ViewModel.
     val allPosts: LiveData<List<Post>> = repository.allPosts.asLiveData()
-    //val exists: LiveData<Int> = repository.exists.as
-    /**
-     * Launching a new coroutine to insert the data in a non-blocking way
-     */
+
     fun insert(post: Post) = viewModelScope.launch {
         repository.insert(post)
     }

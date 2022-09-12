@@ -46,7 +46,6 @@ class ContactActivity : AppCompatActivity() {
             val ig = Intent(Intent.ACTION_VIEW)
             ig.data = Uri.parse(url)
             startActivity(ig)
-
         }
 
         whatsappImage.setOnClickListener(){
@@ -59,9 +58,6 @@ class ContactActivity : AppCompatActivity() {
             }else{
                 Toast.makeText(this@ContactActivity, "Install WhatsApp first", Toast.LENGTH_LONG).show()
             }
-
-
-
         }
 
         ecdImage.setOnClickListener(){
@@ -69,7 +65,6 @@ class ContactActivity : AppCompatActivity() {
             val ecd = Intent(Intent.ACTION_VIEW)
             ecd.data = Uri.parse(url)
             startActivity(ecd)
-
         }
         imageArray.add(R.drawable.one)
         imageArray.add(R.drawable.two)

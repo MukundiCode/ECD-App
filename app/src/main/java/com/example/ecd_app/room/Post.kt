@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * This class defines the database model in the room database
+ * The class is serializable
+ */
+
 package com.example.ecd_app.room
 
 import android.os.Parcel

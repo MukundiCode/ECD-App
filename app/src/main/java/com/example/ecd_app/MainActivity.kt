@@ -1,16 +1,19 @@
 package com.example.ecd_app
 
-import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +21,6 @@ import com.example.ecd_app.retrofit.*
 import com.example.ecd_app.room.Post
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -56,10 +58,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
-            //need a method to change the list in the recycler view will be similar to the search methods
             allPostsDatabase()
-//            Snackbar.make(it,"This is a simple Snackbar",Snackbar.LENGTH_LONG).show()
-
         }
 
         categoryBtnBabyHealth.setOnClickListener(){
@@ -68,7 +67,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
-            //need a method to change the list in the recycler view will be similar to the search methods
             getPostsByCategory("Baby Health")
         }
 
@@ -78,7 +76,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
-            //need a method to change the list in the recycler view will be similar to the search methods
             getPostsByCategory("Baby Development")
         }
 
@@ -88,7 +85,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
-            //need a method to change the list in the recycler view will be similar to the search methods
             getPostsByCategory("Parent Health")
         }
 
@@ -98,7 +94,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
-            //need a method to change the list in the recycler view will be similar to the search methods
             getPostsByCategory("Assigned Content")
         }
 
@@ -108,7 +103,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         wordViewModel.allPosts.observe(this) { words ->
             val rootView = window.decorView.rootView
             Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
-
             words.let { adapter.submitList(it) }
         }
         Permissions().checkStoragePermission(this)
@@ -116,14 +110,60 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     }
 
     fun retrofitCall(){
-        val compositeDisposable = CompositeDisposable()
-        val username = (this.application as ECDApplication).getUsernameFromPreferences()
-        System.out.println("Username is "+username)
-        compositeDisposable.add(
-            RetrofitService.ServiceBuilder.buildService().getPosts(username)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
+        val connection: String = checkWifi(this)
+        if(connection == "WIFI"){
+            val compositeDisposable = CompositeDisposable()
+            val username = (this.application as ECDApplication).getUsernameFromPreferences()
+            compositeDisposable.add(
+                RetrofitService.ServiceBuilder.buildService().getPosts(username)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
+
+        } else if (connection == "CELLULAR"){
+            val dialogClickListener =
+                DialogInterface.OnClickListener { dialog, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+                            val compositeDisposable = CompositeDisposable()
+                            val username = (this.application as ECDApplication).getUsernameFromPreferences()
+                            compositeDisposable.add(
+                                RetrofitService.ServiceBuilder.buildService().getPosts(username)
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
+                        }
+                        DialogInterface.BUTTON_NEGATIVE -> {}
+                    }
+                }
+
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to use mobile data to sync ECD content? This might deplete your data.").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show()
+
+        } else if (connection == "OFFLINE"){
+            Toast.makeText(this, "Can't sync when offline, please connect to the internet", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    @SuppressLint("NewApi")
+    fun checkWifi(context: Context): String {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    return "CELLULAR"
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    return "WIFI"
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    return "ETHERNET"
+                }
+            }
+        }
+        return "OFFLINE"
     }
 
     fun onResponse(response: List<PostJS>){
@@ -190,13 +230,11 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         val syncView = sync?.actionView as? androidx.appcompat.widget.AppCompatImageView
         syncView?.setBackgroundDrawable(getDrawable(R.drawable.ic_postfetch ))
         searchView?.isSubmitButtonEnabled= true
-
         syncView?.setOnClickListener(){
             if (Permissions().checkStoragePermission(this) && Permissions().checkReadStoragePermission(this)){
                 Toast.makeText(this@MainActivity,"Fetching", Toast.LENGTH_LONG).show()
                 retrofitCall()
             }
-
         }
         searchView?.setOnQueryTextListener(this@MainActivity)
         return true
@@ -206,7 +244,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         if (query!=null){
             searchDatabase(query)
         }
-
         return true
     }
 
@@ -234,8 +271,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
 
     private fun getPostsByCategory(categoryQuery: String){
         val rootView = window.decorView.rootView
-//        Snackbar.make(rootView,"This is a simple Snackbar",Snackbar.LENGTH_LONG).setAnchorView(R.id.textViewanchor).show()
-
         wordViewModel.getPostByCategory(categoryQuery).observe(this) { list ->
             list.let {
                 if (it.isEmpty()){
@@ -244,27 +279,12 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                     postStatusCommunicationTV.visibility = View.INVISIBLE
                 }
                 if (it.size==1){
-//                    Toast.makeText(
-//                        this@MainActivity,
-//                        "Showing ${it.size} post in $categoryQuery",
-//                        Toast.LENGTH_LONG
-//                    ).show()
                     Snackbar.make(rootView,"Showing ${it.size} post in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
-
-
                 }
                 if(it.size>1) {
-//                    Toast.makeText(
-//                        this@MainActivity,
-//                        "Showing ${it.size} posts in $categoryQuery",
-//                        Toast.LENGTH_LONG
-//                    ).show()
                     Snackbar.make(rootView,"Showing ${it.size} posts in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
-
                 }
-
                 adapter.submitList(it)
-
             }
         }
     }
@@ -276,9 +296,7 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
             }else{
                 postStatusCommunicationTV.visibility = View.INVISIBLE
                 val rootView = window.decorView.rootView
-
                 Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
-
             }
             words.let { adapter.submitList(it) }
         }

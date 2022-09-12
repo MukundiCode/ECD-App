@@ -37,7 +37,6 @@ class Permissions {
                     .create()
                     .show()
             } else {
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(
                     context , arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     101
@@ -75,7 +74,6 @@ class Permissions {
                     .create()
                     .show()
             } else {
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(
                     context, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                     41

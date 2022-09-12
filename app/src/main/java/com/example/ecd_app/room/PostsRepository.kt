@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * This is the repository class for the room database.
+ * Ensures single instance of database connection
+ */
+
 package com.example.ecd_app.room
 
 import androidx.annotation.WorkerThread
@@ -21,7 +27,6 @@ class PostsRepository(private val postDAO: PostDAO) {
     fun existsAsync(post_title: String) {
         Executors.newSingleThreadExecutor().execute {
             val num  = exists(post_title)
-            //liveWords.postValue(words)
         }
     }
 
@@ -30,7 +35,6 @@ class PostsRepository(private val postDAO: PostDAO) {
         postDAO.deleteAll()
     }
 
-    //suvanth
     fun searchDatabase(searchQuery: String): Flow<List<Post>> {
         return postDAO.searchDatabase(searchQuery)
     }

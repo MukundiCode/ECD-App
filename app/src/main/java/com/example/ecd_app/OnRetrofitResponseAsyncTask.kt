@@ -19,7 +19,6 @@ class OnRetrofitResponseAsyncTask : Service()  {
     private var videoLinks : ArrayList<String> = ArrayList()
     private val job = SupervisorJob()
     private val scope = CoroutineScope(Dispatchers.IO + job)
-
     private var postsRepository : PostsRepository? = null
 
     private inner class ServiceHandler(looper: Looper) : Handler(looper) {
@@ -80,7 +79,6 @@ class OnRetrofitResponseAsyncTask : Service()  {
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show()
         posts = intent.getParcelableArrayListExtra<Post>("PostList") as ArrayList<Post>
         videoLinks = intent.getParcelableArrayListExtra<Parcelable>("VideoLinks") as ArrayList<String>
-
         scope.launch {
             addToDatabase(posts)
         }

@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi CHitamba
+ * This class initializes the retrofit service using the provided url.
+ * NOTE: The URL can't be accessed from strings.xml
+ */
+
 package com.example.ecd_app.retrofit
 
 import com.google.gson.GsonBuilder

@@ -7,7 +7,6 @@ data class LocalVideoData(
     val VIDEO_DURATION: Long,
     val VIDEO_SIZE: Long,
     val VIDEO_DATE_ADDED: Long
-    //val VIDEO_RESOLUTION: String
 ) {
 
 }

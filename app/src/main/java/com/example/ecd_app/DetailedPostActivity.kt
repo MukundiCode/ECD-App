@@ -55,7 +55,6 @@ class DetailedPostActivity : AppCompatActivity() {
            // startActivity(intentVid)
         }
 
-
         //fetching intents
         var intent = intent //getting the intent
         val postID = intent.getIntExtra("iPostID", 0)
@@ -70,9 +69,7 @@ class DetailedPostActivity : AppCompatActivity() {
         val tvCategory: TextView = findViewById(R.id.tvCategory)
         val tvPostTitle: TextView = findViewById(R.id.tvTitle)
         val tvPostContent: TextView = findViewById(R.id.tvContent)
-
         tvCategory.text = postMetaData
-
 
         //clean up the wp postContent html jsoup
         val doc: org.jsoup.nodes.Document? = Jsoup.parse(postContent)

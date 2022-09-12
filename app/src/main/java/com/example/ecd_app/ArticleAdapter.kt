@@ -18,9 +18,6 @@ class ArticleAdapter(val articleList: List<Article>, val onClickListener: OnClic
     lateinit var articleDescription: TextView;
     lateinit var articleImage: ImageView;
 
-
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutView = LayoutInflater.from((parent.context)).inflate(R.layout.article_item_layout, parent, false)
         return ViewHolder(layoutView)
@@ -42,7 +39,6 @@ class ArticleAdapter(val articleList: List<Article>, val onClickListener: OnClic
     }
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view){
-
     }
 
 }

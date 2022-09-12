@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * This is a data class (POJO) for the returned json from the web portal
+ * JSON response is converted into an object of this class
+ */
+
 package com.example.ecd_app.retrofit
 
 import com.google.gson.annotations.SerializedName
