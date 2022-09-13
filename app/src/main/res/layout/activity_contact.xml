@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    @author Jonathan Swanepoel and Suvanth Ramruthen-->
+<!--    This file designed the about us page within the application-->
+
 <com.google.android.flexbox.FlexboxLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
