@@ -1,6 +1,6 @@
 # You and Your Baby
 The staff-facing web portal and user-facing web app is accessible through youandyourbaby.bhabhisana.org.za\
-Details to login with admin credentials can be found in the ECD Hons MS Teams group
+Details to login with admin credentials, with the full zipped .wpress file, can be found in the ECD Hons MS Teams group
 
 # WordPress Scripts (php and html)
 These scripts were used to achieve key functionality such as:
