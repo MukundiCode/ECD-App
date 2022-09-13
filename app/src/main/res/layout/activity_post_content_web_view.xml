@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    @author Jonathan Swanepoel and Suvanth Ramruthen-->
+<!--    This file is an old-unused web view file -->
+
 <LinearLayout xmlns:android = "http://schemas.android.com/apk/res/android"
     xmlns:app = "http://schemas.android.com/apk/res-auto"
     xmlns:tools = "http://schemas.android.com/tools"

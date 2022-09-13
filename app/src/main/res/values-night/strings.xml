@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ecd_content">ECD Content</string>
+    <string name="public_articles">Public Articles</string>
+    <string name="facilities">Facilities</string>
+    <string name="information">Information</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="enter_your_username">Enter your username:</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="or">OR</string>
+    <string name="continue_as_guest">Continue as guest</string>
+    <string name="this_ecd_content_is_available_to_view">This ECD Content is available to view</string>
+    <string name="ecd_content_available_for_you">ECD Content available for you.</string>
+</resources>

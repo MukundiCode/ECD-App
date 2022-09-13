@@ -11,5 +11,18 @@
     <string name="title_activity_create_map">CreateMapActivity</string>
     <string name="permission_request_message">We use storage permission to be able to download and save ECD videos from the web portal. Go to your phone settings and allow storage read and write permissions for this application to access this feature.</string>
     <string name="permission_request_explaination">Close</string>
+    <string name="ecd_content">ECD Content</string>
+    <string name="public_articles">Public Articles</string>
+    <string name="facilities">Facilities</string>
+    <string name="information">Information</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="enter_your_username">Enter your username:</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="or">OR</string>
+    <string name="continue_as_guest">Continue as guest</string>
+    <string name="this_ecd_content_is_available_to_view">This ECD Content is available to view</string>
+    <string name="ecd_content_available_for_you">ECD Content available for you.</string>
 
 </resources>
