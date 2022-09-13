@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * This background service is started on retrofit response
+ * adds posts to database and downloads videos
+ */
+
 package com.example.ecd_app
 
 import android.app.Service
@@ -10,7 +16,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import java.io.File
 
 class OnRetrofitResponseAsyncTask : Service()  {
 
@@ -38,6 +43,13 @@ class OnRetrofitResponseAsyncTask : Service()  {
         postsRepository = (this.application as ECDApplication).repository
     }
 
+    /**
+     * For each video
+     * download if video exists
+     * else pass
+     *
+     * @param videoLinks
+     */
     fun downloadVideos(videoLinks: ArrayList<String>){
         var downloader = VideoDownloader()
         System.out.println("Downloading videos, number of videos: "+ videoLinks.size)
@@ -65,6 +77,13 @@ class OnRetrofitResponseAsyncTask : Service()  {
         }
     }
 
+    /**
+     * For each post
+     * if post not exist
+     * add to database
+     *
+     * @param posts
+     */
     suspend fun addToDatabase(posts : ArrayList<Post>){
         for (post in posts){
             if (post != null) {
@@ -96,6 +115,6 @@ class OnRetrofitResponseAsyncTask : Service()  {
     }
 
     override fun onDestroy() {
-        Toast.makeText(this, "service done", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Sync completed", Toast.LENGTH_SHORT).show()
     }
 }

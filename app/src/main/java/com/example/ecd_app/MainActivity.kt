@@ -1,3 +1,7 @@
+/**
+ * @author Tinashe Mukundi Chitamba and Suvanth Ramruthen
+ */
+
 package com.example.ecd_app
 
 import android.annotation.SuppressLint
@@ -36,6 +40,12 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         PostsViewModelFactory((application as ECDApplication).repository)
     }
 
+    /**
+     * Initialize buttons
+     * Initialize adapter
+     * Check permissions
+     * @param savedInstanceState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -109,6 +119,10 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         Permissions().checkReadStoragePermission(this)
     }
 
+    /**
+     * Checks if connected to wifi, then makes retrofit call. Creates composite disposable
+     * then observes until response
+     */
     fun retrofitCall(){
         val connection: String = checkWifi(this)
         if(connection == "WIFI"){
@@ -146,6 +160,11 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         }
     }
 
+    /**
+     * Checks if phone connected to wifi or cellular
+     * @param context
+     * @return String
+     */
     @SuppressLint("NewApi")
     fun checkWifi(context: Context): String {
         val connectivityManager =
@@ -166,6 +185,12 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         return "OFFLINE"
     }
 
+    /**
+     * Function called on retrofit response
+     * Gets list of posts, and starts the background service
+     * for adding posts to database and downloading videos
+     * @param response
+     */
     fun onResponse(response: List<PostJS>){
         var posts: ArrayList<Post> = ArrayList<Post>()
         var videoLinks: ArrayList<String> = ArrayList<String>()
@@ -203,10 +228,21 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         startService(intent)
     }
 
+    /**
+     * On retrofit call fail
+     * @param t : throwable
+     */
     fun onFailure(t: Throwable){
-        System.out.println("Retrofit Failed: "+ t.stackTraceToString())
+        //System.out.println("Retrofit Failed: "+ t.stackTraceToString())
+        Toast.makeText(this@MainActivity,"Syncing failed", Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Extracts the video link from post content
+     *
+     * @param post_content
+     * @return link
+     */
     fun getVideoLink(post_content : String): String? {
         var url: String? = null
         val doc: org.jsoup.nodes.Document? = Jsoup.parse(post_content)

@@ -31,6 +31,11 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
+        /**
+         * TODO : Remove initial post
+         *
+         * @param db SQLite Database
+         */
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             INSTANCE?.let { database ->

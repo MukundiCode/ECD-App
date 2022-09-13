@@ -1,3 +1,8 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * Class encapsulates querying media store and returning videos
+ */
+
 package com.example.ecd_app
 
 import android.annotation.SuppressLint
@@ -49,6 +54,11 @@ class LocalVideoContract {
     }
 }
 
+/**
+ * Returns all videos in mediastore
+ * @param contentResolver
+ * @return list of videos
+ */
 @SuppressLint("Range")
 fun fetchVideos(contentResolver: ContentResolver): Single<List<LocalVideoData>> {
     return Single.create<List<LocalVideoData>> {

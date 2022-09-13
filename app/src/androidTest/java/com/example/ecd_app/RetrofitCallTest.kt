@@ -28,6 +28,7 @@ import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 /**
+ * @author Tinashe Mukundi Chitamba
  * Instrumented test, which will execute on an Android device.
  *
  * See [testing documentation](http://d.android.com/tools/testing).
@@ -40,6 +41,10 @@ class RetrofitCallTest {
     private lateinit var client : OkHttpClient
     private lateinit var api: WordPressEcdAPI
 
+    /**
+     * Setup mockito
+     *
+     */
     @Before
     fun setup(){
         mockWebServer.start(8000)
@@ -68,6 +73,10 @@ class RetrofitCallTest {
         mockWebServer.shutdown()
     }
 
+    /**
+     * Test size of list returned
+     *
+     */
     @Test
     fun testPostListSize() {
         runBlocking {
@@ -75,6 +84,11 @@ class RetrofitCallTest {
             assertEquals(19, actual.size)
         }
     }
+
+    /**
+     * Tests that the titles are maintained when consumed
+     *
+     */
     @Test
     fun testPostTestTitle(){
         runBlocking {
@@ -82,6 +96,11 @@ class RetrofitCallTest {
             assertEquals("Using a crate to help baby with sitting",actual.get(0).post!!.postTitle)
         }
     }
+
+    /**
+     * Tests that category name is maintained
+     *
+     */
     @Test
     fun testPostCategory(){
         runBlocking {
@@ -89,6 +108,11 @@ class RetrofitCallTest {
             assertEquals("Assigned Content",actual.get(0).category)
         }
     }
+
+    /**
+     * Test methoda that extracts link from post
+     *
+     */
     @Test
     fun testLinkExtraction(){
         runBlocking {

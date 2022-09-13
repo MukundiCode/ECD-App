@@ -1,3 +1,8 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * data class for local video data
+ */
+
 package com.example.ecd_app
 
 data class LocalVideoData(
