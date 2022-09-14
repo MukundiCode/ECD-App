@@ -29,5 +29,3 @@ Login credentials are available through the MS Teams Channel.
 
 ### Contributor
 - Jonathan Swanepoel
-
-
