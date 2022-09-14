@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/12 THE GREAT/AndroidStudioProjects/ECD_App/app/src/main/res/layout/activity_detailed_post.xml" value="0.22" />
+        <entry key="..\:/Users/12 THE GREAT/AndroidStudioProjects/ECD_App/app/src/main/res/layout/download_popup.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/12 THE GREAT/AndroidStudioProjects/ECD_App/app/src/main/res/layout/recyclerview_item.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.5165" />
         <entry key="app/src/main/res/layout/activity_create_map.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/layout/activity_detailed_post.xml" value="0.4479166666666667" />
@@ -11,4 +14,5 @@
       </map>
     </option>
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
