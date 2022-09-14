@@ -41,18 +41,18 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
 
         /**
-         * B
+         * Button to handle fullscreen functionality
          */
         bt_fullscreen.setOnClickListener(){
             if(!isFullScreen){
-                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen_exit))
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen_exit))//changing icon for fullscreen exit
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE//setting orientation
             }else{
-                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen))
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen)) //changing icon for fullscreen
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT //setting orientation
 
             }
-            isFullScreen =!isFullScreen
+            isFullScreen =!isFullScreen//updating boolean flag
 
         }
 
@@ -60,27 +60,31 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
         
         simpleExoPlayer= SimpleExoPlayer.Builder(this)
-            .setSeekBackIncrementMs(5000)
-            .setSeekForwardIncrementMs(5000)
+            .setSeekBackIncrementMs(5000)//setting skip forward timer
+            .setSeekForwardIncrementMs(5000)//setting rewind timer
             .build()
         playerView.player = simpleExoPlayer
         playerView.keepScreenOn=true
 
+        /**
+         * Listener to handle media player operations
+         */
         simpleExoPlayer.addListener(object: Player.Listener{
             override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                 if (playbackState==Player.STATE_BUFFERING){
-                    progressBar.visibility= View.VISIBLE
+                    progressBar.visibility= View.VISIBLE//enabling progress bar to communicate video duration
 
                 }
                 else if(playbackState==Player.STATE_READY){
-                    progressBar.visibility=View.GONE
+                    progressBar.visibility=View.GONE//disabling progress bar
                 }
             }
 
         })
 
-        val videoSource = Uri.parse(postVideoPath)
+        val videoSource = Uri.parse(postVideoPath)//setting media file path for palyer
         val mediaItem = MediaItem.fromUri(videoSource)
+        //preparing and playing media
         simpleExoPlayer.setMediaItem(mediaItem)
         simpleExoPlayer.prepare()
         simpleExoPlayer.play()
@@ -88,14 +92,20 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
     }
 
+    /**
+     * stopping media play progress
+     */
     override fun onStop() {
         super.onStop()
-        simpleExoPlayer.stop()
+        simpleExoPlayer.stop()//stopping player
     }
 
+    /**
+     * Releases media play when video playback activity ends
+     */
     override fun onDestroy() {
         super.onDestroy()
-        simpleExoPlayer.release()
+        simpleExoPlayer.release()//releasing player
     }
 
 }

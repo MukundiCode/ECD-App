@@ -25,16 +25,9 @@ class ArticleListActivity : AppCompatActivity() {
         val articleList : List<Article> = listOf(//geenrating list of articles
             Article("Road To Health", "Road to health government book","rthb_booklet.pdf"),
             Article("RTHB Guide","Guide for using the RTHB Booklet","rthb_guide.pdf"),//new article
-            Article("Road To Health Girls","Road to health government book for girls","rthb_girls.pdf"),
-            Article("Road To Health Boys","Road to health government book for boys","rthb_boys.pdf"),
             Article("Side-By-Side Breastfeeding","Outlines what you should know about breastfeeding","breastfeeding-qa-booklet.pdf"),
-            Article("Awareness for Breastfeeding","Breastfeeding poster","poster.pdf"),
-            Article("COMACH Poster","Comach design poster","comach.pdf"),
-            Article("1000 Days","Unicef 1000 Days","unicef1000days.pdf"),
             Article("1000 Days Poster","1000 Day Poster graphic","1000daysposter.pdf"),
-            Article("Neonatal Care","Unicef neonatal care guide","unicef_neonatal.pdf"),
             Article("Importance Of Play","Article describing the process of learning through play","learn_through_play.pdf"),
-            //new articles
             Article("Child Immunization","Immunization information poster","childimmunizationsposter.pdf"),
             Article("Messages for Mothers","Afrikaans m4m brochure","m4mafrikaansbrochure.pdf"),
             Article("Messages for Mothers","isiXhosa m4m brochure","m4misixhosabrochure.pdf"),
