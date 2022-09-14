@@ -86,7 +86,7 @@ class MapActivity : AppCompatActivity() {
                     Place("Mitchell's Plain Hospital", "021 832 9200 ", -34.02146629490426, 18.61368319755477),
                     Place("Valkenberg Hospital", "021 440 3111", -33.93603264713252, 18.47776105337481)
                 )),
-            UserMap("Physical Health Resources",
+            UserMap("Child Health Resources",
                 listOf(
                     Place("Red Cross War Memorial Children’s Hospital", "021 658 5111", -33.95450369148614, 18.48742408221094),
                     Place("UCT Paediatrics & Child Health Lab", "021 658 5314", -33.96948264030165, 18.543180243578416),

@@ -110,7 +110,7 @@ class DashBoard : AppCompatActivity() {
         helpView?.setBackgroundDrawable(getDrawable(R.drawable.ic_baseline_help_outline_24 ))//setting drawable
         helpView?.setOnClickListener(){
             val intent = Intent(this@DashBoard, ArticleActivity::class.java)//creating intent to pass article details
-            val helpPDFObj = Article("Road To Help", "HelpDocument","placeholderHelp.pdf")
+            val helpPDFObj = Article("Road To Help", "HelpDocument","guide.pdf")
             intent.putExtra(EXTRA_ARTICLE_FNAME, helpPDFObj) //putting article file name extra for help
             startActivity(intent)
         }
