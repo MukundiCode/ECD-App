@@ -63,6 +63,7 @@
                 android:fontFamily="@font/psbold"
                 app:layout_constraintLeft_toRightOf="@id/ivArticleCard"
                 app:layout_constraintTop_toTopOf="@id/ivArticleCard"/>
+
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="0dp"
@@ -72,7 +73,7 @@
                 app:layout_flexBasisPercent="100%"
                 android:text="@string/this_ecd_content_is_available_to_view"
                 app:layout_constraintRight_toRightOf="parent"
-                android:fontFamily="@font/psregular"></TextView>
+                android:fontFamily="@font/psregular" />
 
         </com.google.android.flexbox.FlexboxLayout>
 

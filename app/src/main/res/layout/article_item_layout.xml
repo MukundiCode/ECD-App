@@ -63,6 +63,7 @@ app:cardElevation="8dp"
             android:fontFamily="@font/psbold"
             app:layout_constraintLeft_toRightOf="@id/ivArticleCard"
             app:layout_constraintTop_toTopOf="@id/ivArticleCard"/>
+
         <TextView
             android:id="@+id/tvArticleDescription"
             android:layout_width="0dp"
@@ -71,8 +72,8 @@ app:cardElevation="8dp"
             android:layout_margin="8dp"
             app:layout_flexBasisPercent="100%"
             app:layout_constraintRight_toRightOf="parent"
-            android:text="This video goes over how breastfeeding should be conducted in a professional setting"
-            android:fontFamily="@font/psmediumitalic"></TextView>
+            android:text="@string/this_video_goes_over_how_breastfeeding_should_be_conducted_in_a_professional_setting"
+            android:fontFamily="@font/psmediumitalic" />
     </com.google.android.flexbox.FlexboxLayout>
 </com.google.android.flexbox.FlexboxLayout>
 </androidx.cardview.widget.CardView>

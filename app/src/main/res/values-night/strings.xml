@@ -13,4 +13,21 @@
     <string name="continue_as_guest">Continue as guest</string>
     <string name="this_ecd_content_is_available_to_view">This ECD Content is available to view</string>
     <string name="ecd_content_available_for_you">ECD Content available for you.</string>
+    <string name="our_story">Our Story</string>
+    <string name="the_bhabhisana_baby_project_is_based_in_the_western_cape_south_africa_and_was_established_in_august_2015_by_highly_skilled_therapists_who_recognised_the_need_to_help_babies_who_come_from_underserved_communities_with_early_intervention_during_the_critical_1_000_day_period">The Bhabhisana Baby Project is based in the Western Cape, South Africa, and was established in August 2015 by highly skilled therapists who recognised the need to help babies who come from underserved communities with early intervention during the critical 1 000-day period.</string>
+    <string name="get_in_touch">Get in touch</string>
+    <string name="location_179_belgravia_rd">Location: 179 Belgravia Rd</string>
+    <string name="home_you_and_your_baby">Home: You and Your Baby</string>
+    <string name="ecd_title">ECD Title</string>
+    <string name="category">Category</string>
+    <string name="assigned_content">Assigned Content</string>
+    <string name="baby_health">Baby Health</string>
+    <string name="baby_development">Baby Development</string>
+    <string name="parent_health">Parent Health</string>
+    <string name="no_content_in_this_category">No content in this category</string>
+    <string name="sync_new_content">Sync New Content</string>
+    <string name="clear_all_saved_data">Clear all saved data</string>
+    <string name="app_permissions">App permissions</string>
+    <string name="version">Version</string>
+    <string name="this_video_goes_over_how_breastfeeding_should_be_conducted_in_a_professional_setting">This video goes over how breastfeeding should be conducted in a professional setting</string>
 </resources>

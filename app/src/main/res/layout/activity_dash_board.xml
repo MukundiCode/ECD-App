@@ -55,7 +55,7 @@
                     android:paddingLeft="30dp"
                     android:paddingRight="30dp"
                     android:layout_marginBottom="12dp"
-                    android:text="Home: You and Your Baby "
+                    android:text="@string/home_you_and_your_baby"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
