@@ -9,7 +9,7 @@ Passwords are available on request, or they are available within the ECD Hons MS
 These scripts were used to achieve key functionality such as:
 - Fetching posts assigned to a user.
 - Designing and displaying these posts.
-- Filtering by category or language.\
+- Filtering by category or language.
 
 These scripts are placed in the "code-blocks", within the WordPress installation.\
 Code-blocks are local. Therefore, these scripts cannot reference pre-defined variables or functions. Redundancy therefore exists throughout the independent code-blocks.\
@@ -28,6 +28,6 @@ Key functionality includes:
 - x2 Custom Endpoints for Mobile App to fetch.
 - Web Portal customization for Authors.
 - Web Portal online help and documentation.
-- Small changes to native WP experience.\
+- Small changes to native WP experience.
 
 Should future iterations be made, please get in touch with Bhabhisanas IT provider for these details.
