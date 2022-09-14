@@ -18,7 +18,7 @@ App Instrumented Tests - "ECD-App/app/src/androidTest/java/com/example/ecd_app/"
 - Jonathan Swanepoel
 - Suvanth Ramruthen
 
-## WordPress
+## WordPress powered Web Portal and Web App
 Wordpress src code - ECD-App/wordpress/
 
 The WordPress directory hosts a *wordpress-scripts* and *plugin* folder. A readme is attached for more information. 
