@@ -23,7 +23,7 @@ App Instrumented Tests - "ECD-App/app/src/androidTest/java/com/example/ecd_app/"
 ## WordPress powered Web Portal and Web App
 Wordpress src code - ECD-App/wordpress/
 
-The WordPress directory hosts a *wordpress-scripts* and *plugin* folder. A readme is attached for more information. 
+The WordPress directory hosts a *wordpress-scripts* and *plugin* folder. A readme is attached for more information such as reusability. 
 The staff-facing web portal, and user-facing web app, are available through the live domain of [youandyourbaby.bhabhisana.org.za](youandyourbaby.bhabhisana.org.za).
 Login credentials are available through the MS Teams Channel.
 
