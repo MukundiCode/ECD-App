@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="home_you_and_your_baby">Home: You and Your Baby</string>
     <string name="ecd_content">ECD Content</string>
     <string name="public_articles">Public Articles</string>
     <string name="facilities">Facilities</string>

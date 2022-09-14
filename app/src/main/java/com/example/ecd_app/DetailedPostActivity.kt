@@ -1,48 +1,44 @@
 package com.example.ecd_app
 
-import android.content.Context
 import android.content.Intent
-import android.database.Cursor
-import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
-import android.util.Log
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import com.google.android.flexbox.FlexboxLayout
 import org.jsoup.Jsoup
 
+/**
+ * @author Suvanth Ramruthen
+ * DetailedPostActivity renders WP posts in a user interpretable format.
+ */
 class DetailedPostActivity : AppCompatActivity() {
     private val defaulturl =
         "https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4"
-    private var playbackPosition = 0
-    private lateinit var pgBar: ProgressBar
-    private lateinit var iPostVideoView: VideoView
-    private lateinit var mediaController: MediaController
     private lateinit var url: String
     private var postVideoName: String? = null
 
 
+    /**
+     * OnCreate method is called on activity launch, setups activity with post details
+     * @param savedInstanceState saved bundle instance
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setContentView(R.layout.activity_detailed_post)
-        val videoButtonImageView: ImageView = findViewById(R.id.videoImageButton)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)//enabling back button
+        setContentView(R.layout.activity_detailed_post)//inflating detailed post xml file
+        val videoButtonImageView: ImageView = findViewById(R.id.videoImageButton)//finding videoButton
 
+        /**
+         * Creating button listener for video image button launch
+         */
         videoButtonImageView.setOnClickListener() {
-            val intentVid = Intent(this@DetailedPostActivity, fullScreenVideoPlayer::class.java)
+            val intentVid = Intent(this@DetailedPostActivity, fullScreenVideoPlayer::class.java)//create intent
             var videos = this?.let { fetchVideos(it.contentResolver) }
             var found = false
             if (videos != null) {
                 var vids = videos.blockingGet()
                 for (v in vids) {
                     if (v.VIDEO_NAME == postVideoName) {
-//                      iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
-                        intentVid.putExtra("VIDEOLINK", v.VIDEO_PATH)
+                        intentVid.putExtra("VIDEOLINK", v.VIDEO_PATH)//putting video link in intent
                         startActivity(intentVid)
                         found = true
                         break
@@ -52,7 +48,6 @@ class DetailedPostActivity : AppCompatActivity() {
                     Toast.makeText(this, "Video does not exist", Toast.LENGTH_SHORT).show()
                 }
             }
-           // startActivity(intentVid)
         }
 
         //fetching intents
@@ -63,7 +58,6 @@ class DetailedPostActivity : AppCompatActivity() {
         val postDateCreated = intent.getStringExtra("iPostDate")
         val postContent = intent.getStringExtra("iPostContent")
         val postMetaData = intent.getStringExtra("iPostMetaData")
-       // Toast.makeText(this@DetailedPostActivity, postMetaData, Toast.LENGTH_LONG).show()
         postVideoName = intent.getStringExtra("iPostVideoName")
         //getting elements
         val tvCategory: TextView = findViewById(R.id.tvCategory)
@@ -72,16 +66,16 @@ class DetailedPostActivity : AppCompatActivity() {
         tvCategory.text = postMetaData
 
         //clean up the wp postContent html jsoup
-        val doc: org.jsoup.nodes.Document? = Jsoup.parse(postContent)
-        val text: String? = doc?.text()
+        val doc: org.jsoup.nodes.Document? = Jsoup.parse(postContent)//creating document object for jSoup manipulation
+        val text: String? = doc?.text()//getting text without xml tags
         tvPostTitle.text = postTitle
         tvPostContent.text = text
         if (tvPostContent.text.trim().isEmpty()) {
-            tvPostContent.text = "No text decription in this post"
+            tvPostContent.text = "No text decription in this post" //diplaying no text
 
         }
-        val element = doc?.select("video")
-        val srcUrl = element?.attr("src")
+        val element = doc?.select("video")//looking for video link in jSoup doc
+        val srcUrl = element?.attr("src")// filtering by src tag
         if (srcUrl != null) {
             url = if (srcUrl.trim().isEmpty()) {
                 defaulturl
@@ -90,68 +84,7 @@ class DetailedPostActivity : AppCompatActivity() {
             }
         }
 
-        //category
-//        when {
-//            postTitle?.lowercase()?.contains("food") == true && postTitle.lowercase()
-//                .contains("breast") -> tvCategory.text = "Nutrition"
-//            postTitle?.lowercase()?.contains("breast") == true -> tvCategory.text = "Breastfeeding"
-//            else -> tvCategory.text = "General"
-//        }
+
     }
 }
-
-//        //media controller
-//        pgBar = findViewById(R.id.progressBar)
-//        iPostVideoView = findViewById(R.id.videoViewWPpost)
-//        mediaController = MediaController(this@DetailedPostActivity)
-//        val videocontainer: FlexboxLayout = findViewById(R.id.videoContainer)
-
-//        iPostVideoView.setOnPreparedListener() {
-//            mediaController.setAnchorView(videocontainer)
-//            iPostVideoView.setMediaController(mediaController)
-//            iPostVideoView.seekTo(playbackPosition)
-//            iPostVideoView.start()
-//        }
-//
-//        iPostVideoView.setOnInfoListener{ player, what, extras ->
-//            if(what== MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START){
-//                pgBar.visibility = View.INVISIBLE
-//            };true
-//        }
-//}
-//    override fun onStart() {
-//        super.onStart()
-//        System.out.println(postVideoName)
-//        var videos = this?.let { fetchVideos(it.contentResolver) }
-//        if (videos != null) {
-//            var vids = videos.blockingGet()
-//            for (v in vids){
-//                if (v.VIDEO_NAME == postVideoName){
-//                    iPostVideoView.setVideoURI(Uri.parse(v.VIDEO_PATH))
-//                    break
-//                }
-//            }
-//        }
-//        pgBar.visibility= View.VISIBLE
-//
-//
-//    }
-//
-//    override fun onPause() {
-//        iPostVideoView.pause()
-//        playbackPosition = iPostVideoView.currentPosition
-//        super.onPause()
-//    }
-//
-//    override fun onStop() {
-//        iPostVideoView.stopPlayback()
-//        super.onStop()
-//    }
-//
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        Toast.makeText(this@DetailedPostActivity, "destroying", Toast.LENGTH_LONG).show()
-//    }
-//
-//}
 
