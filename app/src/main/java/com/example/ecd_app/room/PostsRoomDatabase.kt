@@ -41,14 +41,14 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     //nothing yet
-                    var postDao = database.postDao()
-                    var post = Post(0,
-                        "BreastFeeding at work",
-                        "July",
-                        "date",
-                        "None",
-                        "meta")
-                    postDao.insert(post)
+//                    var postDao = database.postDao()
+//                    var post = Post(0,
+//                        "BreastFeeding at work",
+//                        "July",
+//                        "date",
+//                        "None",
+//                        "meta")
+//                    postDao.insert(post)
                 }
             }
         }
