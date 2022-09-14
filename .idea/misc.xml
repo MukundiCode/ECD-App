@@ -5,13 +5,23 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.5165" />
         <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.348" />
+        <entry key="app/src/main/res/layout/activity_article.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_article_list.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_contact.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/layout/activity_create_map.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/layout/activity_dash_board.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_detailed_post.xml" value="0.4479166666666667" />
         <entry key="app/src/main/res/layout/activity_display_map.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_full_screen_video_player.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5548717948717948" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/layout/activity_post_content_web_view.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/article_item_layout.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/custom_controller.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/map_item_layout.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/menu/help_menu.xml" value="0.5625" />
         <entry key="app/src/main/res/menu/menu_create_app.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.5625" />
@@ -19,4 +29,11 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.5635416666666667" />
+      </ProjectState>
+    </option>
+  </component>
 </project>

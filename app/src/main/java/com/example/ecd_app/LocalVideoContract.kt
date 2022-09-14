@@ -1,3 +1,8 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * Class encapsulates querying media store and returning videos
+ */
+
 package com.example.ecd_app
 
 import android.annotation.SuppressLint
@@ -32,11 +37,7 @@ class LocalVideoContract {
 
         // The Uri path
         fun queryUri(): Uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
-
-        //fun projection() = arrayOf(VIDEO_NAME, VIDEO_PATH, VIDEO_TYPE, VIDEO_DURATION, VIDEO_SIZE, VIDEO_DATE_ADDED, VIDEO_ALBUM, VIDEO_RESOLUTION)
         fun projection() = arrayOf(VIDEO_NAME,VIDEO_PATH, VIDEO_TYPE, VIDEO_DURATION, VIDEO_SIZE, VIDEO_DATE_ADDED)
-
-
         fun selection(): String {
             val argsSize = selectionArgs().size
             val str = StringBuilder()
@@ -48,11 +49,16 @@ class LocalVideoContract {
             }
             return VIDEO_TYPE.plus(" in (").plus(str.toString()).plus(")")
         }
-
         fun selectionArgs() = arrayOf("video/mp4", "video/m4v", "video/mkv", "video/mov", "video/avi", "video/ts", "video/webm")
         fun queryOrder() = "$VIDEO_DATE_ADDED DESC"
     }
 }
+
+/**
+ * Returns all videos in mediastore
+ * @param contentResolver
+ * @return list of videos
+ */
 @SuppressLint("Range")
 fun fetchVideos(contentResolver: ContentResolver): Single<List<LocalVideoData>> {
     return Single.create<List<LocalVideoData>> {
@@ -60,7 +66,6 @@ fun fetchVideos(contentResolver: ContentResolver): Single<List<LocalVideoData>> 
             val cursor = contentResolver.query(queryUri(), projection(), selection(), selectionArgs(), queryOrder())
             val videosList = mutableListOf<LocalVideoData>()
             var idx = 0
-            System.out.println("cursor is "+cursor)
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     do {
@@ -72,7 +77,6 @@ fun fetchVideos(contentResolver: ContentResolver): Single<List<LocalVideoData>> 
                             cursor.getLong(cursor.getColumnIndex(VIDEO_DURATION)),
                             cursor.getLong(cursor.getColumnIndex(VIDEO_SIZE)),
                             cursor.getLong(cursor.getColumnIndex(VIDEO_DATE_ADDED))
-                            //cursor.getString(cursor.getColumnIndex(VIDEO_RESOLUTION))
                         )
                         )
                         idx++

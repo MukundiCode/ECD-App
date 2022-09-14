@@ -1,16 +1,23 @@
+/**
+ * @author Tinashe Mukundi Chitamba and Suvanth Ramruthen
+ */
+
 package com.example.ecd_app
 
-import android.Manifest
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +25,6 @@ import com.example.ecd_app.retrofit.*
 import com.example.ecd_app.room.Post
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -39,8 +45,10 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
     }
 
     /**
-     *onCreate function sets up the activity page with relevant details
-     * @param savedInstanceState saved bundle state
+     * Initialize buttons
+     * Initialize adapter
+     * Check permissions
+     * @param savedInstanceState
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -142,17 +150,78 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         Permissions().checkReadStoragePermission(this)
     }
 
+    /**
+     * Checks if connected to wifi, then makes retrofit call. Creates composite disposable
+     * then observes until response
+     */
     fun retrofitCall(){
-        val compositeDisposable = CompositeDisposable()
-        val username = (this.application as ECDApplication).getUsernameFromPreferences()
-        System.out.println("Username is "+username)
-        compositeDisposable.add(
-            RetrofitService.ServiceBuilder.buildService().getPosts(username)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
+        val connection: String = checkWifi(this)
+        if(connection == "WIFI"){
+            val compositeDisposable = CompositeDisposable()
+            val username = (this.application as ECDApplication).getUsernameFromPreferences()
+            compositeDisposable.add(
+                RetrofitService.ServiceBuilder.buildService().getPosts(username)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
+
+        } else if (connection == "CELLULAR"){
+            val dialogClickListener =
+                DialogInterface.OnClickListener { dialog, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+                            val compositeDisposable = CompositeDisposable()
+                            val username = (this.application as ECDApplication).getUsernameFromPreferences()
+                            compositeDisposable.add(
+                                RetrofitService.ServiceBuilder.buildService().getPosts(username)
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribeOn(Schedulers.io())
+                                    .subscribe({response -> onResponse(response)}, {t -> onFailure(t) }))
+                        }
+                        DialogInterface.BUTTON_NEGATIVE -> {}
+                    }
+                }
+
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+            builder.setMessage("Are you sure you want to use mobile data to sync ECD content? This might deplete your data.").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show()
+
+        } else if (connection == "OFFLINE"){
+            Toast.makeText(this, "Can't sync when offline, please connect to the internet", Toast.LENGTH_LONG).show()
+        }
     }
 
+    /**
+     * Checks if phone connected to wifi or cellular
+     * @param context
+     * @return String
+     */
+    @SuppressLint("NewApi")
+    fun checkWifi(context: Context): String {
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (connectivityManager != null) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                    return "CELLULAR"
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                    return "WIFI"
+                } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                    return "ETHERNET"
+                }
+            }
+        }
+        return "OFFLINE"
+    }
+
+    /**
+     * Function called on retrofit response
+     * Gets list of posts, and starts the background service
+     * for adding posts to database and downloading videos
+     * @param response
+     */
     fun onResponse(response: List<PostJS>){
         var posts: ArrayList<Post> = ArrayList<Post>()
         var videoLinks: ArrayList<String> = ArrayList<String>()
@@ -190,10 +259,21 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         startService(intent)
     }
 
+    /**
+     * On retrofit call fail
+     * @param t : throwable
+     */
     fun onFailure(t: Throwable){
-        System.out.println("Retrofit Failed: "+ t.stackTraceToString())
+        //System.out.println("Retrofit Failed: "+ t.stackTraceToString())
+        Toast.makeText(this@MainActivity,"Syncing failed", Toast.LENGTH_LONG).show()
     }
 
+    /**
+     * Extracts the video link from post content
+     *
+     * @param post_content
+     * @return link
+     */
     fun getVideoLink(post_content : String): String? {
         var url: String? = null
         val doc: org.jsoup.nodes.Document? = Jsoup.parse(post_content)//generating jSoup document
@@ -232,7 +312,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 Toast.makeText(this@MainActivity,"Fetching", Toast.LENGTH_LONG).show()//fetching content
                 retrofitCall()//api call for sync
             }
-
         }
         searchView?.setOnQueryTextListener(this@MainActivity)//creating query listener
         return true
@@ -247,7 +326,6 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         if (query!=null){
             searchDatabase(query)
         }
-
         return true
     }
 

@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi CHitamba
+ * This class initializes the retrofit service using the provided url.
+ * NOTE: The URL can't be accessed from strings.xml
+ */
+
 package com.example.ecd_app.retrofit
 
 import com.google.gson.GsonBuilder
@@ -23,7 +29,7 @@ class RetrofitService
             .build()
 
         private val retrofit = Retrofit.Builder()
-            .baseUrl("https://wordpress-729091-2804560.cloudwaysapps.com/")
+            .baseUrl("https://youandyourbaby.bhabhisana.org.za/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .callbackExecutor(Executors.newSingleThreadExecutor())

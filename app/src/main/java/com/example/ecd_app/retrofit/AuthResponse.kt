@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * This class handles retrofit responses for authenticating with the
+ * web portal
+ */
+
 package com.example.ecd_app.retrofit
 
 import com.google.gson.annotations.SerializedName

@@ -28,7 +28,6 @@ class ArticleAdapter(val articleList: List<Article>, val onClickListener: OnClic
     lateinit var articleDescription: TextView;//Article short description
     lateinit var articleImage: ImageView;
 
-
     /**
      *Creating the holder of the list items view, generates list items UI dynamically
      * @param parent parent of list item

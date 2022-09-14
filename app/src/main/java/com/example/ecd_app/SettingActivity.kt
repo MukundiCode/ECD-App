@@ -1,12 +1,17 @@
 package com.example.ecd_app
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.cardview.widget.CardView
+import com.example.ecd_app.retrofit.RetrofitService
 import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 
 /**
  * @author Suvanth Ramruthen
@@ -41,16 +46,24 @@ class SettingActivity : AppCompatActivity() {
         }
 
         cardDelete.setOnClickListener(){
-            wordViewModel.deleteAll()
-            Toast.makeText(this@SettingActivity, "Content Cleared", Toast.LENGTH_SHORT).show()
+            val dialogClickListener =
+                DialogInterface.OnClickListener { dialog, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> {
+                            wordViewModel.deleteAll()
+                            Toast.makeText(this@SettingActivity, "Content Cleared", Toast.LENGTH_SHORT).show()
+                        }
+                        DialogInterface.BUTTON_NEGATIVE -> {}
+                    }
+                }
 
-
+            val builder: android.app.AlertDialog.Builder = android.app.AlertDialog.Builder(this)
+            builder.setMessage("You are about to delete all your ECD content").setPositiveButton("Continue", dialogClickListener)
+                .setNegativeButton("Cancel", dialogClickListener).show()
         }
 
         cardPermissions.setOnClickListener(){
             Toast.makeText(this@SettingActivity, "Opened app permissions", Toast.LENGTH_SHORT).show()
-
-
         }
 
         cardVersion.setOnClickListener(){

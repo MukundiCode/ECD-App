@@ -66,7 +66,6 @@ class ContactActivity : AppCompatActivity() {
             val ig = Intent(Intent.ACTION_VIEW)
             ig.data = Uri.parse(url)
             startActivity(ig)
-
         }
 
         /**
@@ -82,9 +81,6 @@ class ContactActivity : AppCompatActivity() {
             }else{
                 Toast.makeText(this@ContactActivity, "Install WhatsApp first", Toast.LENGTH_LONG).show()//showing whatsapp is not installed
             }
-
-
-
         }
 
         /**
@@ -95,7 +91,6 @@ class ContactActivity : AppCompatActivity() {
             val ecd = Intent(Intent.ACTION_VIEW)
             ecd.data = Uri.parse(url)
             startActivity(ecd)
-
         }
         //Adding images to carousel
         imageArray.add(R.drawable.one)

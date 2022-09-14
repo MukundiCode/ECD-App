@@ -1,3 +1,9 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * This is the room database object
+ * It initializes the sqlite database
+ */
+
 package com.example.ecd_app.room
 
 import android.content.Context
@@ -25,6 +31,11 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
+        /**
+         * TODO : Remove initial post
+         *
+         * @param db SQLite Database
+         */
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             INSTANCE?.let { database ->
@@ -38,7 +49,6 @@ public abstract class PostsRoomDatabase : RoomDatabase() {
                         "None",
                         "meta")
                     postDao.insert(post)
-                    System.out.println("Database created")
                 }
             }
         }

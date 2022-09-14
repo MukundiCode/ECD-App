@@ -1,3 +1,8 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * data class for local video data
+ */
+
 package com.example.ecd_app
 
 data class LocalVideoData(
@@ -7,7 +12,6 @@ data class LocalVideoData(
     val VIDEO_DURATION: Long,
     val VIDEO_SIZE: Long,
     val VIDEO_DATE_ADDED: Long
-    //val VIDEO_RESOLUTION: String
 ) {
 
 }

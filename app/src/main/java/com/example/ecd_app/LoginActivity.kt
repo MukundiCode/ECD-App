@@ -106,7 +106,6 @@ class LoginActivity : AppCompatActivity() {
             editor.putString("NAME", name)
             editor.putBoolean("CHECKBOX", true)
             editor.apply()
-
             Toast.makeText(this, "info saved", Toast.LENGTH_LONG).show()
             val intent = Intent(this, DashBoard::class.java)
             startActivity(intent)

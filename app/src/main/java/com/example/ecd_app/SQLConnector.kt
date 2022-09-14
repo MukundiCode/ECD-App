@@ -29,10 +29,8 @@ class SQLConnector {
                         "wordpress" + "?autoReconnect=true&useSSL=false",
                 connectionProps)
         } catch (ex: SQLException) {
-            // handle any errors
             ex.printStackTrace()
         } catch (ex: Exception) {
-            // handle any errors
             ex.printStackTrace()
         }
     }

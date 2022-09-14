@@ -1,3 +1,8 @@
+/**
+ * @author Tinashe Mukundi Chitamba
+ * Unit tests
+ */
+
 package com.example.ecd_app
 
 import com.example.ecd_app.retrofit.RetrofitService
@@ -21,6 +26,10 @@ class RetrofitAuthTest {
     private lateinit var client : OkHttpClient
     private lateinit var api: WordPressEcdAPI
 
+    /**
+     * Setup mockito
+     *
+     */
     @Before
     fun setup(){
         mockWebServer.start(8000)
@@ -42,6 +51,10 @@ class RetrofitAuthTest {
         mockWebServer.shutdown()
     }
 
+    /**
+     * Test valid authentication
+     *
+     */
     @Test
     fun testValidAuth(){
         val response: MockResponse = MockResponse()
@@ -56,6 +69,10 @@ class RetrofitAuthTest {
         }
     }
 
+    /**
+     * Test invalid authentication
+     *
+     */
     @Test
     fun testInValidAuth(){
         val response: MockResponse = MockResponse()

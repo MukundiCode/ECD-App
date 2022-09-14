@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    @author Jonathan Swanepoel and Suvanth Ramruthen-->
+<!--    This file designed the detailed ECD post page within the application -->
+
 <com.google.android.flexbox.FlexboxLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -19,7 +23,7 @@
         android:fontFamily="@font/psbold"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:text="ECD Title"
+        android:text="@string/ecd_title"
         android:textColor="#000000"
         android:textSize="30sp"
         app:layout_flexBasisPercent="100%" />
@@ -44,7 +48,7 @@
             android:paddingTop="5dp"
             android:paddingRight="25dp"
             android:paddingBottom="5dp"
-            android:text="Category"
+            android:text="@string/category"
             android:textColor="#000000" />
     </androidx.cardview.widget.CardView>
 
@@ -93,9 +97,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/psmedium"
                 android:padding="16dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pharetra pharetra massa massa ultricies mi quis hendrerit dolor magna. At ultrices mi tempus imperdiet nulla malesuada pellentesque elit. Eget duis at tellus at urna condimentum mattis pellentesque. Sed sed risus pretium quam vulputate dignissim suspendisse. Ornare arcu dui vivamus arcu felis bibendum. Scelerisque viverra mauris in aliquam. Consequat mauris nunc congue nisi vitae suscipit tellus mauris a. Tristique senectus et netus et malesuada fames ac. Cursus euismod quis viverra nibh. Senectus et netus et malesuada fames ac.
-
-Rutrum quisque non tellus orci. Ut ornare lectus sit amet est placerat in egestas. Mattis nunc sed blandit libero volutpat sed cras. Ullamcorper eget nulla facilisi etiam dignissim diam quis. Maecenas accumsan lacus vel facilisis. Eu nisl nunc mi ipsum faucibus vitae. Dignissim cras tincidunt lobortis feugiat. Tempus egestas sed sed risus. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Aliquet nec ullamcorper sit amet risus nullam eget felis. Orci sagittis eu volutpat odio facilisis mauris sit amet massa. Commodo viverra maecenas accumsan lacus vel facilisis volutpat. Condimentum vitae sapien pellentesque habitant morbi tristique senectus et netus. Consequat mauris nunc congue nisi vitae suscipit tellus mauris a. Lobortis mattis aliquam faucibus purus in massa tempor nec feugiat. Orci porta non pulvinar neque laoreet suspendisse interdum. Tellus cras adipiscing enim eu."
+                android:text="@string/ecd_content_available_for_you"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -103,69 +105,6 @@ Rutrum quisque non tellus orci. Ut ornare lectus sit amet est placerat in egesta
         </ScrollView>
 
     </androidx.cardview.widget.CardView>
+</com.google.android.flexbox.FlexboxLayout>
 
-
-</com.google.android.flexbox.FlexboxLayout><!--
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetailedPostActivity">
-
-
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/psbold"
-        android:text="ECD Title"
-        android:textColor="#000000"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/tvCategory"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.447" />
-
-    <TextView
-        android:id="@+id/tvCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="624dp"
-        android:fontFamily="@font/psregular"
-        android:text="category placeholder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_flexBasisPercent="100%"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="8dp"
-        app:cardCornerRadius="30dp"
-        app:cardElevation="8dp"
-        >
-
-    <WebView
-        android:id="@+id/web_view"
-        android:layout_width="100dp"
-        android:layout_height="200dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    -->
 

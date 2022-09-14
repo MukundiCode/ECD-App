@@ -49,6 +49,5 @@ class ArticleListActivity : AppCompatActivity() {
             })
 
         }
-
     }
 }

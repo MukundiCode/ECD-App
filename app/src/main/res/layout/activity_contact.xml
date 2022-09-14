@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    @author Jonathan Swanepoel and Suvanth Ramruthen-->
+<!--    This file designed the about us page within the application-->
+
 <com.google.android.flexbox.FlexboxLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -37,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/psbold"
                 android:padding="15dp"
-                android:text="Our Story"
+                android:text="@string/our_story"
                 android:textColor="@color/black"
                 android:textSize="24dp" />
 
@@ -47,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/pslight"
                 android:padding="15dp"
-                android:text="The Bhabhisana Baby Project is based in the Western Cape, South Africa, and was established in August 2015 by highly skilled therapists who recognised the need to help babies who come from underserved communities with early intervention during the critical 1 000-day period."
+                android:text="@string/the_bhabhisana_baby_project_is_based_in_the_western_cape_south_africa_and_was_established_in_august_2015_by_highly_skilled_therapists_who_recognised_the_need_to_help_babies_who_come_from_underserved_communities_with_early_intervention_during_the_critical_1_000_day_period"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
@@ -68,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/psbold"
                 android:padding="15dp"
-                android:text="Get in touch"
+                android:text="@string/get_in_touch"
                 android:textColor="@color/black"
                 android:textSize="24dp" />
 
@@ -144,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/psbold"
                 android:padding="15dp"
-                android:text="Location: 179 Belgravia Rd"
+                android:text="@string/location_179_belgravia_rd"
                 android:textColor="@color/black"
                 android:textSize="24dp" />
 
