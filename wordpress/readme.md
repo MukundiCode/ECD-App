@@ -38,3 +38,20 @@ Key functionality includes:
 - Small changes to native WP experience.
 
 Should future iterations be made, please get in touch with Bhabhisanas IT provider for these details.
+
+## Migration/Reusability Details for a new NGO:
+
+Should you wish to implement this web-based ECD Content delivery system with a new NGO, follow the following steps on a new domain.
+
+### WP All-in-one-Import
+
+The no_media_youandyourbaby.wpress package must be imported into the target WP site through the All-in-One WP Migration plugin. Once this package has been imported, proceed to do the following:
+- Save your permalinks twice via Settings > Permalinks.
+- Resign your short codes via Oxygen > Settings > Security.
+- Regenerate your CSS cache via Oxygen > Settings > CSS Cache.
+
+This should result in all the styling, permalinks, and custom code-blocks to be in working order.
+
+Thereafter, seeing as this installation has no media, export all existing media from the old WordPress site (tools > export > media), and upload accordingly to each post.
+
+The documentation viewable through the web portal will show the new NGO how they can use the web portal. 
