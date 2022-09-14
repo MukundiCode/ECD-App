@@ -11,6 +11,8 @@ App Instrumented Tests - "ECD-App/app/src/androidTest/java/com/example/ecd_app/"
 
 `2. Sync Project Gradle File`
 
+`3. Build Project`
+
 `3. Run 'app'`
 
 ### Contributors
