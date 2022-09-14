@@ -1,12 +1,9 @@
 package com.example.ecd_app
 
 import android.content.pm.ActivityInfo
-import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.OrientationEventListener
-import android.view.OrientationListener
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -16,27 +13,36 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 
+/**
+ * fulLScreenVideoPlayer leverages Google Exoplayer to display ecd content in a video player that leverages affordances of similar streaming multimedia platforms
+ */
 class fullScreenVideoPlayer : AppCompatActivity() {
 
-    var isFullScreen = false
-    lateinit var simpleExoPlayer: SimpleExoPlayer
+    var isFullScreen = false //fullscreen boolean status
+    lateinit var simpleExoPlayer: SimpleExoPlayer//exoplayer view to be initialised
 
+    /**
+     * onCreate sets up the activity for playing media files
+     * @param savedInstanceState saved bundle instance state
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_full_screen_video_player)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        setContentView(R.layout.activity_full_screen_video_player) //inflating layout for media player
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)//back button enabled
         supportActionBar?.title = "exo"
 
 
+        //views for ui component
         val playerView = findViewById<PlayerView>(R.id.player)
         val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
         val bt_fullscreen = findViewById<ImageView>(R.id.bt_fullscreen)
-//        val bt_lockscreen = findViewById<ImageView>(R.id.exo_lock)
         var intent = intent //getting the intent
-        val postVideoPath = intent.getStringExtra("VIDEOLINK")
+        val postVideoPath = intent.getStringExtra("VIDEOLINK")//retrieving videolink passed in intent
 
 
-
+        /**
+         * B
+         */
         bt_fullscreen.setOnClickListener(){
             if(!isFullScreen){
                 bt_fullscreen.setImageDrawable(ContextCompat.getDrawable(applicationContext, R.drawable.ic_fullscreen_exit))
@@ -73,7 +79,6 @@ class fullScreenVideoPlayer : AppCompatActivity() {
 
         })
 
-//        val videoSource = Uri.parse("https://ecdportal.azurewebsites.net/wp-content/uploads/2022/07/yt5s.com-The-Road-to-Health_-The-Benefits-of-Breastfeeding.mp4")
         val videoSource = Uri.parse(postVideoPath)
         val mediaItem = MediaItem.fromUri(videoSource)
         simpleExoPlayer.setMediaItem(mediaItem)
@@ -92,10 +97,5 @@ class fullScreenVideoPlayer : AppCompatActivity() {
         super.onDestroy()
         simpleExoPlayer.release()
     }
-
-//    override fun onPause() {
-//        super.onPause()
-//        simpleExoPlayer.release()
-//    }
 
 }

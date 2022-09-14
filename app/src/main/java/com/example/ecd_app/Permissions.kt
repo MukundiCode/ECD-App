@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
+
 class Permissions {
 
     fun checkStoragePermission(context: Context): Boolean {

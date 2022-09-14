@@ -4,11 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.5165" />
+        <entry key="app/src/main/res/drawable/ic_logout.xml" value="0.348" />
         <entry key="app/src/main/res/layout/activity_create_map.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_dash_board.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_detailed_post.xml" value="0.4479166666666667" />
         <entry key="app/src/main/res/layout/activity_display_map.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5548717948717948" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/layout/activity_post_content_web_view.xml" value="0.5635416666666667" />
+        <entry key="app/src/main/res/menu/help_menu.xml" value="0.5625" />
+        <entry key="app/src/main/res/menu/menu_create_app.xml" value="0.5635416666666667" />
         <entry key="app/src/main/res/menu/search_menu.xml" value="0.5625" />
       </map>
     </option>
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
