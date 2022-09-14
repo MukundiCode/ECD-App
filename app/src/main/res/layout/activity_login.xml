@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    @author Jonathan Swanepoel and Suvanth Ramruthen-->
+<!--    This file designed the login page within the application -->
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/ct"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -92,7 +96,7 @@
                 >
 
                 <TextView
-                    android:text="Enter your username:"
+                    android:text="@string/enter_your_username"
                     android:fontFamily="@font/psbold"
                     android:textColor="#000000"
                     android:textSize="22dp"
@@ -108,7 +112,7 @@
                     android:layout_height="50dp"
                     android:ems="14"
                     android:inputType="textPersonName"
-                    android:hint="Username"
+                    android:hint="@string/username"
                     app:layout_constraintStart_toStartOf="parent"
                     />
 
@@ -119,11 +123,11 @@
                     android:backgroundTint="#066D2E"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Login"
+                    android:text="@string/login"
                     />
 
                 <TextView
-                    android:text="OR"
+                    android:text="@string/or"
                     android:fontFamily="@font/psbold"
                     android:textColor="#000000"
                     android:textSize="22dp"
@@ -139,7 +143,7 @@
                     android:backgroundTint="#EA4139"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Continue as guest"
+                    android:text="@string/continue_as_guest"
                     />
 
             </com.google.android.flexbox.FlexboxLayout>

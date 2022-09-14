@@ -32,10 +32,14 @@ import io.reactivex.schedulers.Schedulers
 import org.jsoup.Jsoup
 
 
+/**
+ * @author Suvanth Ramruthen
+ * The Main Activity contains code to display ECD posts fetched from WordPress in a scrollable list
+ */
 class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
-    private lateinit var adapter : PostListAdapter
-    private lateinit var postStatusCommunicationTV : TextView
+    private lateinit var adapter : PostListAdapter //adapter to provide data for posts
+    private lateinit var postStatusCommunicationTV : TextView//textview for post status
     private val wordViewModel: PostsViewModel by viewModels {
         PostsViewModelFactory((application as ECDApplication).repository)
     }
@@ -48,71 +52,98 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "ECD Content List"
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)//enabling back button
+        supportActionBar?.title = "ECD Content List"//setting title
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main)//linking xml file
 
+        //views for category filter
         val categoryAll : AppCompatButton = findViewById(R.id.categoryAll)
         val categoryBtnBabyHealth : AppCompatButton = findViewById(R.id.categoryBabyHealth)
         val categoryBtnBabyDevelopment : AppCompatButton = findViewById(R.id.categoryBabyDevelopment)
         val categoryBtnParentHealth : AppCompatButton = findViewById(R.id.categoryParentHealth)
         val categoryBtnAssignedContent : AppCompatButton = findViewById(R.id.categoryAssignedContent)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        postStatusCommunicationTV = findViewById(R.id.textViewPostStatus)
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)//post recycler view
+        postStatusCommunicationTV = findViewById(R.id.textViewPostStatus)//status for posts
 
 
+        /**
+         * Category filter for filtering by all posts
+         */
         categoryAll.setOnClickListener(){
+            //btn color changes
             categoryAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             categoryBtnBabyHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //submit request to DAO
             allPostsDatabase()
         }
 
+        /**
+         * Category filter for filtering by Baby Health posts
+         */
         categoryBtnBabyHealth.setOnClickListener(){
+            //btn color changes
             categoryAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //submit request to DAO
             getPostsByCategory("Baby Health")
         }
 
+        /**
+         * Category filter for filtering by Baby Development posts
+         */
         categoryBtnBabyDevelopment.setOnClickListener(){
+            //btn color changes
             categoryAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //submit request to DAO
             getPostsByCategory("Baby Development")
         }
 
+        /**
+         * Category filter for filtering by Parent Health posts
+         */
         categoryBtnParentHealth.setOnClickListener(){
+            //btn color changes
             categoryAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
+            //submit request to DAO
             getPostsByCategory("Parent Health")
         }
 
+        /**
+         * Category filter for filtering by Assigned posts
+         */
         categoryBtnAssignedContent.setOnClickListener(){
+            //btn color changes
             categoryAll.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnBabyDevelopment.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnParentHealth.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_initial))
             categoryBtnAssignedContent.setBackgroundDrawable(resources.getDrawable(R.drawable.custom_button_clicked))
+            //submit request to DAO
             getPostsByCategory("Assigned Content")
         }
 
-        adapter = PostListAdapter()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = PostListAdapter() //constructor for post adapter
+        recyclerView.adapter = adapter//setting adapter for posts
+        recyclerView.layoutManager = LinearLayoutManager(this)//setting layout manager
+        //observing post list
         wordViewModel.allPosts.observe(this) { words ->
             val rootView = window.decorView.rootView
-            Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
+            Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()//snackbar update
             words.let { adapter.submitList(it) }
         }
         Permissions().checkStoragePermission(this)
@@ -245,9 +276,9 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
      */
     fun getVideoLink(post_content : String): String? {
         var url: String? = null
-        val doc: org.jsoup.nodes.Document? = Jsoup.parse(post_content)
-        val element = doc?.select("video")
-        val srcUrl = element?.attr("src")
+        val doc: org.jsoup.nodes.Document? = Jsoup.parse(post_content)//generating jSoup document
+        val element = doc?.select("video")//filter by video
+        val srcUrl = element?.attr("src")//filter by src
         if (srcUrl != null) {
             url = if (srcUrl.trim().isEmpty()){
                 null
@@ -255,27 +286,42 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
                 srcUrl
             }
         }
-        return url
+        return url//return url found in document
     }
 
+    /**
+     * Creating menu for search widget and sync call in support action bar
+     * @param menu menu to be generated
+     * @return true showing completed creation
+     */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.search_menu, menu)
+        menuInflater.inflate(R.menu.search_menu, menu)//inflating search menu
+        //ui component views
         val search = menu?.findItem(R.id.menu_search)
         val sync = menu?.findItem(R.id.menu_sync)
         val searchView = search?.actionView as? androidx.appcompat.widget.SearchView
         val syncView = sync?.actionView as? androidx.appcompat.widget.AppCompatImageView
-        syncView?.setBackgroundDrawable(getDrawable(R.drawable.ic_postfetch ))
-        searchView?.isSubmitButtonEnabled= true
+        syncView?.setBackgroundDrawable(getDrawable(R.drawable.ic_postfetch ))//setting drawable
+        searchView?.isSubmitButtonEnabled= true//enabling submit
+
+        /**
+         * Click listener for sync
+         */
         syncView?.setOnClickListener(){
             if (Permissions().checkStoragePermission(this) && Permissions().checkReadStoragePermission(this)){
-                Toast.makeText(this@MainActivity,"Fetching", Toast.LENGTH_LONG).show()
-                retrofitCall()
+                Toast.makeText(this@MainActivity,"Fetching", Toast.LENGTH_LONG).show()//fetching content
+                retrofitCall()//api call for sync
             }
         }
-        searchView?.setOnQueryTextListener(this@MainActivity)
+        searchView?.setOnQueryTextListener(this@MainActivity)//creating query listener
         return true
     }
 
+    /**
+     * Query typed by user
+     * @param query search query entered
+     * @return boolean status of search
+     */
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query!=null){
             searchDatabase(query)
@@ -283,6 +329,11 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         return true
     }
 
+    /**
+     * Query text change checker
+     * @param query search query entered
+     * @return boolean status of search
+     */
     override fun onQueryTextChange(query: String?): Boolean {
         if (query!=null){
             searchDatabase(query)
@@ -290,51 +341,66 @@ class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.O
         return true
     }
 
+    /**
+     * Function to create sql query submitted to DAO
+     * @param query query before formatting
+     */
     private fun searchDatabase(query: String){
-        val searchQuery = "%$query%"
+        val searchQuery = "%$query%"//adding wildcards to query
         wordViewModel.searchDatabase(searchQuery).observe(this) { list ->
             list.let {
                 if (it.isEmpty()){
-                    postStatusCommunicationTV.visibility = View.VISIBLE
+                    postStatusCommunicationTV.visibility = View.VISIBLE//communication
                 }else{
                     postStatusCommunicationTV.visibility = View.INVISIBLE
                 }
-                adapter.submitList(it)
+                adapter.submitList(it)//submitting list to DAO
 
             }
         }
     }
 
+    /**
+     * Retrieving posts by category - BabyHealth, BabyDevelopment, Parent Health and Assigned Content
+     * @param categoryQuery query constructed for filter by category
+     */
     private fun getPostsByCategory(categoryQuery: String){
-        val rootView = window.decorView.rootView
+        val rootView = window.decorView.rootView //setting root view
+        //retrieving posts by category
         wordViewModel.getPostByCategory(categoryQuery).observe(this) { list ->
             list.let {
                 if (it.isEmpty()){
-                    postStatusCommunicationTV.visibility = View.VISIBLE
+                    postStatusCommunicationTV.visibility = View.VISIBLE//showing empty communication
                 }else{
-                    postStatusCommunicationTV.visibility = View.INVISIBLE
+                    postStatusCommunicationTV.visibility = View.INVISIBLE//disabling since it is populated
                 }
                 if (it.size==1){
-                    Snackbar.make(rootView,"Showing ${it.size} post in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
+                    Snackbar.make(rootView,"Showing ${it.size} post in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()//communicating system updates through snackbar
                 }
                 if(it.size>1) {
-                    Snackbar.make(rootView,"Showing ${it.size} posts in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
+                    Snackbar.make(rootView,"Showing ${it.size} posts in $categoryQuery",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()//communicating system updates through snackbar
                 }
-                adapter.submitList(it)
+                adapter.submitList(it)//submitting list to adapter
             }
         }
     }
 
+    /**
+     * retrieving all posts in the local database
+     */
     private fun allPostsDatabase(){
+        //observing all posts list
         wordViewModel.allPosts.observe(this) { words ->
             if (words.isEmpty()){
-                postStatusCommunicationTV.visibility = View.VISIBLE
+                postStatusCommunicationTV.visibility = View.VISIBLE//showing empty post list
             }else{
-                postStatusCommunicationTV.visibility = View.INVISIBLE
+                postStatusCommunicationTV.visibility = View.INVISIBLE//disabling post list empty status
                 val rootView = window.decorView.rootView
-                Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()
+
+                Snackbar.make(rootView,"Showing ${words.size} posts ",Snackbar.LENGTH_SHORT).setAnchorView(R.id.textViewanchor).show()// Showing number of posts visible
+
             }
-            words.let { adapter.submitList(it) }
+            words.let { adapter.submitList(it) }//submitting list
         }
     }
 }

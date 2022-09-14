@@ -1,54 +1,40 @@
 package com.example.ecd_app
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.compose.ui.graphics.Color
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecd_app.room.Post
-import com.mysql.jdbc.Messages.getString
-import kotlin.coroutines.coroutineContext
 
+
+/**
+ * @author Suvanth Ramruthen
+ * PostListAdapter drives the changes in the post list. Holds all data related to post item
+ */
 class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_COMPARATOR)  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         return PostViewHolder.create(parent)
     }
 
+    /**
+     * Binding the data for the post list item
+     * @param holder post view holder
+     * @param position position referenced in the post list
+     */
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        val current = getItem(position)
-        holder.bind(current.postTitle, current.postContent, current.metaData)
-        //holder.itemView.setOnClickListener(){
-        //    d("clickFunction", "clicked")
-        //click listener shouldnt be too bad
-        //djm
-
-        //}
+        val current = getItem(position)//gets item at the position index
+        holder.bind(current.postTitle, current.postContent, current.metaData) //binding the data for the post to the UI component
 
         /**
-         * data class Post(@PrimaryKey (autoGenerate = true) val id: Int,
-        val postTitle: String,
-        val dateCreated: String,
-        val postContent: String,
-        val metaData: String) {
-
-        side code stuff
-        //            Toast.makeText(it.context, "hello", Toast.LENGTH_LONG ).show()
-        //            itemClickFunc.invoke()
-
+         * Creating the click listener for post item
          */
-
         holder.itemView.setOnClickListener(){
-            //we will refer to current
+            //Setting the details for post ui component
             var postID : Int = current.id
             var postTitle : String = current.postTitle
             var postDateCreated : String = current.dateCreated
@@ -57,7 +43,6 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
             var postMetaData : String = current.metaData
 
             //creating intent to transfer data
-
             val intent = Intent(it.context, DetailedPostActivity::class.java)
             //putting data into a intent
             intent.putExtra("iPostID", postID )
@@ -72,14 +57,12 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
     }
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //private val postItemView: TextView = itemView.findViewById(R.id.textView)
         private val postTitleEdit: TextView = itemView.findViewById(R.id.tvTitle)
         private val postTitleDescriptionEdit: TextView = itemView.findViewById(R.id.tvDescription)
         private val postImageView : ImageView = itemView.findViewById(R.id.ivPostImage)
 //        private val postDateEdit: TextView = itemView.findViewById(R.id.tvDate)
 
         fun bind(postTitle: String?, postDescription: String?, postMetaData: String?) {
-//            postItemView.text = text
             postTitleEdit.text = postTitle
             when{
                 postMetaData.equals("Baby Health") -> postImageView.setImageResource(R.drawable.health)
@@ -87,8 +70,6 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
                 postMetaData.equals("Parent Health") -> postImageView.setImageResource(R.drawable.parent)
                 postMetaData.equals("Assigned Content") -> postImageView.setImageResource(R.drawable.assigned)
             }
-//            postTitleDescriptionEdit.text = postDescription
-//            postDateEdit.text = postDate
         }
 
         companion object {
@@ -100,7 +81,6 @@ class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts
         }
     }
     companion object {
-        //from what ive read online this converts the old outdated list into the new list Transforms
         private val Posts_COMPARATOR = object : DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
                 return oldItem === newItem

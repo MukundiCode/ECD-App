@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    @author Jonathan Swanepoel and Suvanth Ramruthen -->
+<!--    This file designed the settings page within the application -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -48,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/psbold"
-                        android:text="Sync New Content"
+                        android:text="@string/sync_new_content"
                         android:textSize="25dp"
                         android:textColor="#265828"
                         android:padding="16px"
@@ -88,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/psbold"
                         android:textColor="#8E1600"
-                        android:text="Clear all saved data"
+                        android:text="@string/clear_all_saved_data"
                         android:textSize="25dp"
                         android:textAlignment="center"
                         android:padding="16dp"
@@ -129,7 +133,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/psbold"
-                        android:text="App permissions"
+                        android:text="@string/app_permissions"
                         android:textSize="25dp"
                         android:padding="16dp"
                         android:textAlignment="center"
@@ -170,7 +174,7 @@
                         android:fontFamily="@font/psbold"
                         android:textSize="25dp"
                         android:textAlignment="center"
-                        android:text="Version"
+                        android:text="@string/version"
                         android:textColor="#192841"
                         android:padding="16dp"
                         />

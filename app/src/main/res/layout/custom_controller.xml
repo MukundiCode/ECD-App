@@ -5,15 +5,6 @@
     android:layout_height="match_parent"
     android:background="#80000000">
 
-<!--    <ImageView-->
-<!--        android:id="@+id/exo_lock"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:padding="10dp"-->
-<!--        android:src="@drawable/ic_lock_open"-->
-<!--        android:theme="@style/ClickableView" />-->
-
     <LinearLayout
         android:id="@+id/sec_controlvid1"
         android:layout_width="wrap_content"

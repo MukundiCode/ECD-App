@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--    @author Jonathan Swanepoel and Suvanth Ramruthen-->
+<!--    This file designed the ECD Content Page layout within the application -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/flexboxLayout"
@@ -46,7 +49,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/custom_button_clicked"
-                    android:text="All"
+                    android:text="@string/all"
                     android:textAllCaps="false"
                     android:textSize="10dp" />
 
@@ -58,7 +61,7 @@
                     android:layout_marginRight="6dp"
                     android:background="@drawable/custom_button_initial"
                     android:padding="12dp"
-                    android:text="Assigned Content"
+                    android:text="@string/assigned_content"
                     android:textAllCaps="false"
                     android:textSize="10dp">
 
@@ -71,7 +74,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/custom_button_initial"
-                    android:text="Baby Health"
+                    android:text="@string/baby_health"
                     android:textAllCaps="false"
                     android:textSize="10dp">
 
@@ -86,7 +89,7 @@
 
                     android:background="@drawable/custom_button_initial"
                     android:padding="12dp"
-                    android:text="Baby Development"
+                    android:text="@string/baby_development"
                     android:textAllCaps="false"
                     android:textSize="10dp">
 
@@ -99,7 +102,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/custom_button_initial"
-                    android:text="Parent Health"
+                    android:text="@string/parent_health"
                     android:textAllCaps="false"
                     android:textSize="10dp">
 
@@ -124,7 +127,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="No content in this category"
+        android:text="@string/no_content_in_this_category"
         android:visibility="invisible"
         app:layout_alignSelf="center"
         app:layout_constraintBottom_toBottomOf="parent"
