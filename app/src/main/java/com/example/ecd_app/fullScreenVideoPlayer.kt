@@ -14,6 +14,7 @@ import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ui.PlayerView
 
 /**
+ * @author Suvanth Ramruthen
  * fulLScreenVideoPlayer leverages Google Exoplayer to display ecd content in a video player that leverages affordances of similar streaming multimedia platforms
  */
 class fullScreenVideoPlayer : AppCompatActivity() {

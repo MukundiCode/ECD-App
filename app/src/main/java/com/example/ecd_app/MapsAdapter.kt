@@ -11,6 +11,7 @@ import com.example.ecd_app.mapModels.UserMap
 
 
 /**
+ * @author Suvanth Ramruthen
  * MapAdapter drives the changes in the Map recyclerView. Holds all data related to map item
  * @property context the context passed to the activity
  * @property userMaps the list of maps to be displayed

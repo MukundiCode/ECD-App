@@ -13,6 +13,7 @@ import com.example.ecd_app.room.Post
 
 
 /**
+ * @author Suvanth Ramruthen
  * PostListAdapter drives the changes in the post list. Holds all data related to post item
  */
 class PostListAdapter(): ListAdapter<Post, PostListAdapter.PostViewHolder>(Posts_COMPARATOR)  {

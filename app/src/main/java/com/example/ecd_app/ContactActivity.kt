@@ -12,6 +12,7 @@ import com.synnapps.carouselview.ImageListener
 
 
 /**
+ * @author Suvanth Ramruthen
  * ContactActivity contains Bhabisanas story, carousel images with staff-parent interactions
  */
 class ContactActivity : AppCompatActivity() {
@@ -90,7 +91,7 @@ class ContactActivity : AppCompatActivity() {
          * Redirect to BBP webportal
          */
         ecdImage.setOnClickListener(){
-            val url: String = "https://ecdportal.azurewebsites.net/"
+            val url: String = "https://youandyourbaby.bhabhisana.org.za/"
             val ecd = Intent(Intent.ACTION_VIEW)
             ecd.data = Uri.parse(url)
             startActivity(ecd)

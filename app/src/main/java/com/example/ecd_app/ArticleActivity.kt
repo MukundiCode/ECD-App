@@ -6,6 +6,7 @@ import android.widget.Toast
 import com.github.barteksc.pdfviewer.PDFView
 
 /**
+ * @author Suvanth Ramruthen
  * The ArticleActivity is the page responsible for rendering pdfs passed through intents
  */
 class ArticleActivity : AppCompatActivity() {

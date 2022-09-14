@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 /**
+ * @author Suvanth Ramruthen
  * ArticleAdapter drives the changes in the Article recyclerView. Holds all data related to article item
  *
  * @property articleList - list of articles to render

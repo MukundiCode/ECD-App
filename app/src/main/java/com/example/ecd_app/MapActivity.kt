@@ -27,6 +27,7 @@ private const val REQUEST_CODE = 1234
 
 
 /**
+ * @author Suvanth Ramruthen
  * MapActivity displays a list of UserMaps that are loaded
  */
 class MapActivity : AppCompatActivity() {

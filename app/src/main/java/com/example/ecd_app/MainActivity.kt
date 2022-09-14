@@ -27,6 +27,7 @@ import org.jsoup.Jsoup
 
 
 /**
+ * @author Suvanth Ramruthen
  * The Main Activity contains code to display ECD posts fetched from WordPress in a scrollable list
  */
 class MainActivity : AppCompatActivity(), androidx.appcompat.widget.SearchView.OnQueryTextListener {

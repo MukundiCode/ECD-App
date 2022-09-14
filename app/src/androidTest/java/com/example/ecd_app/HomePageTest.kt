@@ -1,6 +1,5 @@
 package com.example.ecd_app
 
-
 import android.view.View
 import android.view.ViewGroup
 import androidx.test.espresso.Espresso.onView
@@ -12,9 +11,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import org.hamcrest.Description
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
-import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
+import org.hamcrest.core.AllOf.allOf
+import org.hamcrest.core.Is.`is`
 import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
@@ -22,7 +21,11 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class HomePageTEST {
+/**
+ * @author Suvanth Ramruthen
+ * Testing homepage UI
+ */
+class HomePageTest {
 
     @Rule
     @JvmField

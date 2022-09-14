@@ -13,6 +13,7 @@ import androidx.activity.viewModels
 import androidx.cardview.widget.CardView
 
 /**
+ * @author Suvanth Ramruthen
  *ECD Homepage containing all the activities that a user might explore
  */
 class DashBoard : AppCompatActivity() {

@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 /**
+ * @author Suvanth Ramruthen
  * Login activity presents users with two options i.e. to enter the username assigned by BBP via the Wordpress web portal or to continue as a guest
  */
 class LoginActivity : AppCompatActivity() {

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 const val EXTRA_ARTICLE_FNAME= "EXTRA_ARTICLE_FNAME"
 
 /**
+ * @author Suvanth Ramruthen
  * Activity that holds the Article Recycler View List
  */
 class ArticleListActivity : AppCompatActivity() {

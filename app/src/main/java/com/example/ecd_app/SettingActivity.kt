@@ -9,6 +9,7 @@ import com.example.ecd_app.room.PostsViewModel
 import com.example.ecd_app.room.PostsViewModelFactory
 
 /**
+ * @author Suvanth Ramruthen
  * Settings Activity provides users the ability to sync, delete, permissions and versions.
  */
 class SettingActivity : AppCompatActivity() {

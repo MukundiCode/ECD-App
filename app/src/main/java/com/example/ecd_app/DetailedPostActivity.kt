@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.jsoup.Jsoup
 
 /**
+ * @author Suvanth Ramruthen
  * DetailedPostActivity renders WP posts in a user interpretable format.
  */
 class DetailedPostActivity : AppCompatActivity() {

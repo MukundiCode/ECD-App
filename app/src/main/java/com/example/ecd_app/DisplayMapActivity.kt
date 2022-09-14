@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.LatLngBounds
 
 /**
+ * @author Suvanth Ramruthen
  * Android Studio Base fragment template was used. This class leverages Google Maps API. Renders MAP
  */
 class DisplayMapActivity : AppCompatActivity(), OnMapReadyCallback {

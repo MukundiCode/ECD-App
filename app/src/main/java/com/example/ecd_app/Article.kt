@@ -3,6 +3,7 @@ package com.example.ecd_app
 import java.io.Serializable
 
 /**
+ * @author Suvanth Ramruthen
  * Article data class holds the properties of the article objects
  * @property articleTitle title of article
  * @property articleDescriptor description of article
