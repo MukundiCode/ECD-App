@@ -1,8 +1,8 @@
 <?php
 /**
 * Plugin Name: UCT Portal Plugin
-* Plugin URI: https://bhabhisana.org.za
-* Description: Custom Endpoints for Mobile Application
+* Plugin URI: https://youandyourbaby.bhabhisana.org.za
+* Description: Custom WP Functionality and Endpoints for Mobile Application
 * Version: 1.0
 * Author: Jonathan Wayne Swanepoel
 */
@@ -29,8 +29,8 @@ of wp-admin.
 */
 
 function auto_redirect_after_logout(){
-  wp_safe_redirect( home_url() );
-  exit;
+    wp_safe_redirect( home_url() );
+    exit;
 }
 
 /*
@@ -130,7 +130,8 @@ Remove un-needed wp-admin menus for BBP Author
 
 function remove_admin_menu_core() {
 // BBP Author ID is 12
-  if (get_current_user_id()==12) {
+// UCTAdmin02 ID is 39
+  if ((get_current_user_id()==12)||(get_current_user_id()==39)) {
   		remove_menu_page( 'edit.php' );                   //Posts
 		remove_menu_page( 'edit.php?post_type=page' );    //Pages
 		remove_menu_page( 'edit-comments.php' );          //Comments
@@ -148,8 +149,9 @@ Remove un-needed wp-admin plugin menus for BBP Author
 */
 
 function remove_admin_menu_plugins() {
-	// BBP Author ID - 12
-  if (get_current_user_id()==12) {
+	// BBP Author ID is 12
+	// UCTAdmin02 ID is 39
+  if ((get_current_user_id()==12)||(get_current_user_id()==39)) {
 		remove_menu_page( 'ct_dashboard_page' );
 		remove_menu_page( 'smush' );
 		remove_menu_page( 'pods' );
@@ -162,12 +164,9 @@ Function to add custom dashboard widgets
 */
 
 function my_custom_dashboard_widgets() {
-global $wp_meta_boxes;
-
-wp_add_dashboard_widget('custom_button_widget', 'Quick Links', 'custom_button_help');
-
-wp_add_dashboard_widget('custom_help_widget', 'ECD Portal Documentation', 'custom_dashboard_help');
-
+    global $wp_meta_boxes;
+    wp_add_dashboard_widget('custom_button_widget', 'Quick Links', 'custom_button_help');
+    wp_add_dashboard_widget('custom_help_widget', 'ECD Portal Documentation', 'custom_dashboard_help');
 }
 
 /*
