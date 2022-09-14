@@ -1,5 +1,5 @@
 # ECD-App: You and Your Baby
-The system consists of two main components that being the Kotlin parent mobile application and WordPress staff web portal. The repository contains the source code for both. The BBP staff will be the first users of our web portal, and the BBPs beneficiaries will be the first users of our application.
+This system was developed for the NGO Bhabisana Baby Project(BBP) in collaboration with CoMaCH. The system consists of two main components that being the Kotlin parent mobile application and WordPress staff web portal. The repository contains the source code for both systems. The BBP staff will be the first users of our web portal, and BBPs parents will be the first users of our mobile application.
 
 ## Mobile Application
 App level Src code - "ECD-App/app/src/main/java/com/example/ecd_app/"
